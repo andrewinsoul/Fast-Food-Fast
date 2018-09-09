@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fast Food Homepage</title>
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Aguafina Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="img-cover">
+      <div id="dim-img">
+        <nav class="topnav" id="Topnav">
+          <div id="brand-div">
+            <img class="nav-brand" src="./assets/images/images.jpg">
+            <h1>Fast Food App</h1>
+          </div>
+          <div id="hidden-links">
+            <a href="login.html" id="login-link" class="nav-link">Login</a>
+            <a href="signup.html" id="signup-link" class="nav-link">Sign Up</a>
+          </div>
+          <div id="nav-links">
+            <a class="nav-link active" href="#">HOME</a>
+            <a class="nav-link" href="login.html">LOG IN</a>
+            <a class="nav-link" href="signup.html">SIGN UP</a>
+            <a class="nav-link" href="#">CONTACT US</a>
+            <button id="toggler" onclick="openToggler()">
+              <i class="fa fa-bars"></i>    
+            </button>
+          </div>
+        </nav>
+        <main>
+          <div class="content">
+            <h1>Tantalizers</h1>
+            <p id="welcome-txt"></p>
+            <span>_</span>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="sub-content">
+      <h2>Place Order By Cuisine</h2>
+      <div class="cusine-cards">
+        <div id="african-dish-card" class="food-cards">
+          This is a card that will contain image of an African food with list of available food menu and a button to place order
+        </div>
+        <div id="intercontinental-dish-card" class="food-cards">
+          This is a card that will contain image of an Intercontinental food with list of available food menu and a button to place order
+        </div>
+        <div id="nigerian-dish-card" class="food-cards">
+          This is a card that will contain image of a Nigerian food with list of available food menu and a button to place order
+        </div>
+      </div>
+    </div>
+    <footer class="index-footer">
+      <div class="footer-div" id="social-handles">
+        <h4>Reach us on our handles</h4>
+        <img class="footer-img" src="./assets/images/facebook-icon.png" alt="facbook-icon"/>
+        <img class="footer-img" src="./assets/images/google-icon.png" alt="google-icon"/>
+        <img class="footer-img" src="./assets/images/twitter-icon.png" alt="twitter-icon"/>
+        <img class="footer-img" src="./assets/images/instagram-icon.png" alt="instagram-icon"/>
+      </div>
+      <!-- <div class="footer-div">
+        <h4 class="center-txt">Terms & Condition</h4>
+        <p>
+          Using Fast Food App means you agree to the <a href="terms.html">Terms &AMP; Conditions of the application.</a>
+        </p>
+      </div> -->
+      <div class="footer-div" id="subscribe">
+        <h4>
+          Subscribe and get latest news on application's updates
+        </h4>
+        <form action="">
+          <input id="foot-entry" class="sub-form" type="email" placeholder="Enter Email..."/>
+          <button class="sub-form" id="foot-btn">
+            <i class="fa fa-send"></i>
+          </button>
+        </form>
+      </div>
+    </footer>
+    <div id="end">
+      <small>&copy;Andela Team 2018 All Rights Reserved. Designed By Andy</small>
+    </div>
+    <script src="./assets/scripts/typed.min.js"></script>
+    <script src="./assets/scripts/typer.js"></script>
+    <script src="./assets/scripts/main.js"></script>
+  </body>
+</html>
