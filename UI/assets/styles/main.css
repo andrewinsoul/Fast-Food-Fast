@@ -17,6 +17,9 @@ nav {
   text-decoration: none;
   padding: 14px 16px;
 }
+.topnav a:hover, .topnav.responsive a:hover {
+  color: green;
+}
 nav h1{
   color: white;
   text-decoration: none;
@@ -57,6 +60,7 @@ a.active {
   background-color: #5b0603;
   color: whitesmoke;
   padding: 10px;
+  cursor: pointer;
 }
 .form-jumbotron .fa {
   background-color: #5b0603;
@@ -197,6 +201,7 @@ button.icon {
 .new-old-user a {
   margin-right: 3%;
   color: #000;
+  margin-bottom: 3%;
 }
 #brand-div h1 {
   font-family: Aguafina Script;

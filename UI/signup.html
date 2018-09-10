@@ -19,8 +19,8 @@
           </div>
           <div id="nav-links">
             <a class="nav-link" href="index.html">HOME</a>
-            <a class="nav-link active" href="#">LOG IN</a>
-            <a class="nav-link" href="signup.html">SIGN UP</a>
+            <a class="nav-link" href="login.html">LOG IN</a>
+            <a class="nav-link active" href="#">SIGN UP</a>
             <a class="nav-link" href="#">CONTACT US</a>
           </div>
           <button class="icon" onclick="toggler()">
@@ -31,22 +31,34 @@
     </div>
     <main id="main-form">
       <div class="form-jumbotron">
-        <h3>Fast Food App Login</h3>
-        <h5>Enter your login details</h5>
+        <h3>Fast Food App SignUp</h3>
+        <h5>Sign Up to Fast Food App</h5>
         <form action="" class="col-form">
           <div class="reg-div">
+            <i class="fa fa-user icon"></i>
+            <input type="text" required="required" placeholder="Name">
+          </div>
+          <div class="reg-div">
             <i class="fa fa-envelope icon"></i>
-            <input type="email" required="required" placeholder="Email/Username"/>
+            <input type="email" required="required" placeholder="Email"/>
+          </div>
+          <div class="reg-div">
+            <i class="fa fa-at icon"></i>
+            <input type="text" required="required" placeholder="Username">
           </div>
           <div class="reg-div">
             <i class="fa fa-lock icon"></i>
             <input type="password" required="required" placeholder="Password"/>
           </div>
+          <div class="reg-div">
+            <i class="fa fa-lock icon"></i>
+            <input type="password" required="required" placeholder="Confirm Password"/>
+          </div>
           <div>
-            <input type="submit" value="LOG IN" class="form-btn"/>
+            <input type="submit" value="SIGN UP" class="form-btn"/>
           </div>
           <div class="new-old-user" style="display: flex; justify-content: flex-end">
-            <a href="./signup.html">I don't have an account? Sign Up</a>
+            <a href="./signup.html">Have an account? Log in</a>
           </div>
         </form>
       </div>
