@@ -218,6 +218,184 @@ h1 {
 #welcome-header {
   display: none;
 }
+/*
+  USER-ORDER PAGE STYLES
+*/
+.place-order .nav-brand {
+  width: 55px;
+}
+.place-order #brand-div h1 {
+  font-size: 28px
+}
+#restaurant-desc {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: black;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 5%;
+  background-color: white;
+  margin-bottom: 2%;
+}
+#restaurant-desc img {
+  width: 70px;
+  height: 70px;
+  padding-left: 20px;
+  vertical-align: middle;
+}
+#cusine-category {
+  flex-basis: 17%; 
+  margin-left: 2%; 
+  margin-right: 1%
+}
+#restuarant-menu {
+  flex-basis: 51%; 
+  margin-right: 1%;
+}
+#cart {
+  width: 26%;
+  position: fixed;
+  right: 86%;
+  overflow-y: auto;
+  left: 72%;
+  height: 50%;
+}
+.food-div {
+  background-color: white;
+  box-shadow: 0 0 50px rgba(1, 1, 1, 0.8);
+}
+#spacer-div {
+  background-color: #5b0603; 
+  color: #5b0603; 
+  height: 10px;
+}
+.pad-left {
+  padding-left: 6px;
+}
+.pad-right {
+  padding-right: 6px;
+}
+.col-grey {
+  color: rgba(1, 1, 1, 0.8)
+}
+.space-down {
+  padding-bottom: 10px
+}
+.space-around {
+  padding: 10px;
+}
+.full-width {
+  width: 100%
+}
+#search-food {
+  width: 10%;
+  background-color: green;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px
+ }
+ #menu-items, .menu-items {
+  display: flex; 
+  flex-direction: column; 
+ }
+ #menu-cart-cat-container {
+   display: flex;
+   align-items: flex-start;
+ }
+ .no-marg-top {
+   margin-top: 0;
+ }
+ #view-cart-btn {
+   display: none;
+   justify-content: flex-end;
+ }
+ .center-item-in-flex {
+   display: flex;
+   justify-content: center;
+ }
+ .place-order .menu-title {
+   color: red;
+   margin: 0;
+   border-bottom: 1px solid grey;
+   padding: 15px 6px;
+ }
+ .bottom-line {
+  border-bottom: 1px solid grey;
+ }
+ .space-item-in-flex {
+   display: flex;
+   justify-content: space-between;
+ }
+ .space-item-in-flex p {
+   margin-top: 5px;
+   margin-bottom: 0;
+ }
+ .desc-p {
+   margin-top: 0;
+ }
+ .desc-p small {
+   color: black;
+ }
+ .add-item-btn {
+  max-height: 23px;
+ }
+ button {
+   cursor: pointer;
+ }
+ #cusine-category a {
+   text-decoration: none;
+   color: black
+ }
+ #cusine-category a:hover {
+   color: brown;
+ }
+ .sn {
+   margin-left: 2%;
+ }
+ .food-item-name {
+   margin-left: 7%;
+ }
+ .place-order small {
+   color:black;
+ }
+ .and-div {
+   padding: 10px 0;
+   display: flex;
+ }
+ .add-plate-btn {
+   border-radius: 50%;
+   width: 24px;
+   margin-left: 34px;
+ }
+ .fa-caret-down {
+   margin-left: 0;
+ }
+ .flexblock {
+   display: flex;
+ }
+ #place-order {
+  background-color: green; 
+  color: white; 
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 4px;
+ }
+ .place-order footer {
+   margin-top: 1%;
+   border-top: 1px solid grey;
+   padding: 10px
+ }
+ .place-order main {
+   margin-bottom: 8%;
+ }
+ #end small {
+   color: white;
+ }
+ .price-div {
+   margin-left: 23%;
+   width: 90px;
+ }
 @media screen and (max-width: 803px) {
   #wel-div, .content span, .content h1 {
     display: none;
@@ -226,8 +404,14 @@ h1 {
     display: block;
     font-size: 18px;
   }
+  #view-cart-btn {
+    display: flex;
+  }
   .form-jumbotron {
     width: 85vw;
+  }
+  #restaurant-desc {
+    flex-direction: column;
   }
   .topnav button.icon{
     float: right;
@@ -286,5 +470,29 @@ h1 {
   }
   .sub-form {
     padding: 7px;
+  }
+  /*
+  USER-ORDER PAGE STYLES
+  */
+  #menu-cart-cat-container {
+    flex-direction: column;
+  }
+  #cart {
+    position: static;
+  }
+  #cusine-category, #restuarant-menu, #cart {
+    width: 96%;
+    margin-right: 2%;
+    margin-left: 2%
+  }
+  #restuarant-menu, #cart {
+    margin-top: 5%;
+  }
+  #cusine-category {
+    margin-bottom: 5%;
+  }
+  #restuarant-desc {
+    /* display: flex; */
+    flex-direction: column;
   }
 }
