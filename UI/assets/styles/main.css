@@ -221,10 +221,10 @@ h1 {
 /*
   USER-ORDER PAGE STYLES
 */
-.place-order .nav-brand {
+.place-order .nav-brand, .recent-order .nav-brand {
   width: 55px;
 }
-.place-order #brand-div h1 {
+.place-order #brand-div h1, .recent-order #brand-div h1 {
   font-size: 28px
 }
 #restaurant-desc {
@@ -381,10 +381,13 @@ h1 {
   padding: 10px; 
   border-radius: 4px;
  }
- .place-order footer {
+ .place-order footer, .recent-order footer {
    margin-top: 1%;
    border-top: 1px solid grey;
    padding: 10px
+ }
+ .recent-order footer {
+   margin-top: 8%;
  }
  .place-order main {
    margin-bottom: 8%;
@@ -396,6 +399,44 @@ h1 {
    margin-left: 23%;
    width: 90px;
  }
+/*
+  HISTORY PAGE STYLING
+*/
+body.recent-order {
+  background-color: white;
+}
+.recent-order nav {
+  background-color: #5b0603;
+}
+.recent-order p {
+  margin: 5px 0;
+}
+.recent-order footer {
+  background-color: #5b0603;
+}
+.history-date {
+  margin-left: 1%;
+  margin-top: 3%;
+  margin-bottom: 1%
+}
+.history-div {
+  padding: 6px;
+  border: 1px solid grey;
+  margin: 0 3%;
+  border-radius: 4px;
+}
+.recent-order img {
+  vertical-align: middle;
+}
+.recent-order .complete {
+  width: 18px;
+}
+.recent-order .waiting {
+  width: 15px;
+}
+.recent-order .cancel {
+  width: 12px;
+}
 @media screen and (max-width: 803px) {
   #wel-div, .content span, .content h1 {
     display: none;
