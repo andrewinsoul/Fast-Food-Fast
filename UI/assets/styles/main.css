@@ -221,10 +221,11 @@ h1 {
 /*
   USER-ORDER PAGE STYLES
 */
-.place-order .nav-brand, .recent-order .nav-brand, .admin-menu-list .nav-brand {
+.place-order .nav-brand, .recent-order .nav-brand, .admin-menu-list .nav-brand,
+.admin-mark-order .nav-brand  {
   width: 55px;
 }
-.place-order #brand-div h1, .recent-order #brand-div h1, .admin-menu-list #brand-div h1 {
+.place-order #brand-div h1, .recent-order #brand-div h1, .admin-menu-list #brand-div h1, .admin-mark-order #brand-div h1 {
   font-size: 28px
 }
 #restaurant-desc {
@@ -381,7 +382,9 @@ h1 {
   padding: 10px; 
   border-radius: 4px;
  }
- .place-order footer, .recent-order footer, .admin-menu-list footer {
+ .place-order footer,
+ .recent-order footer,
+.admin-menu-list footer {
    margin-top: 1%;
    border-top: 1px solid grey;
    padding: 10px
@@ -568,6 +571,12 @@ button.edit-btn, button.del-btn {
   padding: 10px;
 }
 
+/*
+  ADMIN-MARK-ORDER
+*/
+.admin-mark-order footer {
+  border-top: 1px solid grey;
+}
 @media screen and (max-width: 803px) {
   #wel-div, .content span, .content h1 {
     display: none;
