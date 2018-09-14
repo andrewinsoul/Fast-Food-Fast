@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fast Food Admin Menu List</title>
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Aguafina Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="admin-menu-list" id="body">
+    <div id="main-container">
+      <nav class="topnav" id="Topnav">
+        <div id="brand-div">
+          <img class="nav-brand" src="./assets/images/images.jpg">
+          <h1>Fast Food App</h1>
+        </div>
+        <div id="nav-links">
+          <a class="nav-link" href="user-order.html">ORDERS</a>
+          <a class="nav-link active" href="#">MENU</a>
+          <a class="nav-link" href="#">PROFILE</a>
+          <a class="nav-link" href="index.html">LOG OUT</a>
+        </div>
+        <button class="icon" onclick="toggler()">
+          <i class="fa fa-bars"></i>    
+        </button>
+      </nav>
+      <main>
+        <h2 class="center-txt">Andy Restaurant Menu</h2>
+        <div class="container">
+          <div class="jumbotron col-1">
+            <div>
+              <h3>Name</h3>
+              <span>Andrew Recipe</span>
+            </div>
+            <div>
+              <h3>Category</h3>
+              <span>Italian</span>
+            </div>
+            <div>
+              <h3>Price</h3>
+              <span>₦ 1,000.00</span>
+            </div>
+            <div>
+              <h3>Description</h3>
+              <p class="wrap">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, architecto similique. Veniam, vero. Sint temporibus, aliquam necessitatibus ratione explicabo aut amet. Sed, autem. Fuga, magni voluptas quos molestiae porro officia?
+              </p>
+            </div>
+            <div class="space-item-in-flex">
+              <button>
+                View
+              </button>
+              <div>
+                <button onclick="openModal('modal')" class="edit-btn">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="del-btn">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="jumbotron">
+            <div>
+              <h3>Name</h3>
+              <span>Andrew Recipe</span>
+            </div>
+            <div>
+              <h3>Category</h3>
+              <span>Italian</span>
+            </div>
+            <div>
+              <h3>Price</h3>
+              <span>₦ 1,000.00</span>
+            </div>
+            <div>
+              <h3>Description</h3>
+              <p class="wrap">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, architecto similique. Veniam, vero. Sint temporibus, aliquam necessitatibus ratione explicabo aut amet. Sed, autem. Fuga, magni voluptas quos molestiae porro officia?
+              </p>
+            </div>
+            <div class="space-item-in-flex">
+              <button>
+                View
+              </button>
+              <div>
+                <button onclick="openModal('modal')" class="edit-btn">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="del-btn">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="jumbotron">
+            <div>
+              <h3>Name</h3>
+              <span>Andrew Recipe</span>
+            </div>
+            <div>
+              <h3>Category</h3>
+              <span>Italian</span>
+            </div>
+            <div>
+              <h3>Price</h3>
+              <span>₦ 1,000.00</span>
+            </div>
+            <div>
+              <h3>Description</h3>
+              <p class="wrap">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, architecto similique. Veniam, vero. Sint temporibus, aliquam necessitatibus ratione explicabo aut amet. Sed, autem. Fuga, magni voluptas quos molestiae porro officia?
+              </p>
+            </div>
+            <div class="space-item-in-flex">
+              <button>
+                View
+              </button>
+              <div>
+                <button onclick="openModal('modal')" class="edit-btn">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="del-btn">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="jumbotron col-1">
+            <div>
+              <h3>Name</h3>
+              <span>Andrew Recipe</span>
+            </div>
+            <div>
+              <h3>Category</h3>
+              <span>Italian</span>
+            </div>
+            <div>
+              <h3>Price</h3>
+              <span>₦ 1,000.00</span>
+            </div>
+            <div>
+              <h3>Description</h3>
+              <p class="wrap">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, architecto similique. Veniam, vero. Sint temporibus, aliquam necessitatibus ratione explicabo aut amet. Sed, autem. Fuga, magni voluptas quos molestiae porro officia?
+              </p>
+            </div>
+            <div class="space-item-in-flex">
+              <button>
+                View
+              </button>
+              <div>
+                <button onclick="openModal('modal')" class="edit-btn">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="del-btn">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="jumbotron" style="display: flex; justify-content: center; cursor: pointer">
+            <button onclick="openAddModal('addModal')">
+              <img src="./assets/images/add-img.png" alt="add icon">
+              <p>Add Menu Item</p>
+            </button>
+          </div>
+        </div>
+      </main>
+      <footer>
+          <div id="end">
+            <small>
+              <div class="center-txt">&copy;Andela Team 2018 All Rights Reserved.</div> 
+              <div class="center-txt">Designed By Andy</div>
+            </small>
+          </div>
+      </footer>
+    </div>
+    <div id="modal">
+      <div id="modal-wrapper">
+        <h3 class="center-txt bottom-line">Update Fast Food Menu Item</h3>
+        <form action="">
+          <label for="name">
+            <b>Name</b>
+          </label>
+          <input id="name" type="text" value="Andrew Recipe"/>
+          <label class="betw-modal-label" for="category">
+            <b>Category</b>
+          </label>
+          <input type="text" id="Category" value="Italian"/>
+          <label class="betw-modal-label" for="price">
+            <b>Price</b>
+          </label>
+          <input type="text" value="₦ 1,000.00">
+          <label class="betw-modal-label" for="description">
+            <b>Description</b>
+          </label>
+          <textarea name="description" id="description" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam molestiae ratione ipsa, quia aliquam earum laboriosam vel adipisci in excepturi, explicabo, eum aspernatur? Facere autem, cupiditate voluptates quisquam distinctio debitis!
+          </textarea>
+        </form>
+        <div class="modal-btns">
+          <button id="update">Update</button>
+          <button id="cancel" onclick="closeModal('modal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="addModal">
+      <div id="addModal-wrapper">
+        <h3 class="center-txt bottom-line">Add Fast Food Menu item</h3>
+        <form action="">
+          <label for="name">
+            <b>Name</b>
+          </label>
+          <input type="text" id="add-name" placeholder="Name"/>
+          <label for="category" class="betw-modal-label">
+            <b>Category</b>
+          </label>
+          <input type="text" id="add-Category" placeholder="Food Menu Category"/>
+          <label for="price" class="betw-modal-label">
+            <b>Price</b>
+          </label>
+          <input type="text" placeholder="Amount of Food"/>
+          <label for="description" class="betw-modal-label">
+            <b>Description</b>
+          </label>
+          <textarea name="description" id="add-description" cols="30" rows="5" placeholder="Brief Description of Food"></textarea>
+        </form>
+        <div class="modal-btns">
+          <button id="add">Add Menu Item</button>
+          <button id="cancel" onclick="closeModal('addModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/scripts/main.js"></script>
+  </body>
+</html>
