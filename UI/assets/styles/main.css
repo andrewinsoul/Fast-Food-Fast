@@ -384,7 +384,9 @@ h1 {
  }
  .place-order footer,
  .recent-order footer,
-.admin-menu-list footer {
+ .admin-menu-list footer,
+ .admin-mark-order footer
+{
    margin-top: 1%;
    border-top: 1px solid grey;
    padding: 10px
@@ -574,8 +576,79 @@ button.edit-btn, button.del-btn {
 /*
   ADMIN-MARK-ORDER
 */
+body.admin-mark-order {
+  background-color: white;
+}
+.admin-mark-order nav {
+  background-color: brown;  
+}
 .admin-mark-order footer {
   border-top: 1px solid grey;
+  margin-top: 28%;
+  background-color: brown;
+}
+table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .25em 0 .75em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table button {
+  padding: 10px;
+}
+table th, table td {
+  padding: .625em;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+td {
+  text-align: center;
+}
+.fa-check::before {
+  color: white;
+  font-size: 20px;
+}
+.fa-close::before {
+  color: white;
+  font-size: 20px
+}
+.check, .accepted {
+  background-color: green;
+}
+.close {
+  background-color: red;
+}
+.check {
+  width: 50%;
+}
+.close {
+  width: 46%;
+}
+td.accepted {
+  color: white;
+  text-align: center;
+}
+td.declined {
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+.action {
+  padding: .625em 0;
 }
 @media screen and (max-width: 803px) {
   #wel-div, .content span, .content h1 {
@@ -641,7 +714,7 @@ button.edit-btn, button.del-btn {
   }
   #aval-cusines div {
     width: 90vw;
-    margin-left: 5vw;
+    margin: 0 auto;
     margin-top: 9%;
     background-color: brown;
   }
@@ -690,6 +763,62 @@ button.edit-btn, button.del-btn {
     top: 222px;
     bottom: 20px;
     margin: -43% 0 0 -43%;
+  }
+  /*
+  ADMIN MARK ORDER
+  */
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    display: none;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    content: attr(data-holder);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .action {
+    padding: .625em;
+  }
+  .close, .check {
+    width: 11%;
+  }
+  td.accepted, td.declined {
+    text-align: right;
+    color: black;
+    background-color: white;
+  }
+  .accepted span {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 15%
+  }
+  .declined span {
+    background-color: red;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    width: 15%;
+    padding: 10px;
   }
 }
 @media screen and (max-height: 368px) {

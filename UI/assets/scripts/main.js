@@ -51,5 +51,5 @@ function closeModal(target) {
 }
 
 function openLink(url) {
-
+  document.location.href = url;
 }
