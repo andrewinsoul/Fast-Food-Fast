@@ -415,6 +415,7 @@ body.recent-order {
 }
 .recent-order p {
   margin: 5px 0;
+  flex-basis: 15%;
 }
 .recent-order footer {
   background-color: #5b0603;
