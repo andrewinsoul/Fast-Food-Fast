@@ -3,5 +3,7 @@ import orderController from '../controllers/orders';
 
 const orderRouter = express.Router();
 
-orderRouter.get('/orders', orderController.getAllOrders);
+orderRouter
+  .post('/orders', orderController.placeAnOrder)
+  .get('/orders', orderController.getAllOrders);
 export default orderRouter;
