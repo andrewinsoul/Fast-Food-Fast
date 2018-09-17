@@ -24,5 +24,12 @@ class Order {
     const index = orderData.findIndex(order => order.id === Number(req.params.id));
     return res.status(200).send({ status: 'success', order: orderData[index] });
   }
+
+  updateAnOrder(req, res) {
+    const message = 'status of order successfully updated';
+    const index = orderData.findIndex(order => order.id === Number(req.params.id));
+    orderData[index].status = req.body.status;
+    return res.status(200).send({ status: 'success', message });
+  }
 }
 export default new Order();
