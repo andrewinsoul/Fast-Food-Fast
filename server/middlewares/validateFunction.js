@@ -33,8 +33,8 @@ class Validator {
     if (req.body.status === undefined) return res.status(400).send({ status: 'error', error: 'the status field is required' });
     if (typeof (status) !== 'string') return res.status(400).send({ status: 'error', error: 'only strings are allowed for the status field' });
     if (!status.trim()) return res.status(400).send({ error: 'status field cannot be blank' });
-    if (status !== 'wait' || status !== 'declined' || status !== 'accepted') return res.status(400).send({ status: 'error', error: 'value of status should either be waiting, declined or accepted' });
-    return next();
+    if (status === 'wait' || status === 'declined' || status === 'accepted') return next();
+    return res.status(400).send({ status: 'error', error: 'value of status should either be wait, declined or accepted' });
   }
 
   /**
@@ -49,8 +49,8 @@ class Validator {
     if (req.body.status === undefined) return res.status(400).send({ status: 'error', error: 'the status field is required' });
     if (typeof (status) !== 'string') return res.status(400).send({ status: 'error', error: 'only strings are allowed for the status field' });
     if (!status.trim()) return res.status(400).send({ error: 'status field cannot be blank' });
-    if (status !== 'wait' || status !== 'declined' || status !== 'accepted') return res.status(400).send({ status: 'error', error: 'value of status should either be waiting, declined or accepted' });
-    return next();
+    if (status.toLowerCase() === 'wait' || status.toLowerCase() === 'declined' || status.toLowerCase() === 'accepted') return next();
+    return res.status(400).send({ status: 'error', error: 'value of status should either be waiting, declined or accepted' });
   }
 
   /**
