@@ -42,7 +42,9 @@ class Order {
    * @returns {object} - status code and server message
    */
   getAnOrder(req, res) {
-    const index = orderData.findIndex(order => order.id === Number(req.params.id));
+    const index = orderData.findIndex(
+      order => order.id === Number(req.params.id)
+    );
     return res.status(200).send({ status: 'success', order: orderData[index] });
   }
 
@@ -54,9 +56,13 @@ class Order {
    */
   updateAnOrder(req, res) {
     const message = 'status of order successfully updated';
-    const index = orderData.findIndex(order => order.id === Number(req.params.id));
+    const index = orderData.findIndex(
+      order => order.id === Number(req.params.id)
+    );
     orderData[index].status = req.body.status;
-    return res.status(200).send({ status: 'success', message, order: orderData });
+    return res.status(200).send({
+      status: 'success', message, order: orderData
+    });
   }
 }
 export default new Order();
