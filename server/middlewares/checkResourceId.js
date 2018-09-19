@@ -7,7 +7,7 @@ import orderData from '../models/order';
  * @param {*} next - the callback function
  * @returns {object} - status code and error message
  */
-function Helper(req, res, next) {
+function checkResourceId(req, res, next) {
   const index = orderData.findIndex(
     order => order.id === Number(req.params.id)
   );
@@ -17,4 +17,4 @@ function Helper(req, res, next) {
   }
   return next();
 }
-export default Helper;
+export default checkResourceId;

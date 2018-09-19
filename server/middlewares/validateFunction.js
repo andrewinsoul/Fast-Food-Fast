@@ -142,7 +142,7 @@ class Validator {
     if (isNaN(req.params.id)) {
       return res.status(400).send({
         status: 'error',
-        error: 'params shoudld be a number'
+        error: 'id params shoudld be a number'
       });
     }
     if (!(parseInt(req.params.id, 10) === Number(req.params.id))) {

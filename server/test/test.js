@@ -28,7 +28,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             .end(() => done());
         });
     });
-    it('should return code 201 with object of order just added', (done) => {
+    it('should return code 201 with object of order just added when user access POST /api/v1/orders', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
         .send({
@@ -45,7 +45,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
         });
     });
 
-    it('should return code 200 with all orders', (done) => {
+    it('should return code 200 with all orders when user access GET /api/v1/orders', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
         .end((err, res) => {
@@ -58,7 +58,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
         });
     });
 
-    it('should return code 200 with specified order', (done) => {
+    it('should return code 200 with specified order when user access GET /api/v1/order/:id', (done) => {
       chai.request(app)
         .get('/api/v1/orders/2')
         .end((err, res) => {
@@ -71,7 +71,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
         });
     });
 
-    it('should return code 200 with concise success message', (done) => {
+    it('should return code 200 with concise success message when user access PUT /api/v1/order/:id', (done) => {
       chai.request(app)
         .put('/api/v1/orders/2')
         .send({
@@ -93,7 +93,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
 
   describe('tests for invalid inputs of Fast Food Fast API', () => {
     describe('tests for invalid inputs in placing order endpoint', () => {
-      it('should return code 400 with error message', (done) => {
+      it('should return code 400 with error message when user access place order endpoint without address field', (done) => {
         chai.request(app)
           .post('/api/v1/orders')
           .send({
@@ -108,7 +108,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             done();
           });
       });
-      it('should return code 400 with concise error message', (done) => {
+      it('should return code 400 with concise error message when user access place order endpoint without status field', (done) => {
         chai.request(app)
           .post('/api/v1/orders')
           .send({
@@ -123,7 +123,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             done();
           });
       });
-      it('should return code 400 with simple error message', (done) => {
+      it('should return code 400 with simple error message when user access the place order endpoint with invalid value for the order field', (done) => {
         chai.request(app)
           .post('/api/v1/orders')
           .send({
@@ -139,7 +139,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             done();
           });
       });
-      it('should return 400 with error message', (done) => {
+      it('should return 400 with error message when user access the place order endpoint with invalid input for the name field', (done) => {
         chai.request(app)
           .post('/api/v1/orders')
           .send({
@@ -155,7 +155,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             done();
           });
       });
-      it('should return 400 with error message', (done) => {
+      it('should return 400 with error message when user access the place order endpoint with wrong type of value in order field', (done) => {
         chai.request(app)
           .post('/api/v1/orders')
           .send({
@@ -176,7 +176,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
     });
 
     describe('tests for invalid inputs in updating the status endpoint', () => {
-      it('should return code 400 with concise error message', (done) => {
+      it('should return code 400 with concise error message when user access update endpoint without the status field', (done) => {
         chai.request(app)
           .put('/api/v1/orders/2')
           .send({ name: 'name' })
@@ -187,7 +187,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
             done();
           });
       });
-      it('should return code 400 with error message', (done) => {
+      it('should return code 400 with error message when user access the update endpoint with unallowed values for the status in status field', (done) => {
         chai.request(app)
           .put('/api/v1/orders/2')
           .send({ status: 'status' })
@@ -203,7 +203,7 @@ describe('Fast-Food-App dummy data endpoint tests', () => {
     });
 
     describe('test for helper function', () => {
-      it('should return code 404 with concise error message', (done) => {
+      it('should return code 404 with concise error message when id of order is not found', (done) => {
         chai.request(app)
           .get('/api/v1/orders/2100')
           .end((err, res) => {
