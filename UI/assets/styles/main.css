@@ -39,6 +39,10 @@ a.active {
   text-align: center;
   color: white
 }
+#restuarant-img h3 {
+  display: inline-block;
+  padding-left: 20px;
+}
 
 #main-form, #aval-cusines, .form-jumbotron {
   display: flex;
@@ -159,7 +163,6 @@ img.nav-brand {
   width: 92px;
   border-radius: 44px;
   vertical-align: middle;
-  margin-top: 10px;
 }
 .fa {
   font-size: 303px;
@@ -206,6 +209,8 @@ button.icon {
 #brand-div h1 {
   font-family: Aguafina Script;
   display: inline-block;
+  vertical-align: middle;
+  padding-left: 4px;
   font-size: 50px;
 }
 h1 {
@@ -338,8 +343,12 @@ h1 {
  .desc-p small {
    color: black;
  }
+ .add-item-btn img{
+    width: 23px;
+    vertical-align: middle;
+ }
  .add-item-btn {
-  max-height: 23px;
+   margin-bottom: 4px;
  }
  button {
    cursor: pointer;
