@@ -15,7 +15,7 @@ nav {
 .topnav a {
   color: #f2f2f2;
   text-decoration: none;
-  padding: 14px 16px;
+  padding: 14px 6px;
 }
 .topnav a:hover, .topnav.responsive a:hover {
   color: green;
@@ -38,6 +38,10 @@ a.active {
 .sub-content {
   text-align: center;
   color: white
+}
+#restuarant-img h3 {
+  display: inline-block;
+  padding-left: 20px;
 }
 
 #main-form, #aval-cusines, .form-jumbotron {
@@ -159,7 +163,6 @@ img.nav-brand {
   width: 92px;
   border-radius: 44px;
   vertical-align: middle;
-  margin-top: 10px;
 }
 .fa {
   font-size: 303px;
@@ -206,6 +209,8 @@ button.icon {
 #brand-div h1 {
   font-family: Aguafina Script;
   display: inline-block;
+  vertical-align: middle;
+  padding-left: 4px;
   font-size: 50px;
 }
 h1 {
@@ -213,7 +218,7 @@ h1 {
   color: white
 }
 .nav-link {
-  margin-right: 43px;
+  margin-right: 23px;
 }
 #welcome-header {
   display: none;
@@ -338,8 +343,12 @@ h1 {
  .desc-p small {
    color: black;
  }
+ .add-item-btn img{
+    width: 23px;
+    vertical-align: middle;
+ }
  .add-item-btn {
-  max-height: 23px;
+   margin-bottom: 4px;
  }
  button {
    cursor: pointer;
@@ -349,7 +358,7 @@ h1 {
    color: black
  }
  #cusine-category a:hover {
-   color: brown;
+   color: #5b0603;
  }
  .sn {
    margin-left: 2%;
@@ -446,9 +455,6 @@ body.recent-order {
 /*
   ADMIN MENU LIST STYLING
 */
-body.admin-menu-list {
-  background-color: brown;
-}
 .admin-menu-list .container {
   display: flex;
   color: black;
@@ -485,7 +491,7 @@ body.admin-menu-list {
 .jumbotron p {
   margin-top: 0;
 }
-#modal, #addModal {
+#modal, #addModal, #delModal {
   background: white;
   position: fixed;
   width: 50%;
@@ -496,9 +502,16 @@ body.admin-menu-list {
   opacity: 0;
   left: 50%;
   margin: -25% 0 0 -25%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
-.modalOpen #modal, .modalOpen #addModal {
+#delModal {
+  height: 30%;
+  overflow-y: hidden
+}
+#delModal p {
+  padding-left: 4%
+}
+.modalOpen #modal, .modalOpen #addModal, .modalOpen #delModal {
   transform: scale(1);
   opacity: 1;
 }
@@ -506,7 +519,7 @@ body.admin-menu-list {
   filter: blur(1px) grayscale(0%);
   transform: scale(1);
 }
-#main-container, #modal, #addModal {
+#main-container, #modal, #addModal, #delModal {
   transition: all 0.4s ease;
 }
 #modal-wrapper form, #addModal-wrapper form {
@@ -580,13 +593,16 @@ button.edit-btn, button.del-btn {
 body.admin-mark-order {
   background-color: white;
 }
+#cancel {
+  margin-left: 3%
+}
 .admin-mark-order nav {
-  background-color: brown;  
+  background-color: #5b0603;  
 }
 .admin-mark-order footer {
   border-top: 1px solid grey;
   margin-top: 28%;
-  background-color: brown;
+  background-color: #5b0603;
 }
 table {
   width: 100%;
@@ -759,7 +775,7 @@ td.declined {
     margin: 0 auto;
     margin-top: 4%;
   }
-  #modal, #addModal {
+  #modal, #addModal, #delModal {
     width: 86%;
     top: 222px;
     bottom: 20px;
