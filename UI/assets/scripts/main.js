@@ -67,7 +67,7 @@ function closeModal(target) {
   const container = document.getElementById('main-container');
   const modalDiv = document.getElementById(target);
   bodyTag.className = 'admin-menu-list';
-  bodyTag.style.background = 'brown';
+  bodyTag.style.background = '#5b0603';
   bodyTag.style.overflowY = 'auto';
   container.style.pointerEvents = 'auto';
 }
