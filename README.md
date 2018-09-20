@@ -48,15 +48,56 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
 
 ## API ROUTES
 <table>
-<tr><th>HTTP VERB</th><th>ENDPOINT</th><th>FUNCTIONALITY</th></tr>
-<tr><td>POST</td> <td>api/v1/orders</td>  <td>places an order</td></tr>
+  <tr>
+    <th>HTTP VERB</th>
+    <th>ENDPOINT</th>
+    <th>FUNCTIONALITY</th>
+    <th>Request Payload</th>
+  </tr>
+  <tr>
+    <td>POST</td> 
+    <td>api/v1/orders</td>  
+    <td>places an order</td>
+    <td>
 
-<tr><td>PUT</td> <td>api/v1/orders/:orderId</td>  <td>Update status of an order</td></tr>
+      name: <string>
+      order: <string>
+      address: <string>
+      status: <string> allowed value for status are: wait, declined or accepted
+  </td>
+  </tr>
 
-<tr><td>GET</td> <td>api/v1/orders/:orderId</td> <td>Get an order</td></tr>
+  <tr>
+    <td>PUT</td> 
+    <td>api/v1/orders/:orderId</td>  
+    <td>Update status of an order</td>
+    <td>
 
-<tr><td>GET</td> <td>api/v1/orders</td> <td>Get all orders</td></tr>
-    </table>
+      status: <string> allowed value of status are wait, declined or accepted
+
+  </td>
+  </tr>
+
+  <tr>
+    <td>GET</td> 
+    <td>api/v1/orders/:orderId</td> 
+    <td>Get an order</td>
+    <td>
+
+      No payload but orderId must be an integer
+  </td>
+  </tr>
+
+  <tr>
+    <td>GET</td> 
+    <td>api/v1/orders</td> 
+    <td>Get all orders</td>
+    <td>
+
+      None
+  </td>
+  </tr>
+</table>
 
 ## Coding Style
 
@@ -64,7 +105,7 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
 
 ## How to Contribute
 
-````bash
+```bash
 - Fork this repository.
 - Clone it.
 - Create your feature branch on your local machine with ```git checkout -b your-feature-branch```
