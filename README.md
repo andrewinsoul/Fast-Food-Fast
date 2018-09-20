@@ -52,7 +52,7 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
     <th>HTTP VERB</th>
     <th>ENDPOINT</th>
     <th>FUNCTIONALITY</th>
-    <th>Request Payload</th>
+    <th>REQUEST PAYLOAD</th>
   </tr>
   <tr>
     <td>POST</td> 
