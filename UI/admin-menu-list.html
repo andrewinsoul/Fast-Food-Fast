@@ -17,7 +17,7 @@
           <h1>Fast Food App</h1>
         </div>
         <div id="nav-links">
-          <a class="nav-link" href="user-order.html">ORDERS</a>
+          <a class="nav-link" href="admin-mark-order.html">ORDERS</a>
           <a class="nav-link active" href="#">MENU</a>
           <a class="nav-link" href="#">PROFILE</a>
           <a class="nav-link" href="index.html">LOG OUT</a>
@@ -49,14 +49,11 @@
               </p>
             </div>
             <div class="space-item-in-flex">
-              <button onclick="openLink('./admin-mark-order.html')">
-                View Orders
-              </button>
               <div>
                 <button onclick="openModal('modal')" class="edit-btn">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="del-btn">
+                <button class="del-btn" onclick="openDelModal()">
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
@@ -83,14 +80,11 @@
               </p>
             </div>
             <div class="space-item-in-flex">
-              <button onclick="openLink('./admin-mark-order.html')">
-                View Orders
-              </button>
               <div>
                 <button onclick="openModal('modal')" class="edit-btn">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="del-btn">
+                <button class="del-btn" onclick="openDelModal()">
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
@@ -117,14 +111,11 @@
               </p>
             </div>
             <div class="space-item-in-flex">
-              <button onclick="openLink('./admin-mark-order.html')">
-                View Orders
-              </button>
               <div>
                 <button onclick="openModal('modal')" class="edit-btn">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="del-btn">
+                <button class="del-btn" onclick="openDelModal()">
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
@@ -151,21 +142,18 @@
               </p>
             </div>
             <div class="space-item-in-flex">
-              <button onclick="openLink('./admin-mark-order.html')">
-                View Orders
-              </button>
               <div>
                 <button onclick="openModal('modal')" class="edit-btn">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="del-btn">
+                <button class="del-btn" onclick="openDelModal()">
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="jumbotron" style="display: flex; justify-content: center; cursor: pointer">
+          <div class="jumbotron center-item-in-flex ">
             <button onclick="openAddModal('addModal')">
               <img src="./assets/images/add-img.png" alt="add icon">
               <p>Add Menu Item</p>
@@ -234,6 +222,16 @@
         <div class="modal-btns">
           <button id="add">Add Menu Item</button>
           <button id="cancel" onclick="closeModal('addModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="delModal">
+      <div id="delmodal-wrapper">
+        <h3 class="center-txt bottom-line">Delete Fast Food Menu Item</h3>
+        <p>Are you sure you wish to delete Menu Item</p>
+        <div class="modal-btns">
+          <button id="delete">Delete</button>
+          <button id="cancel" onclick="closeModal('modal')">Cancel</button>
         </div>
       </div>
     </div>
