@@ -1,4 +1,4 @@
-import orderData from '../models/order';
+import { orders } from '../models/order';
 
 /**
  * @desc helper function that returns error if resource is not found
@@ -8,8 +8,8 @@ import orderData from '../models/order';
  * @returns {object} - status code and error message
  */
 function checkResourceId(req, res, next) {
-  const index = orderData.findIndex(
-    order => order.id === Number(req.params.id)
+  const index = orders.findIndex(
+    order => order.orderId === Number(req.params.id)
   );
   const error = 'order not found';
   if (index === -1) {

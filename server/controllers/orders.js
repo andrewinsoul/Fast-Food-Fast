@@ -1,4 +1,4 @@
-import orderData from '../models/order';
+import { orders } from '../models/order';
 
 /**
  * @description contains methods that manipulates data from order model
@@ -11,7 +11,7 @@ class Order {
    * @returns {object} - status code and server message
    */
   getAllOrders(req, res) {
-    return res.status(200).send({ status: 'success', message: orderData });
+    return res.status(200).send({ status: 'success', message: orders });
   }
 
   /**
@@ -21,17 +21,14 @@ class Order {
    * @returns {object} -status code and server message
    */
   placeAnOrder(req, res) {
-    const {
-      name, order, address, status,
-    } = req.body;
-    const orderDetails = {
-      id: orderData.length + 1,
-      name,
-      order,
-      address,
-      status,
-    };
-    orderData.push(orderDetails);
+    const orderDetails = Object.assign(
+      req.body, {
+        orderId: orders.length + 1,
+        date: new Date(Date.now()),
+        status: 'waiting',
+      }
+    );
+    orders.push(orderDetails);
     return res.status(201).send({ status: 'success', order: orderDetails });
   }
 
@@ -42,10 +39,10 @@ class Order {
    * @returns {object} - status code and server message
    */
   getAnOrder(req, res) {
-    const index = orderData.findIndex(
-      order => order.id === Number(req.params.id)
+    const index = orders.findIndex(
+      order => order.orderId === Number(req.params.id)
     );
-    return res.status(200).send({ status: 'success', order: orderData[index] });
+    return res.status(200).send({ status: 'success', order: orders[index] });
   }
 
   /**
@@ -56,12 +53,12 @@ class Order {
    */
   updateAnOrder(req, res) {
     const message = 'status of order successfully updated';
-    const index = orderData.findIndex(
-      order => order.id === Number(req.params.id)
+    const index = orders.findIndex(
+      order => order.orderId === Number(req.params.id)
     );
-    orderData[index].status = req.body.status;
+    orders[index].status = req.body.status;
     return res.status(200).send({
-      status: 'success', message, order: orderData
+      status: 'success', message, order: orders
     });
   }
 }

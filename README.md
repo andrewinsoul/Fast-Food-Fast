@@ -53,6 +53,7 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
     <th>ENDPOINT</th>
     <th>FUNCTIONALITY</th>
     <th>REQUEST PAYLOAD</th>
+    <th>EXAMPLE</th>
   </tr>
   <tr>
     <td>POST</td> 
@@ -60,10 +61,24 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
     <td>places an order</td>
     <td>
 
-      name: <string>
-      order: <string>
+      userId: <integer>
+      order: <array>
       address: <string>
-      status: <string> allowed value for status are: wait, declined or accepted
+  </td>
+    <td>
+    
+      userId: 1,
+      order: [
+        {
+          "foodId": 1,
+          "quantity: 2
+        },
+        {
+          "foodId": 2,
+          "quantity": 1,
+        }
+      ],
+      address: "address"    
   </td>
   </tr>
 
@@ -76,6 +91,10 @@ https://fast-food-andy.herokuapp.com/api/v1/orders
       status: <string> allowed value of status are wait, declined or accepted
 
   </td>
+  <td>
+
+  
+</td>
   </tr>
 
   <tr>

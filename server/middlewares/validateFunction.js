@@ -1,3 +1,6 @@
+import { foodList } from '../models/order';
+/* eslint-disable prefer-const */
+/* eslint-disable max-len */
 /**
  * @description - contains methods that validates input
  * @class Validator
@@ -12,44 +15,52 @@ class Validator {
    */
   placeOrder(req, res, next) {
     const {
-      name,
+      userId,
       order,
       address,
-      status,
     } = req.body;
-    if (req.body.name === undefined) {
+    if (userId === undefined) {
       return res.status(400).send(
-        { status: 'error', error: 'the name field is required' }
+        { status: 'error', error: 'the userId is required' }
       );
     }
-    if (typeof (name) !== 'string') {
+    if (isNaN(Number(userId))) {
       return res.status(400).send(
         {
           status: 'error',
-          error: 'only strings are allowed for the name field'
+          error: 'userId should be a number'
         }
       );
     }
-    if (!name.trim()) {
+    if (!(parseInt(Number(userId), 10) === Number(userId))) {
       return res.status(400).send(
-        { status: 'error', error: 'name field cannot be blank' }
+        { status: 'error', error: 'userId must be an integer' }
       );
     }
-    if (req.body.order === undefined) {
+    for (let i = 0; i < order.length; i += 1) {
+      let foodIndex = foodList.findIndex(foodItem => Number(foodItem.foodId) === Number(order[i].foodId));
+      if (foodIndex === -1) return res.status(404).send({ status: 'error', error: `foodId ${order[i].foodId} not found` });
+    }
+    if (address === undefined) {
+      return res.status(400).send({ status: 'error', error: 'the address field is required' });
+    }
+    if (order === undefined) {
       return res.status(400).send(
         { status: 'error', error: 'the order field is required' }
       );
     }
-    if (typeof (order) !== 'string') {
+    if (!(Array.isArray(order))) {
+      console.log(order);
       return res.status(400).send({
         status: 'error',
-        error: 'only strings are allowed for the order field'
+        error: 'order must be array of objects'
       });
     }
-    if (!order.trim()) {
+
+    if (order.length === 0) {
       return res.status(400).send({
         status: 'error',
-        error: 'order field cannot be blank'
+        error: 'cannot place an empty order'
       });
     }
 
@@ -68,31 +79,7 @@ class Validator {
     if (!address.trim()) {
       return res.status(400).send({ error: 'address field cannot be blank' });
     }
-
-    if (req.body.status === undefined) {
-      return res.status(400).send({
-        status: 'error',
-        error: 'the status field is required'
-      });
-    }
-    if (typeof (status) !== 'string') {
-      return res.status(400).send({
-        status: 'error',
-        error: 'only strings are allowed for the status field'
-      });
-    }
-    if (!status.trim()) {
-      return res.status(400).send({ error: 'status field cannot be blank' });
-    }
-    if (status === 'wait' || status === 'declined' || status === 'accepted') {
-      return next();
-    }
-    return res.status(400).send(
-      {
-        status: 'error',
-        error: 'value of status should either be wait, declined or accepted'
-      }
-    );
+    return next();
   }
 
   /**
@@ -120,7 +107,7 @@ class Validator {
       return res.status(400).send({ error: 'status field cannot be blank' });
     }
     if (
-      status.toLowerCase() === 'wait'
+      status.toLowerCase() === 'waiting'
       || status.toLowerCase() === 'declined'
       || status.toLowerCase() === 'accepted') {
       return next();
