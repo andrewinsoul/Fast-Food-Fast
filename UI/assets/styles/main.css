@@ -346,12 +346,15 @@ h1 {
  .desc-p small {
    color: black;
  }
- .add-item-btn img{
+ .add-item-btn img, .remove-item-btn img{
     width: 23px;
     vertical-align: middle;
  }
- .add-item-btn {
+ .add-item-btn, .remove-item-btn {
    margin-bottom: 4px;
+ }
+ .remove-item-btn {
+   display: none;
  }
  button {
    cursor: pointer;

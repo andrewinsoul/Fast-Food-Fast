@@ -27,7 +27,14 @@
         </button>
       </nav>
       <main>
-        <h2 class="center-txt">Admin User</h2>
+        <div style="display: flex; justify-content: space-around">
+          <h2>Admin User</h2>
+          <div>
+            <div onclick="openAddModal('addModal')" style="cursor: pointer;">
+              <i style="font-size: 50px; color: green" class="fa fa-plus-circle"></i>
+            </div>
+          </div>
+        </div>
         <div class="container">
           <div class="jumbotron col-1">
             <div>
@@ -152,13 +159,6 @@
               </div>
             </div>
           </div>
-
-          <div class="jumbotron center-item-in-flex ">
-            <button onclick="openAddModal('addModal')">
-              <img src="../assets/images/add-img.png" alt="add icon">
-              <p>Add Menu Item</p>
-            </button>
-          </div>
         </div>
       </main>
       <footer>
@@ -193,7 +193,7 @@
           </textarea>
         </form>
         <div class="modal-btns">
-          <button id="update">Update</button>
+          <button id="update" onclick="updateMenu()">Update</button>
           <button id="cancel" onclick="closeModal('modal')">Cancel</button>
         </div>
       </div>
@@ -220,7 +220,7 @@
           <textarea name="description" id="add-description" cols="30" rows="5" placeholder="Brief Description of Food"></textarea>
         </form>
         <div class="modal-btns">
-          <button id="add">Add Menu Item</button>
+          <button id="add" onclick="addMenu()">Add Menu Item</button>
           <button id="cancel" onclick="closeModal('addModal')">Cancel</button>
         </div>
       </div>
@@ -230,7 +230,7 @@
         <h3 class="center-txt bottom-line">Delete Fast Food Menu Item</h3>
         <p>Are you sure you wish to delete Menu Item</p>
         <div class="modal-btns">
-          <button id="delete">Delete</button>
+          <button id="delete" onclick="closeModal('modal')">Delete</button>
           <button id="cancel" onclick="closeModal('modal')">Cancel</button>
         </div>
       </div>
