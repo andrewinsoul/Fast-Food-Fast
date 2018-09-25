@@ -17,6 +17,8 @@ query.then(() => {
   query = config.query(cart);
   console.log('cart table successfully created ');
 }).catch(error => console.log(error));
+import orderRouter from './server/routes/orderRouter';
+
 const app = express();
 
 app.use(logger('dev'));
@@ -29,6 +31,8 @@ app.get('/', (req, res) => {
     message: 'welcome to fast food fast API'
   });
 });
+app.use('/api/v1', orderRouter);
+
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 app.listen(port, () => console.log(`server live on port ${port}`));
