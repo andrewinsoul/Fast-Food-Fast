@@ -106,8 +106,8 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'andrewinsolsul@gmail.com',
-          password: 'password'
+          email: 'philnew@gmail.com',
+          password: 'NotIntelligentButCurious'
         })
         .end((err, res) => {
           expect(res).to.have.status(200);

@@ -8,9 +8,11 @@ query.then(() => {
   console.log('users table successfully created');
 }).then(() => {
   query = config.query(menu);
-  console.log('menu table successfully created');
 }).then(() => {
   query = config.query(cart);
-  console.log('cart table successfully created ');
-}).then(() => process.exit(0))
+}).then(() => {
+  console.log('menu table successfully created');
+  console.log('cart table successfully created');
+  process.exit(0);
+})
   .catch(error => console.log(error));
