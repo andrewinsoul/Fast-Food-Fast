@@ -8,7 +8,7 @@ const { expect } = chai;
 
 describe('Fast-Food-Fast backend tests with postgres database for user model', () => {
   describe('tests controller that signs up a user', () => {
-    it('should return code 201 with success message and token', (done) => {
+    it('should return code 201 with success message', (done) => {
       chai.request(app)
         .post('/api/v1/auth/signup')
         .send({
@@ -21,12 +21,11 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
         .end((err, res) => {
           expect(res).to.have.status(201);
           expect(res.body).to.have.property('status');
-          expect(res.body.message).eql('signup successful');
+          expect(res.body.status).eql('success');
           expect(res.body.token).to.not.eql(null);
           done();
         });
     });
-
     it('should return code 409 with existing email with error message and null token', (done) => {
       chai.request(app)
         .post('/api/v1/auth/signup')
@@ -41,7 +40,6 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
           expect(res).to.have.status(409);
           expect(res.body).to.have.property('status');
           expect(res.body.status).eql('error');
-          expect(res.body.token).to.not.eql(null);
           done();
         });
     });
@@ -125,7 +123,7 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'andrewinsoul@gmail.com',
+          email: 'philnew@gmail.com',
           password: 'NotIntelligentButCurious'
         })
         .end((err, res) => {

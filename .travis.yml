@@ -3,6 +3,7 @@ node_js:
   - "stable"
 before_script: 
   - npm run createTable
+  - npm i -D coveralls
 script:
   - npm test
 after_script: 

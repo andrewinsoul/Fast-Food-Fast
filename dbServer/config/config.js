@@ -13,7 +13,6 @@ if (env === 'development') {
   config = new pg.Client(dbCredential[env].DB_URL);
 }
 
-const config = new pg.Client(dbCredential[env]);
 config.connect()
   .then(() => console.log('database successfully connected'))
   .catch(error => console.log({ error }));
