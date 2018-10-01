@@ -4,9 +4,13 @@
   "description": "A web application that allows user order for food",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha ./server/test --compilers js:babel-core/register --exit",
-    "start": "babel-node ./app",
+    "test:dev": "nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
+    "test": "cross-env NODE_ENV=test npm run seed & nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
+    "start": "npm run createTable & babel-node ./app",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "dropTable": "babel-node ./dbServer/sql/dropTables.js",
+    "createTable": "babel-node ./dbServer/sql/createTables.js",
+    "seed": "babel-node ./dbServer/sql/seed.js",
     "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
@@ -27,9 +31,14 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "morgan": "^1.9.1"
+    "jsonwebtoken": "^8.3.0",
+    "morgan": "^1.9.1",
+    "pg": "^7.4.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",

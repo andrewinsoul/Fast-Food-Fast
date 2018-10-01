@@ -1,11 +1,15 @@
 language: node_js
-node_js: 
+node_js:
   - "stable"
-cache: bundler
-before_script:
-  - npm i -D coveralls
-script: 
+before_script: 
+  - npm run createTable
+script:
   - npm test
+after_script: 
+  - npm run dropTable
 after_success:
   - npm run coverage
   - npm run report-coverage
+env:
+  global:
+    - NODE_ENV = test

@@ -91,6 +91,18 @@ class Validator {
    */
   updateOrder(req, res, next) {
     const { status } = req.body;
+    if (isNaN(req.params.id)) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'id param should be a number'
+      });
+    }
+    if (!(parseInt(req.params.id, 10) === Number(req.params.id))) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'param should be an integer'
+      });
+    }
     if (req.body.status === undefined) {
       return res.status(400).send({
         status: 'error',
@@ -133,7 +145,7 @@ class Validator {
       });
     }
     if (!(parseInt(req.params.id, 10) === Number(req.params.id))) {
-      return res.status(400).send({ status: 'error', error: '' });
+      return res.status(400).send({ status: 'error', error: 'param should be an integer' });
     }
     return next();
   }
