@@ -6,6 +6,7 @@ import user from './dbServer/sql/models/user';
 import menu from './dbServer/sql/models/menu';
 import cart from './dbServer/sql/models/cart';
 import userRouter from './dbServer/router/userRouter';
+import orderRouter from './server/routes/orderRouter';
 
 let query = config.query(user);
 query.then(() => {
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
     message: 'welcome to fast food fast API'
   });
 });
+app.use('/api/v1', orderRouter);
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 app.listen(port, () => console.log(`server live on port ${port}`));
