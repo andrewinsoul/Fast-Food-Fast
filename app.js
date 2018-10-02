@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import userRouter from './dbServer/router/userRouter';
+import menuRouter from './dbServer/router/menuRouter';
 
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/', userRouter);
+app.use('/api/v1', menuRouter);
 app.get('/', (req, res) => {
   res.status(200).send({
     status: 'success',

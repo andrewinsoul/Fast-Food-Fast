@@ -30,7 +30,7 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
       chai.request(app)
         .post('/api/v1/auth/signup')
         .send({
-          username: 'coolfeel',
+          username: 'dcoolfeel',
           password: 'NotIntelligentButCurious',
           email: 'philnew@gmail.com',
           phone: '08166035057',

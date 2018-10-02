@@ -3,7 +3,7 @@ const menu = `
     foodId serial primary key, 
     food varchar(350),
     price integer,
-    userId int,
+    userId integer,
     foreign key(userId) references users(userId)
   )`;
 export default menu;

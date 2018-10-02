@@ -1,5 +1,22 @@
+import bcrypt from 'bcryptjs';
 import config from '../config/config';
 
+const AdminUser = `
+  INSERT INTO users (
+    username,
+    email,
+    address,
+    password,
+    phone,
+    user_role
+  ) VALUES
+  ( 'andypin',
+    'andrewinsoliii@gmail.com',
+    'Andela Office',
+    '${bcrypt.hashSync('password')}',
+    '12345678654',
+    ${true})
+`;
 const BulkInsertUser = `
   INSERT INTO users (
     username,
@@ -58,29 +75,28 @@ const InsertOrder = `
       userId,
       createdAt
     ) VALUES ($1, $2, $3, $4)`;
-config.query(BulkInsertUser).then(() => {
-  console.log('users table successfully populated');
-}).then(() => {
-  config.query(BulkInsertMenu).then(() => {
-    console.log('menu table successfully populated');
-  }).then(() => {
-    config.query(InsertOrder, [
-      arrayOrders1,
-      'new',
-      2,
-      new Date(Date.now())
-    ]).then(() => {
+config.query(AdminUser).then(() => {
+  config.query(BulkInsertUser).then(() => {
+    config.query(BulkInsertMenu).then(() => {
       config.query(InsertOrder, [
-        arrayOrders2,
-        'cancelled',
-        3,
+        arrayOrders1,
+        'new',
+        2,
         new Date(Date.now())
-      ]);
-    }).then(() => console.log('cart table successfully populated'))
-      .then(() => process.exit(0))
-      .catch((error) => {
-        console.log(error);
-        process.exit(1);
+      ]).then(() => {
+        config.query(InsertOrder, [
+          arrayOrders2,
+          'cancelled',
+          3,
+          new Date(Date.now())
+        ]).then(() => {
+          console.log('tables successfully populated');
+          process.exit(0);
+        });
       });
+    });
+  }).catch((error) => {
+    console.log(error);
+    process.exit(1);
   });
 });

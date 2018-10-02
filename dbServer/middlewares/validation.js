@@ -132,5 +132,51 @@ class validation {
     }
     return next();
   }
+
+  /**
+   * @description - method that validates input on create menu route
+   * @param {object} req - the request object
+   * @param {object} res - the response object
+   * @param {function} next - the callback function
+   * @returns {object} - status code and error
+   */
+  createMenu(req, res, next) {
+    const {
+      foodName,
+      price,
+    } = req.body;
+    if (foodName === undefined) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'foodName field is required'
+      });
+    }
+    if (typeof (foodName) !== 'string') {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid type for foodName, must be a string'
+      });
+    }
+    if (price === undefined) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'price field is required'
+      });
+    }
+    const validPrice = parseInt(price, 10);
+    if (isNaN(validPrice)) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid data type for price, must be a number'
+      });
+    }
+    if (!(parseInt(price, 10) === validPrice)) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid number type for price, must be integer'
+      });
+    }
+    return next();
+  }
 }
 export default new validation();
