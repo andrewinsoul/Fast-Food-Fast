@@ -32,5 +32,28 @@ class Menu {
       });
     });
   }
+
+  /**
+   * @description - method that allows user gets available menu
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} - status code and server message
+   */
+  getAvailableMenu(req, res) {
+    config.query(`
+      SELECT food, price FROM menu
+    `).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(200).send({
+          status: 'success',
+          message: 'no menu added by admin'
+        });
+      }
+      return res.status(200).send({
+        status: 'success',
+        message: result.rows
+      });
+    });
+  }
 }
 export default new Menu();

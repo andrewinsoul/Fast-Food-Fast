@@ -11,6 +11,9 @@ menuRouter
     verifyToken,
     verifyAdmin,
     validation.createMenu,
-    menu.createMenu);
+    menu.createMenu)
+  .get('/menu',
+    verifyToken,
+    menu.getAvailableMenu);
 
 export default menuRouter;

@@ -65,5 +65,16 @@ describe('Fast-Food_Fast backend tests with postgres database for menu model', (
           done();
         });
     });
+
+    it('should return code 403 with error message when authorized user tries to create menu without token', (done) => {
+      chai.request(app)
+        .get('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.status).to.eql('success');
+          done();
+        });
+    });
   });
 });
