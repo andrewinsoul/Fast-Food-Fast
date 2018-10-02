@@ -8,6 +8,24 @@ const { expect } = chai;
 
 describe('Fast-Food-Fast backend tests with postgres database for user model', () => {
   describe('tests controller that signs up a user', () => {
+    it('should return code 201 with success message', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          username: 'coolfeel',
+          password: 'NotIntelligentButCurious',
+          email: 'philnew@gmail.com',
+          phone: '08166035057',
+          address: 'My Crib'
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.body).to.have.property('status');
+          expect(res.body.status).eql('success');
+          expect(res.body.token).to.not.eql(null);
+          done();
+        });
+    });
     it('should return code 409 with existing email with error message and null token', (done) => {
       chai.request(app)
         .post('/api/v1/auth/signup')
@@ -22,7 +40,6 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
           expect(res).to.have.status(409);
           expect(res.body).to.have.property('status');
           expect(res.body.status).eql('error');
-          expect(res.body.token).to.not.eql(null);
           done();
         });
     });
