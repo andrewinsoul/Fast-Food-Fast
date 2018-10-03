@@ -28,17 +28,17 @@ const BulkInsertUser = `
   ( 'andypdy',
     'andrewinsolsul@gmail.com',
     'Andela Office',
-    'password',
+    '${bcrypt.hashSync('password')}',
     '12345678654'),
   ('slavaak',
   'slavacouroy05as@gmail.com',
   'my school',
-  'password',
+  '${bcrypt.hashSync('password')}',
   '12345678976'),
   ('constancea',
     'chiamasdkaconswtance87@gmail.com',
     'address',
-    'password',
+    '${bcrypt.hashSync('password')}',
     '12345678987')
 `;
 const BulkInsertMenu = `
@@ -81,13 +81,13 @@ config.query(AdminUser).then(() => {
       config.query(InsertOrder, [
         arrayOrders1,
         'new',
-        2,
+        4,
         new Date(Date.now())
       ]).then(() => {
         config.query(InsertOrder, [
           arrayOrders2,
           'cancelled',
-          3,
+          4,
           new Date(Date.now())
         ]).then(() => {
           console.log('tables successfully populated');

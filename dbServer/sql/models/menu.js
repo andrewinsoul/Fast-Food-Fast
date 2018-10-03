@@ -4,6 +4,7 @@ const menu = `
     food varchar(350),
     price integer,
     userId integer,
-    foreign key(userId) references users(userId)
+    foreign key(userId) references users(userId) 
+    on delete cascade on update cascade
   )`;
 export default menu;

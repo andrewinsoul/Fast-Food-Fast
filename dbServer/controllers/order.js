@@ -77,5 +77,29 @@ class Order {
       });
     });
   }
+
+  /**
+   * @description - method that gets the order history of a user
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} - status code and server message
+   */
+  getUserOrderHistory(req, res) {
+    const { userId } = req;
+    config.query(`
+      SELECT address, phone, email, orderId, orders, createdAt FROM users INNER JOIN cart ON (users.userid = ($1)) 
+    `, [userId]).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(404).send({
+          status: 'error',
+          error: 'you have no order history'
+        });
+      }
+      return res.status(200).send({
+        status: 'success',
+        message: result.rows
+      });
+    });
+  }
 }
 export default new Order();

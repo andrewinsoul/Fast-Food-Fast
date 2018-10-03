@@ -21,6 +21,9 @@ orderRouter
     validation.checkParam,
     verifyToken,
     verifyAdmin,
-    order.getAnOrder);
+    order.getAnOrder)
+  .get('/users/orders',
+    verifyToken,
+    order.getUserOrderHistory);
 
 export default orderRouter;
