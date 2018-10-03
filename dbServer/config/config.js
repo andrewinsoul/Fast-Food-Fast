@@ -11,6 +11,8 @@ if (env === 'development') {
   config = new pg.Client(dbCredential[env]);
 } else if (env === 'test') {
   config = new pg.Client(dbCredential[env].DB_URL);
+} else {
+  config = new pg.Client(dbCredential[env].DB_URL);
 }
 
 config.connect()

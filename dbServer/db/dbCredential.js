@@ -11,6 +11,9 @@ const dbCredential = {
   },
   test: {
     DB_URL: process.env.DB_TEST
+  },
+  production: {
+    DB_URL: process.env.DATABASE_URL
   }
 };
 export default dbCredential;
