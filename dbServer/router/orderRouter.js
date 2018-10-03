@@ -16,6 +16,11 @@ orderRouter
     verifyAdmin,
     validation.checkParam,
     validation.updateStatus,
-    order.updateOrderStatus);
+    order.updateOrderStatus)
+  .get('/orders/:orderId',
+    validation.checkParam,
+    verifyToken,
+    verifyAdmin,
+    order.getAnOrder);
 
 export default orderRouter;

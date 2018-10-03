@@ -103,5 +103,41 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
           done();
         });
     });
+
+    it('should return status code 404 when admin user tries to get an order not in the database', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/3')
+        .set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('order not found');
+          done();
+        });
+    });
+
+    it('should return status code 200 when admin user tries to get an order in the database', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/2')
+        .set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.status).to.eql('success');
+          expect(res.body).to.have.property('message');
+          done();
+        });
+    });
+
+    it('should return status code 400 when admin user tries to get an order in the database with wrong data type for param', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/2srfv')
+        .set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('invalid data type, param must be an integer');
+          done();
+        });
+    });
   });
 });
