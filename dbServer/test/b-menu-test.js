@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 let adminToken = '';
 
-describe('Fast-Food_Fast backend tests with postgres database for menu model', () => {
+describe('Fast-Food-Fast backend tests with postgres database for menu model', () => {
   describe('tests controller that creates a menu', () => {
     it('should login and get token for testing purposes', (done) => {
       chai.request(app)
