@@ -177,5 +177,41 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
           done();
         });
     });
+
+    it('should return status code 404 tries to order for a food not found in database.', (done) => {
+      chai.request(app)
+        .post('/api/v1/orders')
+        .set('x-access-token', userWithNoOrderToken)
+        .send({
+          orders: JSON.parse(`[
+            { "foodId": 1200, "quantity": 3 },
+            { "foodId": 5, "quantity": 1 }
+          ]`)
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('food not found');
+          done();
+        });
+    });
+
+    it('should return status code 404 tries to order for a food not found in database.', (done) => {
+      chai.request(app)
+        .post('/api/v1/orders')
+        .set('x-access-token', userWithNoOrderToken)
+        .send({
+          orders: JSON.parse(`[
+            { "foodId": 1, "quantity": 3 },
+            { "foodId": 2, "quantity": 1 }
+          ]`)
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.body.status).to.eql('success');
+          expect(res.body.message).to.eql('order placed successfully');
+          done();
+        });
+    });
   });
 });

@@ -101,5 +101,35 @@ class Order {
       });
     });
   }
+
+  /**
+   * @description - method that allows user to place an order
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} - status code and server message
+   */
+  placeOrder(req, res) {
+    const { orders } = req.body;
+    config.query(
+      'INSERT INTO cart(orders, userid, createdAt) VALUES($1, $2, $3) RETURNING *', [
+        orders,
+        req.userId,
+        new Date(Date.now()),
+      ]
+    ).then(
+      (result) => {
+        res.status(201).send({
+          status: 'success',
+          message: 'order placed successfully',
+          order: result.rows[0]
+        });
+      }
+    ).catch((error) => {
+      res.status(500).send({
+        status: 'error',
+        error
+      });
+    });
+  }
 }
 export default new Order();

@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import config from '../config/config';
+
 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // this regex was obtained from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 /**
  * @description contains methods that validates input
@@ -232,6 +234,98 @@ class validation {
       }
     }
     return next();
+  }
+
+  /**
+   * @description - method that validates input on place order route
+   * @param {object} req - the request object
+   * @param {object} res - the response object
+   * @param {function} next - the callback function
+   * @returns {object} - status code and error
+   */
+  placeOrder(req, res, next) {
+    const {
+      orders
+    } = req.body;
+    if (orders === undefined) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'orders field is required'
+      });
+    }
+    if (orders.constructor !== Array) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid type for orders, must be an Array'
+      });
+    }
+    if (orders.length === 0) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'cart order empty, please fill'
+      });
+    }
+    const promiseArray = [];
+    let Query;
+    for (let i = 0; i < orders.length; i += 1) {
+      if (orders[i].foodId === undefined) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'object needs to have foodId property'
+        });
+      }
+      if (orders[i].quantity === undefined) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'object needs to have quantity property'
+        });
+      }
+      if (isNaN(orders[i].foodId) || typeof (orders[i].foodId) === 'string') {
+        return res.status(400).send({
+          status: 'error',
+          error: 'invalid type for foodId, type should be a number'
+        });
+      }
+      if (isNaN(orders[i].quantity) || typeof (orders[i].quantity) === 'string') {
+        return res.status(400).send({
+          status: 'error',
+          error: 'invalid type for quantity, type should be a number'
+        });
+      }
+      if (!(parseInt(orders[i].foodId, 10) === orders[i].foodId)) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'invalid number type, foodId should be an integer'
+        });
+      }
+      if (!(parseInt(orders[i].quantity, 10) === orders[i].quantity)) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'invalid number type, quantity should be an integer'
+        });
+      }
+      Query = config.query(`
+      SELECT * FROM menu WHERE foodId = ($1) LIMIT 1
+      `, [orders[i].foodId]);
+      promiseArray.push(Query);
+    }
+    let FoodNotFound;
+    Promise.all(promiseArray).then((result) => {
+      for (let item = 0; item < result.length; item += 1) {
+        if (result[item].rowCount === 0) {
+          FoodNotFound = 'food not found';
+          break;
+        }
+      }
+    }).catch(error => res.status(500).send({ error })).then(() => {
+      if (FoodNotFound === 'food not found') {
+        return res.status(404).send({
+          status: 'error',
+          error: 'food not found'
+        });
+      }
+      return next();
+    });
   }
 }
 export default new validation();

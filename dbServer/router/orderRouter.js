@@ -24,6 +24,10 @@ orderRouter
     order.getAnOrder)
   .get('/users/orders',
     verifyToken,
-    order.getUserOrderHistory);
+    order.getUserOrderHistory)
+  .post('/orders',
+    verifyToken,
+    validation.placeOrder,
+    order.placeOrder);
 
 export default orderRouter;
