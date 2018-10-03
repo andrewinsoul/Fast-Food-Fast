@@ -27,5 +27,31 @@ class Order {
       });
     });
   }
+
+  /**
+   * @description - method that allows admin user update status of an order
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} - status code and server message
+   */
+  updateOrderStatus(req, res) {
+    const { status } = req.body;
+    const { orderId } = req.params;
+    config.query(`
+      UPDATE cart SET status = ($1) WHERE orderId = ($2) RETURNING *
+    `, [status, orderId]).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(404).send({
+          status: 'error',
+          error: 'order not found'
+        });
+      }
+      return res.status(200).send({
+        status: 'success',
+        message: 'updated successfully',
+        data: result.rows[0]
+      });
+    }).catch(error => res.status(500).send({ error }));
+  }
 }
 export default new Order();
