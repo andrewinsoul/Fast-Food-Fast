@@ -9,5 +9,8 @@ const dbCredential = {
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
   },
+  test: {
+    DB_URL: process.env.DB_TEST
+  }
 };
 export default dbCredential;
