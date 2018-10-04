@@ -4,10 +4,10 @@
   "description": "A web application that allows user order for food",
   "main": "index.js",
   "scripts": {
-    "heroku-postbuild": "npm run dropTable & npm run createTable & npm run createAdmin",
+    "heroku-postbuild": "npm run dropTable",
     "test:dev": "nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
     "test": "npm run seed & nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
-    "start": "babel-node ./app",
+    "start": "npm run createTable & npm run createAdmin & babel-node ./app",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "createAdmin": "babel-node ./dbServer/sql/createAdmin.js",
     "dropTable": "babel-node ./dbServer/sql/dropTables.js",

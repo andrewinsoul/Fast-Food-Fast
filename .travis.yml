@@ -2,8 +2,6 @@ language: node_js
 node_js:
   - "stable"
 before_script: 
-  - npm run createTable
-  - npm run createAdmin
   - npm i -D coveralls
 script:
   - npm test
