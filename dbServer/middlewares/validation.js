@@ -242,8 +242,18 @@ class validation {
   checkParam(req, res, next) {
     if ((req.url) === `/orders/${req.params.orderId}`) {
       const { orderId } = req.params;
-      const param = parseInt(orderId, 10);
-      if (isNaN(param) || isNaN(Number(orderId)) || !(parseInt(param, 10) === Number(orderId))) {
+      const orderIdParam = parseInt(orderId, 10);
+      if (isNaN(orderIdParam) || isNaN(Number(orderId)) || !(parseInt(orderIdParam, 10) === Number(orderId))) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'invalid data type, param must be an integer'
+        });
+      }
+    }
+    if ((req.url) === `/users/${req.params.userId}/orders`) {
+      const { userId } = req.params;
+      const userIdParam = parseInt(userId, 10);
+      if (isNaN(userIdParam) || isNaN(Number(userId)) || !(parseInt(userIdParam, 10) === Number(userId))) {
         return res.status(400).send({
           status: 'error',
           error: 'invalid data type, param must be an integer'

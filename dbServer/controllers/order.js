@@ -86,6 +86,13 @@ class Order {
    */
   getUserOrderHistory(req, res) {
     const { userId } = req;
+    const userParamId = Number(req.params.userId);
+    if (userId !== userParamId) {
+      return res.status(401).send({
+        status: 'error',
+        error: 'unauthorized access, cannot view another user history order'
+      });
+    }
     config.query(`
       SELECT address, phone, email, orderId, orders, createdAt FROM users INNER JOIN cart ON (users.userid = ($1)) 
     `, [userId]).then((result) => {

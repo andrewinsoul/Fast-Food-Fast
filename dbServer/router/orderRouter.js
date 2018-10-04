@@ -22,8 +22,9 @@ orderRouter
     verifyToken,
     verifyAdmin,
     order.getAnOrder)
-  .get('/users/orders',
+  .get('/users/:userId/orders',
     verifyToken,
+    validation.checkParam,
     order.getUserOrderHistory)
   .post('/orders',
     verifyToken,

@@ -181,9 +181,33 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
-    it('should return status code 200 when a user tries to get history of orders.', (done) => {
+    it("should return status code 401 when a user tries to get another user's history of orders.", (done) => {
       chai.request(app)
-        .get('/api/v1/users/orders')
+        .get('/api/v1/users/2/orders')
+        .set('x-access-token', userWithOrderToken)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('unauthorized access, cannot view another user history order');
+          done();
+        });
+    });
+
+    it("should return status code 400 when a user tries to get another user's history of orders.", (done) => {
+      chai.request(app)
+        .get('/api/v1/users/2asw/orders')
+        .set('x-access-token', userWithOrderToken)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('invalid data type, param must be an integer');
+          done();
+        });
+    });
+
+    it('should return status code 200 when a user tries to get another his history of orders.', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/5/orders')
         .set('x-access-token', userWithOrderToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
