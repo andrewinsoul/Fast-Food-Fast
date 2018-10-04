@@ -1,8 +1,10 @@
 /* eslint-disable max-len */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import dotenv from 'dotenv';
 import app from '../../app';
 
+dotenv.load();
 chai.use(chaiHttp);
 const { expect } = chai;
 let adminToken = '';
@@ -13,8 +15,8 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'andrewinsoliii@gmail.com',
-          password: 'password'
+          email: process.env.ADMIN_EMAIL,
+          password: process.env.ADMIN_PASSWORD
         })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -32,6 +34,7 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
           price: 1200
         })
         .end((err, res) => {
+          console.log(adminToken);
           expect(res).to.have.status(201);
           expect(res.body.status).to.eql('success');
           done();
@@ -57,11 +60,26 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
-          foodName: 'food-name'
+          foodName: 'food name'
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body.error).to.eql('price field is required');
+          done();
+        });
+    });
+
+    it('should return code 400 with error message when user tries to create menu without price field', (done) => {
+      chai.request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName: 'food-name',
+          price: 1200
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.error).to.eql('Numbers and special characters not allowed as part of food name, only letters and spaces are allowed');
           done();
         });
     });

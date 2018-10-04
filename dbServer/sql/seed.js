@@ -1,22 +1,6 @@
 import bcrypt from 'bcryptjs';
 import config from '../config/config';
 
-const AdminUser = `
-  INSERT INTO users (
-    username,
-    email,
-    address,
-    password,
-    phone,
-    user_role
-  ) VALUES
-  ( 'andypin',
-    'andrewinsoliii@gmail.com',
-    'Andela Office',
-    '${bcrypt.hashSync('password')}',
-    '12345678654',
-    ${true})
-`;
 const BulkInsertUser = `
   INSERT INTO users (
     username,
@@ -25,18 +9,23 @@ const BulkInsertUser = `
     password,
     phone
 ) VALUES
-  ( 'andypdy',
-    'andrewinsolsul@gmail.com',
+  ( 'andypdyq',
+    'mymail@gmail.com',
+    'Andela Office',
+    '${bcrypt.hashSync('password')}',
+    '12345678654'),
+    ( 'andypin',
+    'mygmail@gmail.com',
     'Andela Office',
     '${bcrypt.hashSync('password')}',
     '12345678654'),
   ('slavaak',
-  'slavacouroy05as@gmail.com',
+  'slavas@gmail.com',
   'my school',
   '${bcrypt.hashSync('password')}',
   '12345678976'),
   ('constancea',
-    'chiamasdkaconswtance87@gmail.com',
+    'constance8721@gmail.com',
     'address',
     '${bcrypt.hashSync('password')}',
     '12345678987')
@@ -75,28 +64,26 @@ const InsertOrder = `
       userId,
       createdAt
     ) VALUES ($1, $2, $3, $4)`;
-config.query(AdminUser).then(() => {
-  config.query(BulkInsertUser).then(() => {
-    config.query(BulkInsertMenu).then(() => {
+config.query(BulkInsertUser).then(() => {
+  config.query(BulkInsertMenu).then(() => {
+    config.query(InsertOrder, [
+      arrayOrders1,
+      'new',
+      4,
+      new Date(Date.now())
+    ]).then(() => {
       config.query(InsertOrder, [
-        arrayOrders1,
-        'new',
+        arrayOrders2,
+        'cancelled',
         4,
         new Date(Date.now())
       ]).then(() => {
-        config.query(InsertOrder, [
-          arrayOrders2,
-          'cancelled',
-          4,
-          new Date(Date.now())
-        ]).then(() => {
-          console.log('tables successfully populated');
-          process.exit(0);
-        });
+        console.log('tables successfully populated');
+        process.exit(0);
       });
     });
-  }).catch((error) => {
-    console.log(error);
-    process.exit(1);
   });
+}).catch((error) => {
+  console.log(error);
+  process.exit(1);
 });

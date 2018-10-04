@@ -159,6 +159,12 @@ class validation {
         error: 'invalid type for foodName, must be a string'
       });
     }
+    if (!(/^[a-zA-Z\s]*$/).test(foodName)) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'Numbers and special characters not allowed as part of food name, only letters and spaces are allowed'
+      });
+    }
     if (price === undefined) {
       return res.status(400).send({
         status: 'error',
@@ -178,7 +184,18 @@ class validation {
         error: 'invalid number type for price, must be integer'
       });
     }
-    return next();
+    config.query('SELECT * FROM menu WHERE food=($1) AND price=($2) LIMIT 1',
+      [foodName, price])
+      .then((result) => {
+        if (result.rowCount !== 0) {
+          return res.status(409).send({
+            status: 'error',
+            error: 'food already in database'
+          });
+        }
+        return next();
+      })
+      .catch(e => console.log(e));
   }
 
   /**

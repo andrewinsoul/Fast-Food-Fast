@@ -1,7 +1,10 @@
 /* eslint-disable max-len */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import dotenv from 'dotenv';
 import app from '../../app';
+
+dotenv.load();
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -13,8 +16,8 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'andrewinsoliii@gmail.com',
-          password: 'password'
+          email: process.env.ADMIN_EMAIL,
+          password: process.env.ADMIN_PASSWORD
         })
         .end((err, res) => {
           adminToken = res.body.token;
@@ -26,7 +29,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'chiamasdkaconswtance87@gmail.com',
+          email: 'constance8721@gmail.com',
           password: 'password'
         })
         .end((err, res) => {
@@ -39,7 +42,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'slavacouroy05as@gmail.com',
+          email: 'slavas@gmail.com',
           password: 'password'
         })
         .end((err, res) => {
@@ -59,7 +62,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
-    it('should return status code 403 and status error when user enters a wrong token', (done) => {
+    it('should return status code 401 and status error when user enters a wrong token', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
         .set('x-access-token', 'WrongToken')
@@ -67,6 +70,18 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
           expect(res).to.have.status(401);
           expect(res.body.status).to.eql('error');
           expect(res.body.error).to.eql('Failed to authenticate token');
+          done();
+        });
+    });
+
+    it('should return status code 403 and error when a non-admin user tries to access the endpoint', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders')
+        .set('x-access-token', userWithNoOrderToken)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('forbidden access, only admin is allowed.');
           done();
         });
     });

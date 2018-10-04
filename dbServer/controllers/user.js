@@ -25,66 +25,43 @@ class UserController {
       address,
       phone,
     } = req.body;
-    config.query('SELECT * FROM users LIMIT 1').then(
-      (selectResult) => {
-        if (selectResult.rowCount === 0) {
-          const role = true;
-          config.query(
-            'INSERT INTO users(username, email, address, password, phone, user_role) values ($1, $2, $3, $4, $5, $6) RETURNING *', [username, email, address, encodedPassword, phone, role],
-          ).then(
-            (result) => {
-              const token = jwt.sign(
-                {
-                  id: result.rows[0].userid,
-                },
-                key,
-                {
-                  expiresIn: 86400,
-                }
-              );
-              return res.status(201).send(
-                {
-                  status: 'success',
-                  token,
-                  message: 'admin signup successful'
-                }
-              );
-            },
-          )
-            .catch(error => res.status(409).send({
-              status: 'error',
-              error: error.detail
-            }));
-        } else {
-          config.query(
-            'INSERT INTO users(username, email, address, password, phone) VALUES ($1, $2, $3, $4, $5) RETURNING *', [username, email, address, encodedPassword, phone],
-          ).then(
-            (result) => {
-              const token = jwt.sign(
-                {
-                  id: result.rows[0].userid,
-                },
-                key,
-                {
-                  expiresIn: 86400,
-                }
-              );
-              return res.status(201).send(
-                {
-                  status: 'success',
-                  token,
-                  message: 'signup successful'
-                }
-              );
-            },
-          )
-            .catch(error => res.status(409).send({
-              status: 'error',
-              error: error.detail
-            }));
-        }
+    config.query(
+      `INSERT INTO users(
+        username,
+        email,
+        address,
+        password,
+        phone) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [username, email, address, encodedPassword, phone]
+    ).then(
+      (result) => {
+        const token = jwt.sign(
+          {
+            id: result.rows[0].userid,
+          },
+          key,
+          {
+            expiresIn: 86400,
+          }
+        );
+        return res.status(201).send({
+          status: 'success',
+          token,
+          message: 'signup successful'
+        });
       }
-    );
+    ).catch((err) => {
+      const errorDetail = err.detail;
+      let error;
+      if (errorDetail.includes('email')) {
+        error = 'user with email already exists';
+      } else {
+        error = 'user with username already exists';
+      }
+      return res.status(409).send({
+        status: 'error',
+        error
+      });
+    });
   }
 
   /**

@@ -3,6 +3,7 @@ node_js:
   - "stable"
 before_script: 
   - npm run createTable
+  - npm run createAdmin
   - npm i -D coveralls
 script:
   - npm test
@@ -12,5 +13,4 @@ after_success:
   - npm run coverage
   - npm run report-coverage
 env:
-  global:
-    - NODE_ENV = test
+  - NODE_ENV = test
