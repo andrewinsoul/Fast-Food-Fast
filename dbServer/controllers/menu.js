@@ -13,11 +13,16 @@ class Menu {
   createMenu(req, res) {
     const {
       foodName,
-      price
+      price,
+      description
     } = req.body;
     const InsertQuery = `
-      INSERT INTO menu(food, price, userId) VALUES ($1, $2, $3) RETURNING *`;
-    config.query(InsertQuery, [foodName, price, req.userId]).then(
+      INSERT INTO menu
+        (food,
+        price,
+        description,
+        userId) VALUES ($1, $2, $3, $4) RETURNING *`;
+    config.query(InsertQuery, [foodName, price, description, req.userId]).then(
       (result) => {
         res.status(201).send({
           status: 'success',

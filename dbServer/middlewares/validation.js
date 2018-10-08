@@ -146,6 +146,7 @@ class validation {
     const {
       foodName,
       price,
+      description
     } = req.body;
     if (foodName === undefined) {
       return res.status(400).send({
@@ -153,10 +154,22 @@ class validation {
         error: 'foodName field is required'
       });
     }
+    if (description === undefined) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'description field is required'
+      });
+    }
     if (typeof (foodName) !== 'string') {
       return res.status(400).send({
         status: 'error',
         error: 'invalid type for foodName, must be a string'
+      });
+    }
+    if (typeof (description) !== 'string') {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid type for description, must be a string'
       });
     }
     if (!(/^[a-zA-Z\s]*$/).test(foodName)) {
@@ -169,6 +182,12 @@ class validation {
       return res.status(400).send({
         status: 'error',
         error: 'price field is required'
+      });
+    }
+    if (description.length > 250) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'description too long, should not be more than 250 characters'
       });
     }
     const validPrice = parseInt(price, 10);
@@ -184,8 +203,8 @@ class validation {
         error: 'invalid number type for price, must be integer'
       });
     }
-    config.query('SELECT * FROM menu WHERE food=($1) AND price=($2) LIMIT 1',
-      [foodName, price])
+    config.query('SELECT * FROM menu WHERE food=($1) AND price=($2) AND description=($3) LIMIT 1',
+      [foodName, price, description])
       .then((result) => {
         if (result.rowCount !== 0) {
           return res.status(409).send({
