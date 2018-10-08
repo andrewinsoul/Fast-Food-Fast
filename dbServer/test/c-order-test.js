@@ -252,5 +252,27 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
           done();
         });
     });
+
+    it('should return status code 200 with a welcome message when the home link is accessed', (done) => {
+      chai.request(app)
+        .get('/')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.status).to.eql('success');
+          expect(res.body.message).to.eql('welcome to fast food fast API');
+          done();
+        });
+    });
+
+    it('should return status code 404 with an error message when an invalid link is accessed', (done) => {
+      chai.request(app)
+        .get('/invalid link')
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('invalid link, not found');
+          done();
+        });
+    });
   });
 });

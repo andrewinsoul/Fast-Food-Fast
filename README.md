@@ -26,11 +26,15 @@ https://www.pivotaltracker.com/n/projects/2196515
 ## Hosted Application
 https://fast-food-andy.herokuapp.com/api/v1/orders
 
+## API Documentation
+<a href='https://fast-food-andy.herokuapp.com/api/v1/api-docs'>View </a>the documentation of the API
+
 ## Technologies Used
 - NodeJS
 - Express
 - Babel
 - Eslint
+- Swagger
 
 ## Installation
 
