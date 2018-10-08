@@ -8,7 +8,7 @@
       "email": "andrewinsoul@gmail.com"
     }
   },
-  "host": "https://fast-food-andy.herokuapp.com/",
+  "host": "https://fast-food-andy.herokuapp.com",
   "basePath": "/api/v1",
   "tags": [
     {
