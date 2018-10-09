@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     message: 'welcome to fast food fast API'
   });
 });
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
   res.status(404).send({
     status: 'error',
     error: 'invalid link, not found'
