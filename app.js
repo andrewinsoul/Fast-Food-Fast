@@ -5,9 +5,9 @@ import swaggerUi from 'swagger-ui-express';
 import userRouter from './dbServer/router/userRouter';
 import menuRouter from './dbServer/router/menuRouter';
 import orderRouter from './dbServer/router/orderRouter';
+import swaggerDocument from './swagger.json';
 
 const app = express();
-const swaggerDocument = './swagger.json';
 app.use(logger('dev'));
 app.use('/api/v1/api-docs',
   swaggerUi.serve,
