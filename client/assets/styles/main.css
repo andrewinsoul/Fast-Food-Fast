@@ -1,0 +1,885 @@
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  background-color: #5b0603;
+}
+nav {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  overflow: hidden;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+}
+.topnav a {
+  color: #f2f2f2;
+  text-decoration: none;
+  padding: 14px 16px;
+}
+.topnav a:hover, .topnav.responsive a:hover {
+  color: green;
+}
+.error-span, small.error {
+  color: red;
+}
+small.error {
+  margin-left: 7%;
+  /* display: none; */
+}
+.loader {
+  border: 3px solid white;
+  border-radius: 50%;
+  border-top: 3px solid green;
+  display: none;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite; /* Safari */
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+nav h1{
+  color: white;
+  text-decoration: none;
+}
+.sh-left b {
+  text-transform: uppercase;
+  color: teal;
+}
+.sh-right b {
+  text-transform: uppercase;
+  color: teal;
+}
+.works-a {
+  text-decoration: none;
+  color: grey;
+}
+.works-a:hover {
+  color: green;
+}
+#nav-links {
+  margin-right: 3%;
+}
+.sh-left {
+  margin-left: 5%;
+}
+.sh-right {
+  margin-right: 5%;
+}
+a.active {
+  color: green;
+}
+#dim-img {
+  background-color: rgba(1, 1, 1, 0.8);
+  margin-bottom: 4%;
+  padding-bottom: 4%;
+}
+.sub-content {
+  text-align: center;
+  color: white
+}
+#restuarant-img h3 {
+  display: inline-block;
+  padding-left: 20px;
+}
+
+#main-form, #aval-cusines, .form-jumbotron {
+  display: flex;
+}
+.col-form div {
+  display: flex;
+  margin-top: 27px;
+  margin-right: auto;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.col-form {
+  width: inherit;
+}
+.form-btn {
+  margin-left: 7%;
+  width: 27%;
+  margin-bottom: 5%;
+  background-color: #5b0603;
+  color: whitesmoke;
+  padding: 10px;
+  cursor: pointer;
+}
+.form-jumbotron .fa {
+  background-color: #5b0603;
+  padding: 10px;
+  margin-left: 7%;
+  color: white;
+  width: 15px;
+}
+.reg-div input {
+  width: 70%;
+  color: rgba(1, 1, 1, 0.8);
+  padding: 10px;
+  border-radius: 0;
+  border: 1px solid grey;
+  border-left: 0;
+}
+#main-form {
+  justify-content: center;
+  align-items: center;
+}
+.form-jumbotron {
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  width: 35vw;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(1, 1, 1, 0.8);
+}
+#aval-cusines img {
+  width: 100%;
+  height: 263px;
+}
+#aval-cusines div {
+  width: 25%;
+}
+footer {
+  color: white;
+}
+footer img {
+  width: 35px;
+}
+.form-jumbotron h5 {
+  margin-top: 0;
+}
+.index-footer {
+  border-top: 1px solid grey;
+  margin-top: 3%;
+  padding: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+footer div img.footer-img:hover {
+  transition: .5s;
+  transform: scale(1.2) rotate(360deg);
+}
+input {
+  border-radius: 4px;
+  border: 1px solid grey;
+  color: rgba(1, 1, 1, 0.8)
+}
+#social-handles, #subscribe {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+#foot-entry {
+  width: 80%;
+}
+#foot-btn {
+  color: white;
+  background-color: green;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+.sub-form {
+  padding: 8px;
+}
+small {
+  margin-bottom: 15px;
+  color: white;
+}
+.center-txt {
+  text-align: center;
+}
+#end {
+  display: flex;
+  justify-content: center;
+}
+.sub-content h2 {
+  color: white;
+  margin-bottom: 3%
+}
+img.nav-brand {
+  width: 92px;
+  border-radius: 44px;
+  vertical-align: middle;
+}
+.fa {
+  font-size: 303px;
+}
+#img-cover {
+  background: url(../images/background-img.jpg) no-repeat fixed;
+  background-size: cover;
+}
+button.icon {
+  cursor: pointer;
+  display: none;
+  color: tomato;
+}
+.nav-brand {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+.content p {
+  font-family: cursive;
+  color: white;
+  font-size: 33px;
+}
+.content {
+  text-align: center;
+  color: white;
+}
+.content h1 {
+  font-style: oblique;
+}
+#welcome-txt {
+  display: inline;
+}
+.new-old-user {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1%;
+  margin-right: 7%
+}
+.new-old-user a {
+  margin-right: 3%;
+  color: #000;
+  margin-bottom: 3%;
+}
+#brand-div h1 {
+  font-family: Aguafina Script;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 4px;
+  font-size: 50px;
+}
+h1 {
+  font-size: 56px;
+  color: white
+}
+.nav-link {
+  margin-right: 43px;
+}
+#welcome-header {
+  display: none;
+}
+/*
+  USER-ORDER PAGE STYLES
+*/
+.place-order .nav-brand, .recent-order .nav-brand, .admin-menu-list .nav-brand,
+.admin-mark-order .nav-brand  {
+  width: 55px;
+}
+.place-order #brand-div h1, .recent-order #brand-div h1, .admin-menu-list #brand-div h1, .admin-mark-order #brand-div h1 {
+  font-size: 28px
+}
+#restaurant-desc {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: black;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 5%;
+  background-color: white;
+  margin-bottom: 2%;
+}
+#restaurant-desc img {
+  width: 70px;
+  height: 70px;
+  padding-left: 20px;
+  vertical-align: middle;
+}
+#cusine-category {
+  flex-basis: 17%; 
+  margin-left: 2%; 
+  margin-right: 1%
+}
+#restuarant-menu {
+  flex-basis: 51%; 
+  margin-right: 1%;
+}
+#cart {
+  width: 26%;
+  position: fixed;
+  right: 86%;
+  overflow-y: auto;
+  left: 72%;
+  height: 50%;
+}
+.food-div {
+  background-color: white;
+  box-shadow: 0 0 50px rgba(1, 1, 1, 0.8);
+}
+#spacer-div {
+  background-color: #5b0603; 
+  color: #5b0603; 
+  height: 10px;
+}
+.pad-left {
+  padding-left: 6px;
+}
+.pad-right {
+  padding-right: 6px;
+}
+.col-grey {
+  color: rgba(1, 1, 1, 0.8)
+}
+.space-down {
+  padding-bottom: 10px
+}
+.space-around {
+  padding: 10px;
+}
+.full-width {
+  width: 100%
+}
+#search-food {
+  width: 10%;
+  background-color: green;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px
+ }
+ #menu-items, .menu-items {
+  display: flex; 
+  flex-direction: column; 
+ }
+ #menu-cart-cat-container {
+   display: flex;
+   align-items: flex-start;
+ }
+ .no-marg-top {
+   margin-top: 0;
+ }
+ #view-cart-btn {
+   display: none;
+   justify-content: flex-end;
+ }
+ .center-item-in-flex {
+   display: flex;
+   justify-content: center;
+ }
+ .place-order .menu-title {
+   color: red;
+   margin: 0;
+   border-bottom: 1px solid grey;
+   padding: 15px 6px;
+ }
+ .bottom-line {
+  border-bottom: 1px solid grey;
+ }
+ .space-item-in-flex {
+   display: flex;
+   justify-content: space-between;
+ }
+ .space-item-in-flex p {
+   margin-top: 5px;
+   margin-bottom: 0;
+ }
+ .desc-p {
+   margin-top: 0;
+ }
+ .desc-p small {
+   color: black;
+ }
+ .add-item-btn img{
+    width: 23px;
+    vertical-align: middle;
+ }
+ .add-item-btn {
+   margin-bottom: 4px;
+ }
+ button {
+   cursor: pointer;
+ }
+ #cusine-category a {
+   text-decoration: none;
+   color: black
+ }
+ #cusine-category a:hover {
+   color: brown;
+ }
+ .sn {
+   margin-left: 2%;
+ }
+ .food-item-name {
+   margin-left: 7%;
+ }
+ .place-order small {
+   color:black;
+ }
+ .and-div {
+   padding: 10px 0;
+   display: flex;
+ }
+ .add-plate-btn {
+   border-radius: 50%;
+   width: 24px;
+   margin-left: 34px;
+ }
+ .fa-caret-down {
+   margin-left: 0;
+ }
+ .flexblock {
+   display: flex;
+ }
+ #place-order {
+  background-color: green; 
+  color: white; 
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 4px;
+ }
+ .place-order footer,
+ .recent-order footer,
+ .admin-menu-list footer,
+ .admin-mark-order footer
+{
+   margin-top: 1%;
+   border-top: 1px solid grey;
+   padding: 10px
+ }
+ .recent-order footer {
+   margin-top: 8%;
+ }
+ .place-order main {
+   margin-bottom: 8%;
+ }
+ #end small {
+   color: white;
+ }
+ .price-div {
+   margin-left: 23%;
+   width: 90px;
+ }
+/*
+  HISTORY PAGE STYLING
+*/
+body.recent-order {
+  background-color: white;
+}
+.recent-order nav {
+  background-color: #5b0603;
+}
+.recent-order p {
+  margin: 5px 0;
+  flex-basis: 15%;
+}
+.recent-order footer {
+  background-color: #5b0603;
+}
+.history-date {
+  margin-left: 1%;
+  margin-top: 3%;
+  margin-bottom: 1%
+}
+.history-div {
+  padding: 6px;
+  border: 1px solid grey;
+  margin: 0 3%;
+  border-radius: 4px;
+}
+.recent-order img {
+  vertical-align: middle;
+}
+.recent-order .complete {
+  width: 18px;
+}
+.recent-order .waiting {
+  width: 15px;
+}
+.recent-order .cancel {
+  width: 12px;
+}
+/*
+  ADMIN MENU LIST STYLING
+*/
+body.admin-menu-list {
+  background-color: brown;
+}
+.admin-menu-list .container {
+  display: flex;
+  color: black;
+  flex-flow: row wrap;
+}
+.wrap {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.admin-menu-list footer { 
+  margin-top: 3%;
+}
+.admin-menu-list main {
+  margin-top: 3%
+}
+.admin-menu-list h2 {
+  color: #ffffff;
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+.admin-menu-list .jumbotron {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  width: 29%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  margin-left: 2%;
+  padding: 10px;
+  margin-top: 3%;
+}
+.jumbotron h3 {
+  margin-bottom: 0;
+}
+.jumbotron p {
+  margin-top: 0;
+}
+#modal, #addModal {
+  background: white;
+  position: fixed;
+  width: 50%;
+  height: 80%;
+  top: 57%;
+  bottom: 6%;
+  transform: scale(0);
+  opacity: 0;
+  left: 50%;
+  margin: -25% 0 0 -25%;
+  overflow-y: scroll;
+}
+.modalOpen #modal, .modalOpen #addModal {
+  transform: scale(1);
+  opacity: 1;
+}
+.modalOpen #main-container {
+  filter: blur(1px) grayscale(0%);
+  transform: scale(1);
+}
+#main-container, #modal, #addModal {
+  transition: all 0.4s ease;
+}
+#modal-wrapper form, #addModal-wrapper form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#modal-wrapper input, #addModal-wrapper input, #modal-wrapper textarea, #addModal-wrapper textarea {
+  width: 80%;
+  border-radius: 4px;
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 0 auto
+}
+#modal-wrapper .betw-modal-label, #addModal-wrapper .betw-modal-label {
+  margin-top: 5%;
+}
+#modal-wrapper h3, #addModal-wrapper h3 {
+  padding-bottom: 10px;
+}
+#modal-wrapper label, #addModal-wrapper label, #modal-wrapper input, #addModal-wrapper input #modal-wrapper textarea, #addModal-wrapper textarea {
+  margin: 0 auto;
+}
+.modal-btns {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6%;
+  border-top: 1px solid grey;
+  padding: 10px;
+}
+#update, #cancel, #add {
+  padding: 10px;
+}
+#update, #add {
+  margin-right: 3%
+}
+#modal-wrapper #description, #addModal-wrapper #add-description {
+  overflow: auto;
+  resize: vertical;
+  font-size: 16px;
+  width: 80%;
+  padding: 10px;
+  margin: 0 auto;
+  font-family:  inherit;
+}
+.edit-btn, .del-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+.del-btn, .edit-btn {
+  background: white;
+  color: dodgerblue;
+}
+.edit-btn:hover {
+  background: dodgerblue;
+  color: white;
+}
+.del-btn:hover {
+  background: tomato;
+  color: white;
+}
+button.edit-btn, button.del-btn {
+  font-size: 20px;
+  padding: 10px;
+}
+
+/*
+  ADMIN-MARK-ORDER
+*/
+body.admin-mark-order {
+  background-color: white;
+}
+.admin-mark-order nav {
+  background-color: brown;  
+}
+.admin-mark-order footer {
+  border-top: 1px solid grey;
+  margin-top: 28%;
+  background-color: brown;
+}
+table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .25em 0 .75em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table button {
+  padding: 10px;
+}
+table th, table td {
+  padding: .625em;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+td {
+  text-align: center;
+}
+.fa-check::before {
+  color: white;
+  font-size: 20px;
+}
+.fa-close::before {
+  color: white;
+  font-size: 20px
+}
+.check, .accepted {
+  background-color: green;
+}
+.close {
+  background-color: red;
+}
+.check {
+  width: 50%;
+}
+.close {
+  width: 46%;
+}
+td.accepted {
+  color: white;
+  text-align: center;
+}
+td.declined {
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+.action {
+  padding: .625em 0;
+}
+@media screen and (max-width: 803px) {
+  #wel-div, .content span, .content h1 {
+    display: none;
+  }
+  #welcome-header {
+    display: block;
+    font-size: 18px;
+  }
+  #view-cart-btn {
+    display: flex;
+  }
+  .form-jumbotron {
+    width: 85vw;
+  }
+  #restaurant-desc {
+    flex-direction: column;
+  }
+  .topnav button.icon{
+    float: right;
+    display: block;
+    width: 43px;
+    color: white;
+    background-color: tomato;
+    height: 43px;
+    border: 1px solid tomato;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+  .topnav.responsive {
+    position: relative;
+    display: block;
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav.responsive button {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  img.nav-brand {
+    width: 45px;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  #aval-cusines {
+    flex-direction: column;
+  }
+  #brand-div h1 {
+    font-size: 25px;
+  }
+  .sub-content h2 {
+    margin-top: 10%;
+    margin-bottom: 4%;
+  }
+  #aval-cusines div {
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 9%;
+    background-color: brown;
+  }
+  .index-footer {
+    flex-flow: column;
+  }
+  .sub-form {
+    padding: 7px;
+  }
+  /*
+  USER-ORDER PAGE STYLES
+  */
+  #menu-cart-cat-container {
+    flex-direction: column;
+  }
+  #cart {
+    position: static;
+  }
+  #cusine-category, #restuarant-menu, #cart {
+    width: 96%;
+    margin-right: 2%;
+    margin-left: 2%
+  }
+  #restuarant-menu, #cart {
+    margin-top: 5%;
+  }
+  #cusine-category {
+    margin-bottom: 5%;
+  }
+  #restuarant-desc {
+    flex-direction: column;
+  }
+  /*
+  ADMIN MENU PAGE STYLES
+  */
+  .admin-menu-list .container {
+    flex-flow: column;
+  }
+  .admin-menu-list .jumbotron {
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 4%;
+  }
+  #modal, #addModal {
+    width: 86%;
+    top: 222px;
+    bottom: 20px;
+    margin: -43% 0 0 -43%;
+  }
+  /*
+  ADMIN MARK ORDER
+  */
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    display: none;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    content: attr(data-holder);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .action {
+    padding: .625em;
+  }
+  .close, .check {
+    width: 11%;
+  }
+  td.accepted, td.declined {
+    text-align: right;
+    color: black;
+    background-color: white;
+  }
+  .accepted span {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 15%
+  }
+  .declined span {
+    background-color: red;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    width: 15%;
+    padding: 10px;
+  }
+}
+@media screen and (max-height: 368px) {
+  #modal, #addModal {
+    top: 303px;
+  }
+}
