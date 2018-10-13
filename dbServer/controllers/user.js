@@ -37,6 +37,7 @@ class UserController {
         const token = jwt.sign(
           {
             id: result.rows[0].userid,
+            userType: result.rows[0].user_role
           },
           key,
           {
@@ -77,7 +78,7 @@ class UserController {
       password
     } = req.body;
     config.query(
-      'SELECT userid, email, password FROM users WHERE email=($1) LIMIT 1',
+      'SELECT userid, email, password, user_role FROM users WHERE email=($1) LIMIT 1',
       [email]
     ).then((result) => {
       if (result.rowCount === 0) {
@@ -95,7 +96,8 @@ class UserController {
       }
       const token = jwt.sign(
         {
-          id: result.rows[0].userid
+          id: result.rows[0].userid,
+          userAdmin: result.rows[0].user_role
         },
         key,
         {

@@ -205,7 +205,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
-    it('should return status code 200 when a user tries to get another his history of orders.', (done) => {
+    it('should return status code 200 when a user tries to get another user history of orders.', (done) => {
       chai.request(app)
         .get('/api/v1/users/5/orders')
         .set('x-access-token', userWithOrderToken)
