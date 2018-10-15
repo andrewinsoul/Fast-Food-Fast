@@ -28,7 +28,7 @@ small.error {
   /* display: none; */
 }
 .loader {
-  border: 3px solid white;
+  border: 3px solid grey;
   border-radius: 50%;
   border-top: 3px solid green;
   display: none;
