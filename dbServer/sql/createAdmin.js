@@ -20,7 +20,7 @@ const insertAdmin = `
     '${password}',
     '12345678906',
     ${true}
-  ) on conflict do nothing
+  )
 `;
 
 config.query(insertAdmin).then(() => {

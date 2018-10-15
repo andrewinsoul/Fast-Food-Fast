@@ -258,8 +258,6 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         .get('/')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.status).to.eql('success');
-          expect(res.body.message).to.eql('welcome to fast food fast API');
           done();
         });
     });
