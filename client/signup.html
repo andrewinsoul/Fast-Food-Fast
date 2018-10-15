@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fast Food Signup</title>
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Aguafina Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="img-cover">
+      <div id="dim-img">
+        <nav class="topnav" id="Topnav">
+          <div id="brand-div">
+            <img class="nav-brand" src="./assets/images/images.jpg">
+            <h1>Fast Food Fast</h1>
+          </div>
+          <div id="nav-links">
+            <a class="nav-link" href="index.html">HOME</a>
+            <a class="nav-link" href="login.html">LOG IN</a>
+            <a class="nav-link active" href="#">SIGN UP</a>
+            <a class="nav-link" href="#">CONTACT US</a>
+          </div>
+          <button class="icon" onclick="toggler()">
+            <i class="fa fa-bars"></i>    
+          </button>
+        </nav>
+      </div>
+    </div>
+    <main id="main-form">
+      <div class="form-jumbotron">
+        <h3>Fast Food Fast SignUp</h3>
+        <h5>Sign Up to Fast Food Fast</h5>
+        <div class="loader"></div>
+        <div>
+          <b><span class="error-span"></span></b>
+        </div>
+        <form class="signup col-form">
+          <div class="reg-div">
+            <i class="fa fa-user icon"></i>
+            <input id="name" type="text" required="required" placeholder="Name">
+          </div>
+          <small class="error" id="name-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-envelope icon"></i>
+            <input id="email" type="email" required="required" placeholder="Email"/>
+          </div>
+          <small class="error" id="email-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-at icon"></i>
+            <input id="username" type="text" required="required" placeholder="Username">
+          </div>
+          <small class="error" id="username-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-phone icon"></i>
+            <input id="phone" type="text" required="required" placeholder="Phone Number">
+          </div>
+          <small class="error" id="phone-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-lock icon"></i>
+            <input id="password" type="password" required="required" placeholder="Password"/>
+          </div>
+          <small class="error" id="password-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-lock icon"></i>
+            <input id="repeat-password" type="password" required="required" placeholder="Confirm Password"/>
+          </div>
+          <small class="error" id="repeat-password-error"></small>
+          <div class="reg-div">
+            <i class="fa fa-home icon"></i>
+            <textarea maxlength="70" required="required" id="address" placeholder="Address where you receive order" class="signup-textarea"></textarea>
+          </div>
+          <small class="error" id="address-error"></small>
+          <div>
+            <input type="submit" value="SIGN UP" class="form-btn"/>
+          </div>
+          <div class="new-old-user">
+            <a href="./login.html">Have an account? Log in</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer class="index-footer">
+      <div class="footer-div" id="social-handles">
+        <h4 class="center-txt">Reach us on our handles</h4>
+        <img class="footer-img" src="./assets/images/facebook-icon.png" alt="facbook-icon"/>
+        <img class="footer-img" src="./assets/images/google-icon.png" alt="google-icon"/>
+        <img class="footer-img" src="./assets/images/twitter-icon.png" alt="twitter-icon"/>
+        <img class="footer-img" src="./assets/images/instagram-icon.png" alt="instagram-icon"/>
+      </div>
+      <div class="footer-div" id="subscribe">
+        <h4 class="center-txt">
+          Subscribe and get latest news on best deals
+        </h4>
+        <form action="">
+          <input id="foot-entry" class="sub-form" type="email" placeholder="Enter Email..."/>
+          <button class="sub-form" id="foot-btn">
+            <i class="fa fa-send"></i>
+          </button>
+        </form>
+      </div>
+    </footer>
+    <div id="end">
+      <small>
+        <div class="center-txt">&copy;Andela Team 2018 All Rights Reserved.</div> 
+        <div class="center-txt">Designed By Andy</div>
+      </small>
+    </div>
+    <script src="./assets/scripts/main.js"></script>
+    <script src="./assets/scripts/jwt_decode.min.js"></script>
+    <script src="./assets/scripts/UserAuth.js"></script>
+  </body>
+</html>

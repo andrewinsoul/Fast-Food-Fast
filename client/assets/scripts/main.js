@@ -1,3 +1,4 @@
+const hostUrl = 'https://fast-food-andy.herokuapp.com/api/v1/';
 function toggler() {
   const navElement = document.getElementById('Topnav');
   if (navElement.className === 'topnav') {

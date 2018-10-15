@@ -25,10 +25,21 @@ nav {
 }
 small.error {
   margin-left: 7%;
-  /* display: none; */
+  margin-bottom: 4%;
+  display: inline-block;
+}
+.signup-textarea {
+  resize: vertical;
+  width: 70%;
+  padding: 10px;
+  height: 45px;
+  font-family: -apple-system,BlinkMacSystemFont,
+              "Segoe UI",Roboto,"Helvetica Neue",
+              Arial,sans-serif,"Apple Color Emoji",
+              "Segoe UI Emoji","Segoe UI Symbol"
 }
 .loader {
-  border: 3px solid grey;
+  border: 3px solid white;
   border-radius: 50%;
   border-top: 3px solid green;
   display: none;
@@ -100,6 +111,9 @@ a.active {
   margin-right: auto;
   width: 100%;
   background-color: #f2f2f2;
+}
+.signup div {
+  margin-top: 0;
 }
 .col-form {
   width: inherit;
@@ -508,6 +522,7 @@ body.admin-menu-list {
 .admin-menu-list .container {
   display: flex;
   color: black;
+  align-items: flex-start;
   flex-flow: row wrap;
 }
 .wrap {
@@ -541,7 +556,7 @@ body.admin-menu-list {
 .jumbotron p {
   margin-top: 0;
 }
-#modal, #addModal {
+#modal, #addModal, #delModal {
   background: white;
   position: fixed;
   width: 50%;
@@ -554,7 +569,14 @@ body.admin-menu-list {
   margin: -25% 0 0 -25%;
   overflow-y: scroll;
 }
-.modalOpen #modal, .modalOpen #addModal {
+#delModal {
+  height: 30%;
+  overflow-y: hidden;
+}
+#delModal p {
+  padding-left: 4%;
+}
+.modalOpen #modal, .modalOpen #addModal, .modalOpen #delModal {
   transform: scale(1);
   opacity: 1;
 }
@@ -562,7 +584,7 @@ body.admin-menu-list {
   filter: blur(1px) grayscale(0%);
   transform: scale(1);
 }
-#main-container, #modal, #addModal {
+#main-container, #modal, #addModal, #delModal {
   transition: all 0.4s ease;
 }
 #modal-wrapper form, #addModal-wrapper form {
