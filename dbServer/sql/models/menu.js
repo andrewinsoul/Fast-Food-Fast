@@ -2,6 +2,7 @@ const menu = `
   create table if not exists menu (
     foodId serial primary key, 
     food varchar(350),
+    category text,
     price integer,
     description varchar(450),
     userId integer,

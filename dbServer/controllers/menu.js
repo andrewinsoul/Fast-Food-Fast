@@ -13,16 +13,20 @@ class Menu {
   createMenu(req, res) {
     const {
       foodName,
+      category,
       price,
-      description
+      description,
     } = req.body;
     const InsertQuery = `
-      INSERT INTO menu
-        (food,
-        price,
+      INSERT INTO menu(
+        food,
         description,
-        userId) VALUES ($1, $2, $3, $4) RETURNING *`;
-    config.query(InsertQuery, [foodName, price, description, req.userId]).then(
+        category,
+        price,
+        userId) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+    config.query(
+      InsertQuery, [foodName, description, category, price, req.userId]
+    ).then(
       (result) => {
         res.status(201).send({
           status: 'success',
@@ -46,12 +50,12 @@ class Menu {
    */
   getAvailableMenu(req, res) {
     config.query(`
-      SELECT food, price FROM menu
+      SELECT foodId, food, category, price, description FROM menu
     `).then((result) => {
       if (result.rowCount === 0) {
-        return res.status(200).send({
+        return res.status(404).send({
           status: 'success',
-          message: 'no menu added by admin'
+          error: 'no menu added by admin'
         });
       }
       return res.status(200).send({

@@ -145,6 +145,7 @@ class validation {
   createMenu(req, res, next) {
     const {
       foodName,
+      category,
       price,
       description
     } = req.body;
@@ -152,6 +153,12 @@ class validation {
       return res.status(400).send({
         status: 'error',
         error: 'foodName field is required'
+      });
+    }
+    if (category === undefined) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'category field is required'
       });
     }
     if (description === undefined) {
@@ -172,6 +179,12 @@ class validation {
         error: 'invalid type for description, must be a string'
       });
     }
+    if (typeof (category) !== 'string') {
+      return res.status(400).send({
+        status: 'error',
+        error: 'invalid type for category, must be a string'
+      });
+    }
     if (!(/^[a-zA-Z\s]*$/).test(foodName)) {
       return res.status(400).send({
         status: 'error',
@@ -184,10 +197,16 @@ class validation {
         error: 'price field is required'
       });
     }
-    if (description.length > 250) {
+    if (category.length > 100) {
       return res.status(400).send({
         status: 'error',
-        error: 'description too long, should not be more than 250 characters'
+        error: 'text for category too long, should not be more than 100 characters'
+      });
+    }
+    if (description.length > 200) {
+      return res.status(400).send({
+        status: 'error',
+        error: 'description too long, should not be more than 200 characters'
       });
     }
     const validPrice = parseInt(price, 10);
@@ -203,8 +222,8 @@ class validation {
         error: 'invalid number type for price, must be integer'
       });
     }
-    config.query('SELECT * FROM menu WHERE food=($1) AND price=($2) AND description=($3) LIMIT 1',
-      [foodName, price, description])
+    config.query('SELECT * FROM menu WHERE food=($1) AND category=($2) AND price=($3) AND description=($4) LIMIT 1',
+      [foodName, category, price, description])
       .then((result) => {
         if (result.rowCount !== 0) {
           return res.status(409).send({

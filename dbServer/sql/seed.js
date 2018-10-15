@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import bcrypt from 'bcryptjs';
 import config from '../config/config';
 
@@ -33,17 +34,25 @@ const BulkInsertUser = `
 const BulkInsertMenu = `
     INSERT INTO menu (
       food,
+      category,
       price,
+      description,
       userId
     ) VALUES
       ( 'Indomie and Fried Plantain',
+        'Fast Food',
         2000,
+        'A plate of this delicious meal cost 2000 with a bottle of chilled softdrink and six slices of fried plantain',
         1),
-      ('Fried Rice and Chicken',
+      ('Pepsi and Burger',
+        'Junks',
         3000,
+        'Enjoy a special treat of delicious burger steak and a bottle of chilled Pepsi drink all for an awesome price of 3000',
         1),
-      ('Jollof Rice and Fried Meat',
-        2500,
+      ('Akara and Pap',
+        'local',
+        1200,
+        'Enjoy properly fried akara balls and pap to complement it all at a whopping price of 1200',
         1)
 `;
 let arrayOrders1 = `[
