@@ -42,6 +42,11 @@ class GetAllMenu {
   }
 
   displayMenu() {
+    const token = localStorage.getItem('x-access-token');
+    if (!token) {
+      window.location.href = '../../login.html';
+      return
+    }
     const fetchMenu = this.fetchMenu();
     const container = document.querySelector('.container');
     fetchMenu

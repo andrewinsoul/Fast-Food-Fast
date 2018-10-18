@@ -18,11 +18,10 @@ function showAll() {
   fries.style.display = 'block';
   others.style.display = 'block';
   african.style.display = 'block';
-  // document.documentElement.scrollTop = ;
 }
 
 /**
-   * 
+   * @description - create html element with class attribute
    * @param {string} node 
    * @param {string} nameOfClass
    * @returns {HTMLBodyElement} element 
@@ -33,10 +32,9 @@ function createNode(node, nameOfClass='') {
   return element;
 }
 
-/* check the logout function */
 function logout() {
-  localStorage.removeItem('x-access-token');
-  window.location.href = 'client/login.html'
+  localStorage.clear();
+  window.location.href = '../../login.html'
 }
 
 function showIntercontinental() {
