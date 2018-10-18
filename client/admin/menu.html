@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fast Food Admin Menu List</title>
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Aguafina Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  </head>
+  <body class="admin-menu-list" id="body">
+    <div id="main-container">
+      <nav class="topnav" id="Topnav">
+        <div id="brand-div">
+          <img class="nav-brand" src="../assets/images/images.jpg">
+          <h1>Fast Food Fast</h1>
+        </div>
+        <div id="nav-links">
+          <a class="nav-link active" href="#">MENU</a>
+          <a class="nav-link" href="order.html">ORDERS</a>
+          <a class="nav-link" href="#">PROFILE</a>
+          <a onclick="logout()" class="nav-link" href="#">LOG OUT</a>
+        </div>
+        <button class="icon" onclick="toggler()">
+          <i class="fa fa-bars"></i>    
+        </button>
+      </nav>
+      <main>
+        <div style="display: flex; justify-content: space-around">
+          <h2 id="adminUser">Admin User</h2>
+          <div id="addMenu">
+            <div onclick="openAddModal('addModal')" style="cursor: pointer;">
+              <button>
+                <span style="vertical-align: middle">Create Menu</span>
+                <i style="font-size: 20px; color: #0062cc" class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+        </div>
+      </main>
+      <footer>
+          <div id="end">
+            <small>
+              <div class="center-txt">&copy;Andela Team 2018 All Rights Reserved.</div> 
+              <div class="center-txt">Designed By Andy</div>
+            </small>
+          </div>
+      </footer>
+    </div>
+    <div id="modal">
+      <div id="modal-wrapper">
+        <h3 class="center-txt bottom-line">Update Fast Food Menu Item</h3>
+        <form action="">
+          <label for="name">
+            <b>Name</b>
+          </label>
+          <input id="name" type="text"/>
+          <label class="betw-modal-label" for="category">
+            <b>Category</b>
+          </label>
+          <input type="text" id="category"/>
+          <label class="betw-modal-label" for="price">
+            <b>Price</b>
+          </label>
+          <input id="price" type="text"/>
+          <label class="betw-modal-label" for="description">
+            <b>Description</b>
+          </label>
+          <textarea name="description" id="description" rows="5">
+          </textarea>
+        </form>
+        <div class="modal-btns">
+          <button id="update" onclick="updateMenu()">Update</button>
+          <button id="cancel" onclick="closeModal('modal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="addModal">
+      <div id="addModal-wrapper">
+        <h3 class="center-txt bottom-line">Add Fast Food Menu item</h3>
+        <div class="loader"></div>
+        <div id="gen-error"></div>
+        <form id="add-menu-form">
+          <label for="name">
+            <b>Name</b>
+            <span id="name-error"></span>
+          </label>
+          <input type="text" id="add-name" placeholder="Name" required="required"/>
+          <label for="category" class="betw-modal-label">
+            <b>Category</b>
+            <span id="category-error"></span>
+          </label>
+          <input type="text" id="add-category" placeholder="Food Menu Category" required="required"/>
+          <label for="price" class="betw-modal-label">
+            <b>Price</b>
+            <span id="price-error"></span>
+          </label>
+          <input id="add-price" type="text" placeholder="Price Per Plate" required="required"/>
+          <label for="description" class="betw-modal-label">
+            <b>Description</b>
+            <span id="desc-error"></span>
+          </label>
+          <textarea maxlength="150" name="description" id="add-description" cols="30" rows="5" placeholder="Brief Description of Food" required="required"></textarea>
+        </form>
+        <div class="modal-btns">
+          <button id="add" onclick="addMenu()">Add Menu Item</button>
+          <button id="cancel" onclick="closeModal('addModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="delModal">
+      <div id="delmodal-wrapper">
+        <h3 class="center-txt bottom-line">Delete Fast Food Menu Item</h3>
+        <p>Are you sure you wish to delete Menu Item</p>
+        <div class="modal-btns">
+          <button id="delete" onclick="closeModal('modal')">Delete</button>
+          <button id="cancel" onclick="closeModal('modal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/scripts/main.js"></script>
+    <script src="../assets/scripts/GetAllMenu.js"></script>
+  </body>
+</html>
