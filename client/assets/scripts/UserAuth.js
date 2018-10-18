@@ -20,7 +20,7 @@ class UserAuth {
    * @returns {Function} fetch
    */
   userAuthPost(endpoint, payload) {
-    const url = `${hostUrl}${endpoint}`;
+    const url = `${hostURL}/${endpoint}`;
     return fetch(url, {
       method: 'post',
       headers: {
@@ -58,7 +58,6 @@ class UserAuth {
             loader.style.display = 'none';
             location.href = "/client/admin/menu.html";
           } else {
-            // loader.style.display = 'flex'; // check dis line
             location.href = '/client/place-order.html';
           }
         }

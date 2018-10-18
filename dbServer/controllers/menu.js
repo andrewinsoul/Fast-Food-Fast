@@ -60,7 +60,7 @@ class Menu {
       }
       return res.status(200).send({
         status: 'success',
-        message: result.rows
+        menuList: result.rows
       });
     });
   }
