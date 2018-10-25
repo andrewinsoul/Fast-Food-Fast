@@ -56,12 +56,12 @@ const BulkInsertMenu = `
         1)
 `;
 let arrayOrders1 = `[
-  {"foodId": 1, "quantity": 3},
-  {"foodId": 2, "quantity": 1}
+  {"food": "Akara and Pap", "category":"local", "price":1200, "total":4800, "quantity":4},
+  {"food":"Pepsi and Burger","category":"Junks","price":3000,"total":3000,"quantity": 1}
 ]`;
 let arrayOrders2 = `[
-  {"foodId": 3, "quantity": 3},
-  {"foodId": 2, "quantity": 1}
+  {"food": "Indomie and Fried Plantain", "category": "Fast Food", "price": 2000,"total": 8000,"quantity": 4},
+  {"food":"Pepsi and Burger","category":"Junks","price":3000,"total":3000,"quantity": 1}
 
 ]`;
 arrayOrders1 = JSON.parse(arrayOrders1);

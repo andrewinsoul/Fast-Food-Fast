@@ -193,7 +193,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
-    it("should return status code 400 when a user tries to get another user's history of orders.", (done) => {
+    it('should return status code 400 when a user tries to get his history of orders with invalid params.', (done) => {
       chai.request(app)
         .get('/api/v1/users/2asw/orders')
         .set('x-access-token', userWithOrderToken)
@@ -205,7 +205,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
-    it('should return status code 200 when a user tries to get another user history of orders.', (done) => {
+    it('should return status code 200 when a user tries to get his history of orders.', (done) => {
       chai.request(app)
         .get('/api/v1/users/5/orders')
         .set('x-access-token', userWithOrderToken)
@@ -230,12 +230,12 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.body.status).to.eql('error');
-          expect(res.body.error).to.eql('food not found');
+          expect(res.body.error).to.eql('foodId 1200 not found');
           done();
         });
     });
 
-    it('should return status code 404 tries to order for a food not found in database.', (done) => {
+    it('should return status code 201 when authenticated user successfully places order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
         .set('x-access-token', userWithNoOrderToken)
