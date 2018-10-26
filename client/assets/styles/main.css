@@ -20,6 +20,10 @@ nav {
 .topnav a:hover, .topnav.responsive a:hover {
   color: green;
 }
+.process-btn {
+  background: rgb(160, 121, 23);
+  color: white;
+}
 .error-span, small.error {
   color: red;
 }

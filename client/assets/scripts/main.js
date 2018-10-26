@@ -34,7 +34,7 @@ function createNode(node, nameOfClass='') {
 
 function logout() {
   localStorage.clear();
-  window.location.href = '../../login.html'
+  window.location.replace('../login.html');
 }
 
 function showIntercontinental() {
@@ -184,48 +184,6 @@ function addRemoveQty(e) {
       sibling.innerHTML = value - 1;
     }
   }
-}
-
-function acceptOrder(e) {
-  const parentElement = e.parentElement;
-  const nextElementSibling = e.nextElementSibling;
-  e.remove();
-  nextElementSibling.remove();
-  const btnElement = createElement('button');
-  btnElement.textContent = 'Complete Order';
-  btnElement.onclick = 'completeOrder(this)'
-  btnElement.style.background = 'rgb(160, 121, 23)';
-  btnElement.style.color = 'white';
-  btnElement.setAttribute('onclick', 'completeOrder(this)');
-  parentElement.appendChild(btnElement);
-}
-
-function completeOrder(e) {
-  const parentElement = e.parentElement;
-  e.remove();
-  const div = createElement('div');
-  div.style.background = 'green';
-  div.style.color = 'white';
-  div.style.padding = '10px';
-  div.style.display = 'inline-block';
-  div.style.margin = '13px';
-  div.innerHTML = '<small>Completed</small>';
-  parentElement.appendChild(div);
-}
-
-function declineOrder(e) {
-  const parentElement = e.parentElement;
-  const previousElementSibling = e.previousElementSibling;
-  e.remove();
-  previousElementSibling.remove();
-  const div = createElement('div');
-  div.style.background = 'tomato';
-  div.style.color = 'white';
-  div.style.padding = '10px';
-  div.style.margin = '13px';
-  div.style.display = 'inline-block';
-  div.innerHTML = '<small>Cancelled</small>';
-  parentElement.appendChild(div);
 }
 
 function createElement(name) {
