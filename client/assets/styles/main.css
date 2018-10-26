@@ -665,12 +665,27 @@ body.admin-mark-order {
   background-color: white;
 }
 .admin-mark-order nav {
-  background-color: brown;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #5b0603;
+  right: 0;
+}
+.admin-mark-order main {
+  margin-top: 105px;
 }
 .admin-mark-order footer {
   border-top: 1px solid grey;
   margin-top: 28%;
-  background-color: brown;
+  background: #5b0603;
+}
+.admin-mark-order .accept-btn {
+  background: rgb(3, 3, 99);
+  color: white;
+}
+.admin-mark-order .cancel-btn {
+  background: tomato;
+  color: white;
 }
 table {
   width: 100%;
@@ -702,6 +717,7 @@ table th {
 }
 td {
   text-align: center;
+  width: 22%
 }
 .fa-check::before {
   color: white;
@@ -711,8 +727,18 @@ td {
   color: white;
   font-size: 20px
 }
-.check, .accepted {
-  background-color: green;
+
+td div {
+  display: inline-block;
+  color: white;
+  padding: 10px;
+  margin: 13px;
+}
+td.accepted div{
+  background: green;
+}
+td.declined div{
+  background: tomato;
 }
 .close {
   background-color: red;
@@ -723,15 +749,12 @@ td {
 .close {
   width: 46%;
 }
-td.accepted {
+td.accepted, td.declined {
+  padding: .625em 0;
   color: white;
   text-align: center;
 }
-td.declined {
-  background-color: red;
-  color: white;
-  text-align: center;
-}
+
 .action {
   padding: .625em 0;
 }
@@ -870,6 +893,7 @@ td.declined {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
+    width: 90%;
     text-align: right;
   }
   table td:before {

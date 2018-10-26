@@ -56,7 +56,8 @@ class UserAuth {
           const decode = jwt_decode(token);
           if (decode.userAdmin) {
             loader.style.display = 'none';
-            location.href = "/admin/menu.html";
+            // location.href = "/admin/menu.html";
+            location.href = "./admin/menu.html"
           } else {
             location.href = '/place-order.html';
           }

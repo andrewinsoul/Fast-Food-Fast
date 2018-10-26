@@ -58,11 +58,6 @@ function unformatPrice(price) {
   rawPrice = rawPrice.replace('₦', '');
   return rawPrice;
 }
-// function fixBody() {
-//   const body = document.getElementsByClassName('place-order');
-//   alert(body);
-//   console.log(body);
-// }
 
 function showOthers() {
   intercontinental.style.display = 'none';
@@ -191,22 +186,46 @@ function addRemoveQty(e) {
   }
 }
 
-function acceptOrder (e) {
-  const acceptedSpan = document.createElement('span');
-  acceptedSpan.textContent = 'ACCEPTED';
-  const parent = e.parentNode;
-  const grandParent = parent.parentNode;
-  grandParent.replaceChild(acceptedSpan, parent);
-  grandParent.className = 'accepted';
+function acceptOrder(e) {
+  const parentElement = e.parentElement;
+  const nextElementSibling = e.nextElementSibling;
+  e.remove();
+  nextElementSibling.remove();
+  const btnElement = createElement('button');
+  btnElement.textContent = 'Complete Order';
+  btnElement.onclick = 'completeOrder(this)'
+  btnElement.style.background = 'rgb(160, 121, 23)';
+  btnElement.style.color = 'white';
+  btnElement.setAttribute('onclick', 'completeOrder(this)');
+  parentElement.appendChild(btnElement);
+}
+
+function completeOrder(e) {
+  const parentElement = e.parentElement;
+  e.remove();
+  const div = createElement('div');
+  div.style.background = 'green';
+  div.style.color = 'white';
+  div.style.padding = '10px';
+  div.style.display = 'inline-block';
+  div.style.margin = '13px';
+  div.innerHTML = '<small>Completed</small>';
+  parentElement.appendChild(div);
 }
 
 function declineOrder(e) {
-  const declinedSpan = document.createElement('span');
-  declinedSpan.textContent = 'DECLINED';
-  const parent = e.parentNode;
-  const grandParent = parent.parentNode;
-  grandParent.replaceChild(declinedSpan, parent);
-  grandParent.className = 'declined';
+  const parentElement = e.parentElement;
+  const previousElementSibling = e.previousElementSibling;
+  e.remove();
+  previousElementSibling.remove();
+  const div = createElement('div');
+  div.style.background = 'tomato';
+  div.style.color = 'white';
+  div.style.padding = '10px';
+  div.style.margin = '13px';
+  div.style.display = 'inline-block';
+  div.innerHTML = '<small>Cancelled</small>';
+  parentElement.appendChild(div);
 }
 
 function createElement(name) {

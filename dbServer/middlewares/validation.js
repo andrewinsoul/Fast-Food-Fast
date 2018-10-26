@@ -302,7 +302,7 @@ class validation {
   }
 
   /**
-   * @description - method that validates input on place order route
+   * @description - method that validates input on place order route and modifies the request body of place order endpoint
    * @param {object} req - the request object
    * @param {object} res - the response object
    * @param {function} next - the callback function
@@ -331,6 +331,7 @@ class validation {
       });
     }
     const promiseArray = [];
+    const userOrders = [];
     let Query;
     for (let i = 0; i < orders.length; i += 1) {
       if (orders[i].foodId === undefined) {
@@ -370,27 +371,67 @@ class validation {
         });
       }
       Query = config.query(`
-      SELECT * FROM menu WHERE foodId = ($1) LIMIT 1
+      SELECT food, price, category FROM menu WHERE foodId = ($1) LIMIT 1
       `, [orders[i].foodId]);
       promiseArray.push(Query);
+      userOrders.push(orders[i]);
     }
-    let FoodNotFound;
+    const orderArray = [];
     Promise.all(promiseArray).then((result) => {
       for (let item = 0; item < result.length; item += 1) {
         if (result[item].rowCount === 0) {
-          FoodNotFound = 'food not found';
-          break;
+          req.error = `foodId ${userOrders[item].foodId} not found`;
+          return;
         }
+        result[item].rows[0].quantity = req.body.orders[item].quantity;
+        result[item].rows[0].total = req.body.orders[item].quantity * result[item].rows[0].price;
+        orderArray.push(result[item].rows[0]);
       }
-    }).catch(error => res.status(500).send({ error })).then(() => {
-      if (FoodNotFound === 'food not found') {
+      req.body.orders = orderArray;
+      let SUMTOTAL = 0;
+      for (let index = 0; index < orderArray.length; index += 1) {
+        SUMTOTAL += orderArray[index].total;
+      }
+      res.SUMTOTAL = SUMTOTAL;
+      return next();
+    }).then(() => {
+      if (req.error) {
         return res.status(404).send({
           status: 'error',
-          error: 'food not found'
+          error: req.error
         });
       }
+    }).catch(error => res.status(500).send({ error }));
+  }
+
+  /**
+   * @description - method that validates input on place order route
+   * @param {object} req - the request object
+   * @param {object} res - the response object
+   * @param {function} next - the callback function
+   * @returns {object} - status code and error
+   */
+  getAllOrders(req, res, next) {
+    config.query(`
+      SELECT C.orders,
+      C.status, 
+      C.createdAt, 
+      U.username, 
+      U.address, 
+      U.email,
+      U.phone
+      FROM cart c
+      JOIN users u ON c.userId = u.userId
+     `).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(404).send({
+          status: 'error',
+          error: 'No order found'
+        });
+      }
+      req.orders = result.rows;
       return next();
-    });
+    }).catch(e => console.error(e));
   }
 }
 export default new validation();

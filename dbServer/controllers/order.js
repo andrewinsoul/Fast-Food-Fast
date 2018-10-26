@@ -12,19 +12,9 @@ class Order {
    * @returns {object} - status code and server message
    */
   getAllOrders(req, res) {
-    config.query(`
-      SELECT * FROM cart
-    `).then((result) => {
-      if (result.rowCount === 0) {
-        return res.status(404).send({
-          status: 'error',
-          error: 'No order found'
-        });
-      }
-      return res.status(200).send({
-        status: 'success',
-        message: result.rows
-      });
+    return res.status(200).send({
+      status: 'success',
+      allOrders: req.orders
     });
   }
 
@@ -128,7 +118,8 @@ class Order {
         res.status(201).send({
           status: 'success',
           message: 'order placed successfully',
-          order: result.rows[0]
+          orders: result.rows[0].orders,
+          SUMTOTAL: res.SUMTOTAL
         });
       }
     ).catch((error) => {

@@ -51,7 +51,6 @@ class GetAllMenu {
     const container = document.querySelector('.container');
     fetchMenu
       .then((res) => {
-        console.log(res);
         const menu = res.menuList;
         menu.forEach((menuItem) => {
           const parentNode = createNode('div', 'jumbotron');

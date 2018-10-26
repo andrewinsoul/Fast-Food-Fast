@@ -10,6 +10,7 @@ orderRouter
   .get('/orders',
     verifyToken,
     verifyAdmin,
+    validation.getAllOrders,
     order.getAllOrders)
   .put('/orders/:orderId',
     verifyToken,
