@@ -1,4 +1,5 @@
-const hostURL = 'https://fast-food-andy.herokuapp.com/api/v1';
+const hostURL = 'http://localhost:8000/api/v1';
+// const hostURL = 'https://fast-food-andy.herokuapp.com/api/v1';
 const intercontinental = document.getElementById('intercontinental-div');
 const african = document.getElementById('african-div');
 const fries = document.getElementById('fries-div');
@@ -36,6 +37,14 @@ function logout() {
   localStorage.clear();
   window.location.replace('../login.html');
 }
+
+const resetIndex = () => {
+  const allIndex = document.querySelectorAll('.sn');
+  for(let i = 0; i < allIndex.length; i += 1){
+    allIndex[i].textContent = i + 1;
+  }
+}
+
 
 function showIntercontinental() {
   fries.style.display = 'none';
@@ -168,23 +177,69 @@ function hideMenu(e) {
   e.lastChild.previousElementSibling.className = 'fa fa-caret-down';
 }
 
-function addRemoveQty(e) {
-  if (e.className === 'add-plate-btn fa fa-caret-up') {
-    const sibling = e.nextElementSibling;
-    const value = Number(sibling.innerHTML);
-    sibling.innerHTML = value + 1;
-  }
-  else {
-    const sibling = e.previousElementSibling;
-    const value = Number(sibling.innerHTML);
-    if (value == 1) {
-      sibling.innerHTML = 1;
+function formatPrice(price) {
+  let amt = String(price), amtArray = amt.split(""), index = amtArray.length - 1, i = 0;
+  while (index != -1) {
+    i++;
+    if (i == 3) {
+      i = 0;
+      amtArray.splice(index, 0, ",");
     }
-    else {
-      sibling.innerHTML = value - 1;
-    }
+    index--;
   }
+  if (amt.length % 3 == 0) {
+    amtArray.shift();
+  }
+  amtArray.splice(0, 0, '₦');
+  return amtArray.join("");
 }
+
+// const checkout = () => {
+//   const cartItems = document.querySelectorAll('.price-div');
+//   let total = 0;
+//   for (let i = 0; i < cartItems.length; i += 1) {
+//     total += Number(unformatPrice(cartItems[i].textContent));
+//   }
+//   return formatPrice(total);
+// }
+
+// function addRemoveQty(e) {
+//   const checkoutBtn = document.querySelector('#place-order');
+//   const parentNextSibling = e.parentElement.nextElementSibling;
+//   let foodPrice = Number(unformatPrice(e.parentElement.nextElementSibling.textContent));
+//   let sibling;
+//   if (e.className === 'add-plate-btn fa fa-caret-up') {
+//     sibling = e.nextElementSibling;
+//     const value = Number(sibling.innerHTML);
+//     sibling.innerHTML = value + 1;
+//     let initialPrice = foodPrice / (Number(sibling.innerText) - 1)
+//     parentNextSibling.textContent = formatPrice(initialPrice * Number(sibling.innerText));
+//   }
+//   else {
+//     const parentNextSibling = e.parentElement.nextElementSibling;
+//     sibling = e.previousElementSibling;
+//     const value = Number(sibling.innerHTML);
+//     if (value == 1) {
+//       sibling.innerHTML = 1;
+//     }
+//       else {
+//       sibling.innerHTML = value - 1;
+//       let initialPrice = foodPrice / (Number(sibling.innerText) + 1);
+//       parentNextSibling.textContent = formatPrice(foodPrice - initialPrice);
+//     }
+//   }
+//   let myOrders = localStorage.getItem('orders');
+//   myOrders = JSON.parse(myOrders)
+//   const greatGrand = e.parentElement.parentElement.parentElement;
+//   const findId = myOrders.find(order => order.foodId === Number(greatGrand.getAttribute('menuid')))
+//   findId.quantity = Number(sibling.textContent);
+//   localStorage.setItem('orders', JSON.stringify(myOrders));
+  
+//   localStorage.setItem('total', checkout())
+  
+//   console.log(localStorage.getItem('total'));
+//   checkoutBtn.textContent = checkout();
+// }
 
 function createElement(name) {
   return document.createElement(name);
@@ -218,17 +273,4 @@ function updateMenu() {
   setTimeout(() => {
     location.reload();
   }, 1000);
-}
-
-function addRemoveFood(e) {
-  if (e.className === 'pad-right add-item-btn') {
-    e.style.display = 'none';
-    const sibling = e.nextElementSibling;
-    sibling.style.display = 'inline-block';
-  }
-  else {
-    e.style.display = 'none';
-    const sibling = e.previousElementSibling;
-    sibling.style.display = 'inline-block';
-  }
 }

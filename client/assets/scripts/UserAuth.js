@@ -58,7 +58,7 @@ class UserAuth {
             loader.style.display = 'none';
             location.href = "./admin/menu.html"
           } else {
-            location.href = '/place-order.html';
+            location.href = './place-order.html';
           }
         }
       });
@@ -106,7 +106,7 @@ class UserAuth {
         } else {
           const token = res.token;
           localStorage.setItem('x-access-token', token);
-          location.href = "/client/place-order.html";
+          location.href = "./place-order.html";
         }
       }).catch((error) => {
         console.log(res.error);
