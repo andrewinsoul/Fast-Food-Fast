@@ -414,6 +414,7 @@ class validation {
   getAllOrders(req, res, next) {
     config.query(`
       SELECT C.orders,
+      C.orderId,
       C.status, 
       C.createdAt, 
       U.username, 
@@ -421,7 +422,7 @@ class validation {
       U.email,
       U.phone
       FROM cart c
-      JOIN users u ON c.userId = u.userId
+      JOIN users u ON c.userId = u.userId ORDER BY orderId DESC
      `).then((result) => {
       if (result.rowCount === 0) {
         return res.status(404).send({

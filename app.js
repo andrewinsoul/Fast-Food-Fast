@@ -22,6 +22,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin,Content-Type,Accept,x-access-token,Cache-Control,Expires'
   );
+  res.header('Access-Control-Allow-Methods', '*');
   next();
 });
 app.use('/api/v1/', userRouter);
