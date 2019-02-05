@@ -84,7 +84,7 @@ class Order {
       });
     }
     config.query(`
-      SELECT address, phone, email, orderId, orders, createdAt FROM users INNER JOIN cart ON (users.userid = ($1)) 
+      SELECT address, phone, email, orderId, orders, status, createdAt FROM users INNER JOIN cart ON (users.userid = ($1)) 
     `, [userId]).then((result) => {
       if (result.rowCount === 0) {
         return res.status(404).send({
