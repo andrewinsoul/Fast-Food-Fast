@@ -37,16 +37,7 @@ class CreateMenu {
     })
       .then(res => res.json())
       .then((res) => {
-        if (res.error || payload.category === 'Select Category') {
-          if (!res.error) {
-            if (payload.category == 'Select Category') {
-              const span = document.querySelector('#category-error');
-              span.style.color = 'yellow';
-              span.textContent = '  (category field is required)';
-              loader.style.display = 'none';
-              return false;
-            }
-          }
+        if (res.error) {
           if (res.error.includes('already')) {
             const genError = document.querySelector('#gen-error');
             genError.style.color = 'yellow';
@@ -63,6 +54,16 @@ class CreateMenu {
             loader.style.display = 'none';
           } else if (foodNameInput.value.length !== 0) {
             const span = document.querySelector('#name-error');
+            span.textContent = '';
+          }
+          if (payload.category == 'Select Category') {
+            const span = document.querySelector('#category-error');
+            span.style.color = 'yellow';
+            span.textContent = '  (category field is required)';
+            loader.style.display = 'none';
+            return false;
+          } else {
+            const span = document.querySelector('#category-error');
             span.textContent = '';
           }
           if (priceInput.value.length === 0) {

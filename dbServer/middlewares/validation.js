@@ -155,7 +155,7 @@ class validation {
         error: 'foodName field is required'
       });
     }
-    if (category === undefined) {
+    if (category === 'Select Category') {
       return res.status(400).send({
         status: 'error',
         error: 'category field is required'
