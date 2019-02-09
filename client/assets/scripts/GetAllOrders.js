@@ -14,7 +14,6 @@ function completeOrder(e) {
         console.error(res.error);
         return;
       }
-      console.log(res);
       e.remove();
       const div = createElement('div');
       div.style.background = 'green';
