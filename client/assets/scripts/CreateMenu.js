@@ -1,5 +1,3 @@
-import { fstat } from "fs";
-
 const addMenuBtn = document.querySelector('button#add');
 const AddMenuform = document.querySelector('form#add-menu-form');
 const addBtn = document.querySelector('button#add');
