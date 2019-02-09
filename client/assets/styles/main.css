@@ -1,6 +1,8 @@
 body {
   margin: 0;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
   font-size: 16px;
   background-color: #5b0603;
 }
@@ -17,14 +19,16 @@ nav {
   text-decoration: none;
   padding: 14px 16px;
 }
-.topnav a:hover, .topnav.responsive a:hover {
+.topnav a:hover,
+.topnav.responsive a:hover {
   color: green;
 }
 .process-btn {
   background: rgb(160, 121, 23);
   color: white;
 }
-.error-span, small.error {
+.error-span,
+small.error {
   color: red;
 }
 small.error {
@@ -32,7 +36,8 @@ small.error {
   margin-bottom: 4%;
   display: inline-block;
 }
-#adminUser, #addMenu {
+#adminUser,
+#addMenu {
   margin-top: 0%;
 }
 .signup-textarea {
@@ -40,10 +45,9 @@ small.error {
   width: 70%;
   padding: 10px;
   height: 45px;
-  font-family: -apple-system,BlinkMacSystemFont,
-              "Segoe UI",Roboto,"Helvetica Neue",
-              Arial,sans-serif,"Apple Color Emoji",
-              "Segoe UI Emoji","Segoe UI Symbol"
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 .loader {
   border: 3px solid white;
@@ -57,14 +61,22 @@ small.error {
 }
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-nav h1{
+nav h1 {
   color: white;
   text-decoration: none;
 }
@@ -101,14 +113,16 @@ a.active {
 }
 .sub-content {
   text-align: center;
-  color: white
+  color: white;
 }
 #restuarant-img h3 {
   display: inline-block;
   padding-left: 20px;
 }
 
-#main-form, #aval-cusines, .form-jumbotron {
+#main-form,
+#aval-cusines,
+.form-jumbotron {
   display: flex;
 }
 .col-form div {
@@ -187,15 +201,16 @@ footer img {
   justify-content: space-around;
 }
 footer div img.footer-img:hover {
-  transition: .5s;
+  transition: 0.5s;
   transform: scale(1.2) rotate(360deg);
 }
 input {
   border-radius: 4px;
   border: 1px solid grey;
-  color: rgba(1, 1, 1, 0.8)
+  color: rgba(1, 1, 1, 0.8);
 }
-#social-handles, #subscribe {
+#social-handles,
+#subscribe {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -224,7 +239,7 @@ small {
 }
 .sub-content h2 {
   color: white;
-  margin-bottom: 3%
+  margin-bottom: 3%;
 }
 img.nav-brand {
   width: 92px;
@@ -266,7 +281,7 @@ button.icon {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1%;
-  margin-right: 7%
+  margin-right: 7%;
 }
 .new-old-user a {
   margin-right: 3%;
@@ -282,7 +297,7 @@ button.icon {
 }
 h1 {
   font-size: 56px;
-  color: white
+  color: white;
 }
 .nav-link {
   margin-right: 43px;
@@ -293,12 +308,17 @@ h1 {
 /*
   USER-ORDER PAGE STYLES
 */
-.place-order .nav-brand, .recent-order .nav-brand, .admin-menu-list .nav-brand,
-.admin-mark-order .nav-brand  {
+.place-order .nav-brand,
+.recent-order .nav-brand,
+.admin-menu-list .nav-brand,
+.admin-mark-order .nav-brand {
   width: 55px;
 }
-.place-order #brand-div h1, .recent-order #brand-div h1, .admin-menu-list #brand-div h1, .admin-mark-order #brand-div h1 {
-  font-size: 28px
+.place-order #brand-div h1,
+.recent-order #brand-div h1,
+.admin-menu-list #brand-div h1,
+.admin-mark-order #brand-div h1 {
+  font-size: 28px;
 }
 #restaurant-desc {
   display: flex;
@@ -318,12 +338,12 @@ h1 {
   vertical-align: middle;
 }
 #cusine-category {
-  flex-basis: 17%; 
-  margin-left: 2%; 
-  margin-right: 1%
+  flex-basis: 17%;
+  margin-left: 2%;
+  margin-right: 1%;
 }
 #restuarant-menu {
-  flex-basis: 51%; 
+  flex-basis: 51%;
   margin-right: 1%;
 }
 #cart {
@@ -339,8 +359,8 @@ h1 {
   box-shadow: 0 0 50px rgba(1, 1, 1, 0.8);
 }
 #spacer-div {
-  background-color: #5b0603; 
-  color: #5b0603; 
+  background-color: #5b0603;
+  color: #5b0603;
   height: 10px;
 }
 .pad-left {
@@ -350,136 +370,136 @@ h1 {
   padding-right: 6px;
 }
 .col-grey {
-  color: rgba(1, 1, 1, 0.8)
+  color: rgba(1, 1, 1, 0.8);
 }
 .space-down {
-  padding-bottom: 10px
+  padding-bottom: 10px;
 }
 .space-around {
   padding: 10px;
 }
 .full-width {
-  width: 100%
+  width: 100%;
 }
 #search-food {
   width: 10%;
   background-color: green;
   cursor: pointer;
   color: white;
-  border-radius: 4px
- }
- #menu-items, .menu-items {
-  display: flex; 
-  flex-direction: column; 
- }
- #menu-cart-cat-container {
-   display: flex;
-   align-items: flex-start;
- }
- .no-marg-top {
-   margin-top: 0;
- }
- #view-cart-btn {
-   display: none;
-   justify-content: flex-end;
- }
- .center-item-in-flex {
-   display: flex;
-   justify-content: center;
- }
- .place-order .menu-title {
-   color: red;
-   margin: 0;
-   border-bottom: 1px solid grey;
-   padding: 15px 6px;
- }
- .bottom-line {
-  border-bottom: 1px solid grey;
- }
- .space-item-in-flex {
-   display: flex;
-   justify-content: space-between;
- }
- .space-item-in-flex p {
-   margin-top: 5px;
-   margin-bottom: 0;
- }
- .desc-p {
-   margin-top: 0;
- }
- .desc-p small {
-   color: black;
- }
- .add-item-btn img{
-    width: 23px;
-    vertical-align: middle;
- }
- .add-item-btn {
-   margin-bottom: 4px;
- }
- button {
-   cursor: pointer;
- }
- #cusine-category a {
-   text-decoration: none;
-   color: black
- }
- #cusine-category a:hover {
-   color: brown;
- }
- .sn {
-   margin-left: 2%;
- }
- .food-item-name {
-   margin-left: 7%;
- }
- .place-order small {
-   color:black;
- }
- .and-div {
-   padding: 10px 0;
-   display: flex;
- }
- .add-plate-btn {
-   border-radius: 50%;
-   width: 24px;
-   margin-left: 34px;
- }
- .fa-caret-down {
-   margin-left: 0;
- }
- .flexblock {
-   display: flex;
- }
- #place-order {
-  background-color: green; 
-  color: white; 
-  width: 100%; 
-  padding: 10px; 
   border-radius: 4px;
- }
- .place-order footer,
- .recent-order footer,
- .admin-menu-list footer,
- .admin-mark-order footer
-{
-   margin-top: 1%;
-   border-top: 1px solid grey;
-   padding: 10px
- }
- .recent-order footer {
-   margin-top: 8%;
- }
- .place-order main {
-   margin-bottom: 8%;
- }
- #end small {
-   color: white;
- }
- .price-div {
-   margin-left: 23%;
-   width: 90px;
- }
+}
+#menu-items,
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+#menu-cart-cat-container {
+  display: flex;
+  align-items: flex-start;
+}
+.no-marg-top {
+  margin-top: 0;
+}
+#view-cart-btn {
+  display: none;
+  justify-content: flex-end;
+}
+.center-item-in-flex {
+  display: flex;
+  justify-content: center;
+}
+.place-order .menu-title {
+  color: red;
+  margin: 0;
+  border-bottom: 1px solid grey;
+  padding: 15px 6px;
+}
+.bottom-line {
+  border-bottom: 1px solid grey;
+}
+.space-item-in-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.space-item-in-flex p {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.desc-p {
+  margin-top: 0;
+}
+.desc-p small {
+  color: black;
+}
+.add-item-btn img {
+  width: 23px;
+  vertical-align: middle;
+}
+.add-item-btn {
+  margin-bottom: 4px;
+}
+button {
+  cursor: pointer;
+}
+#cusine-category a {
+  text-decoration: none;
+  color: black;
+}
+#cusine-category a:hover {
+  color: brown;
+}
+.sn {
+  margin-left: 2%;
+}
+.food-item-name {
+  margin-left: 7%;
+}
+.place-order small {
+  color: black;
+}
+.and-div {
+  padding: 10px 0;
+  display: flex;
+}
+.add-plate-btn {
+  border-radius: 50%;
+  width: 24px;
+  margin-left: 34px;
+}
+.fa-caret-down {
+  margin-left: 0;
+}
+.flexblock {
+  display: flex;
+}
+#place-order {
+  background-color: green;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+.place-order footer,
+.recent-order footer,
+.admin-menu-list footer,
+.admin-mark-order footer {
+  margin-top: 1%;
+  border-top: 1px solid grey;
+  padding: 10px;
+}
+.recent-order footer {
+  margin-top: 8%;
+}
+.place-order main {
+  margin-bottom: 8%;
+}
+#end small {
+  color: white;
+}
+.price-div {
+  margin-left: 23%;
+  width: 90px;
+}
 /*
   HISTORY PAGE STYLING
 */
@@ -499,7 +519,7 @@ body.recent-order {
 .history-date {
   margin-left: 1%;
   margin-top: 3%;
-  margin-bottom: 1%
+  margin-bottom: 1%;
 }
 .history-div {
   padding: 6px;
@@ -533,11 +553,11 @@ body.recent-order {
   overflow: hidden;
   white-space: nowrap;
 }
-.admin-menu-list footer { 
+.admin-menu-list footer {
   margin-top: 3%;
 }
 .admin-menu-list main {
-  margin-top: 3%
+  margin-top: 3%;
 }
 .admin-menu-list h2 {
   color: #ffffff;
@@ -559,7 +579,9 @@ body.recent-order {
 .jumbotron p {
   margin-top: 0;
 }
-#modal, #addModal, #delModal {
+#modal,
+#addModal,
+#delModal {
   background: white;
   position: fixed;
   width: 50%;
@@ -579,7 +601,9 @@ body.recent-order {
 #delModal p {
   padding-left: 4%;
 }
-.modalOpen #modal, .modalOpen #addModal, .modalOpen #delModal {
+.modalOpen #modal,
+.modalOpen #addModal,
+.modalOpen #delModal {
   transform: scale(1);
   opacity: 1;
 }
@@ -587,25 +611,35 @@ body.recent-order {
   filter: blur(1px) grayscale(0%);
   transform: scale(1);
 }
-#main-container, #modal, #addModal, #delModal {
+#main-container,
+#modal,
+#addModal,
+#delModal {
   transition: all 0.4s ease;
 }
-#modal-wrapper form, #addModal-wrapper form {
+#modal-wrapper form,
+#addModal-wrapper form {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-#modal-wrapper input, #addModal-wrapper input, #modal-wrapper textarea, #addModal-wrapper textarea {
+#modal-wrapper input,
+#addModal-wrapper input,
+#modal-wrapper textarea,
+#addModal-wrapper textarea,
+#addModal-wrapper select {
   width: 80%;
   border-radius: 4px;
   border: 1px solid grey;
   padding: 10px;
-  margin: 0 auto
+  margin: 0 auto;
 }
-#modal-wrapper .betw-modal-label, #addModal-wrapper .betw-modal-label {
+#modal-wrapper .betw-modal-label,
+#addModal-wrapper .betw-modal-label {
   margin-top: 5%;
 }
-#modal-wrapper h3, #addModal-wrapper h3 {
+#modal-wrapper h3,
+#addModal-wrapper h3 {
   padding-bottom: 10px;
 }
 input#add {
@@ -613,7 +647,11 @@ input#add {
   margin-right: 1%;
   cursor: pointer;
 }
-#modal-wrapper label, #addModal-wrapper label, #modal-wrapper input, #addModal-wrapper input #modal-wrapper textarea, #addModal-wrapper textarea {
+#modal-wrapper label,
+#addModal-wrapper label,
+#modal-wrapper input,
+#addModal-wrapper input #modal-wrapper textarea,
+#addModal-wrapper textarea {
   margin: 0 auto;
   font-size: 14px;
 }
@@ -624,27 +662,33 @@ input#add {
   border-top: 1px solid grey;
   padding: 10px;
 }
-#update, #cancel, #add {
+#update,
+#cancel,
+#add {
   padding: 10px;
 }
-#update, #add {
-  margin-right: 3%
+#update,
+#add {
+  margin-right: 3%;
 }
-#modal-wrapper #description, #addModal-wrapper #add-description {
+#modal-wrapper #description,
+#addModal-wrapper #add-description {
   overflow: auto;
   resize: vertical;
   font-size: 16px;
   width: 80%;
   padding: 10px;
   margin: 0 auto;
-  font-family:  inherit;
+  font-family: inherit;
 }
-.edit-btn, .del-btn {
+.edit-btn,
+.del-btn {
   width: 40px;
   height: 40px;
   border-radius: 4px;
 }
-.del-btn, .edit-btn {
+.del-btn,
+.edit-btn {
   background: white;
   color: dodgerblue;
 }
@@ -656,7 +700,8 @@ input#add {
   background: tomato;
   color: white;
 }
-button.edit-btn, button.del-btn {
+button.edit-btn,
+button.del-btn {
   font-size: 20px;
   padding: 10px;
 }
@@ -700,27 +745,28 @@ table {
 }
 table caption {
   font-size: 1.5em;
-  margin: .25em 0 .75em;
+  margin: 0.25em 0 0.75em;
 }
 table tr {
   background: #f8f8f8;
   border: 1px solid #ddd;
-  padding: .35em;
+  padding: 0.35em;
 }
 table button {
   padding: 10px;
 }
-table th, table td {
-  padding: .625em;
+table th,
+table td {
+  padding: 0.625em;
 }
 table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 td {
   text-align: center;
-  width: 22%
+  width: 22%;
 }
 .fa-check::before {
   color: white;
@@ -728,7 +774,7 @@ td {
 }
 .fa-close::before {
   color: white;
-  font-size: 20px
+  font-size: 20px;
 }
 
 td div {
@@ -737,10 +783,10 @@ td div {
   padding: 10px;
   margin: 13px;
 }
-td.accepted div{
+td.accepted div {
   background: green;
 }
-td.declined div{
+td.declined div {
   background: tomato;
 }
 .close {
@@ -752,17 +798,20 @@ td.declined div{
 .close {
   width: 46%;
 }
-td.accepted, td.declined {
-  padding: .625em 0;
+td.accepted,
+td.declined {
+  padding: 0.625em 0;
   color: white;
   text-align: center;
 }
 
 .action {
-  padding: .625em 0;
+  padding: 0.625em 0;
 }
 @media screen and (max-width: 803px) {
-  #wel-div, .content span, .content h1 {
+  #wel-div,
+  .content span,
+  .content h1 {
     display: none;
   }
   #welcome-header {
@@ -778,7 +827,7 @@ td.accepted, td.declined {
   #restaurant-desc {
     flex-direction: column;
   }
-  .topnav button.icon{
+  .topnav button.icon {
     float: right;
     display: block;
     width: 43px;
@@ -844,12 +893,15 @@ td.accepted, td.declined {
   #cart {
     position: static;
   }
-  #cusine-category, #restuarant-menu, #cart {
+  #cusine-category,
+  #restuarant-menu,
+  #cart {
     width: 96%;
     margin-right: 2%;
-    margin-left: 2%
+    margin-left: 2%;
   }
-  #restuarant-menu, #cart {
+  #restuarant-menu,
+  #cart {
     margin-top: 5%;
   }
   #cusine-category {
@@ -869,7 +921,8 @@ td.accepted, td.declined {
     margin: 0 auto;
     margin-top: 4%;
   }
-  #modal, #addModal {
+  #modal,
+  #addModal {
     width: 86%;
     top: 222px;
     bottom: 20px;
@@ -890,12 +943,12 @@ td.accepted, td.declined {
   table tr {
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 0.625em;
   }
   table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: .8em;
+    font-size: 0.8em;
     width: 90%;
     text-align: right;
   }
@@ -906,12 +959,14 @@ td.accepted, td.declined {
     text-transform: uppercase;
   }
   .action {
-    padding: .625em;
+    padding: 0.625em;
   }
-  .close, .check {
+  .close,
+  .check {
     width: 11%;
   }
-  td.accepted, td.declined {
+  td.accepted,
+  td.declined {
     text-align: right;
     color: black;
     background-color: white;
@@ -922,7 +977,7 @@ td.accepted, td.declined {
     padding: 10px;
     display: inline-block;
     text-align: center;
-    width: 15%
+    width: 15%;
   }
   .declined span {
     background-color: red;
@@ -934,7 +989,8 @@ td.accepted, td.declined {
   }
 }
 @media screen and (max-height: 368px) {
-  #modal, #addModal {
+  #modal,
+  #addModal {
     top: 303px;
   }
 }

@@ -61,7 +61,14 @@
           <label class="betw-modal-label" for="category">
             <b>Category</b>
           </label>
-          <input type="text" id="category"/>
+          <select id="category">
+            <option value="All">All</option>
+            <option value="Fries">Fries</option>
+            <option value="local">Local</option>
+            <option value="Intercontinental">Intercontinental</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Others">Others</option>
+          </select>
           <label class="betw-modal-label" for="price">
             <b>Price</b>
           </label>
@@ -93,7 +100,13 @@
             <b>Category</b>
             <span id="category-error"></span>
           </label>
-          <input type="text" id="add-category" placeholder="Food Menu Category" required="required"/>
+          <select id="add-category" style="width: 84%; height: 35px;">
+            <option value="Fries">Fries</option>
+            <option value="local">Local</option>
+            <option value="Intercontinental">Intercontinental</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Others">Others</option>
+          </select>
           <label for="price" class="betw-modal-label">
             <b>Price</b>
             <span id="price-error"></span>
