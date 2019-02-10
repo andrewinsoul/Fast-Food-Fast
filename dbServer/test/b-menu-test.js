@@ -12,7 +12,8 @@ let adminToken = '';
 describe('Fast-Food-Fast backend tests with postgres database for menu model', () => {
   describe('tests controller that creates a menu', () => {
     it('should login and get token for testing purposes', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/auth/login')
         .send({
           email: process.env.ADMIN_EMAIL,
@@ -26,13 +27,15 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         });
     });
     it('should return code 201 with success message when admin user adds a menu with valid payload', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
           foodName: 'Indomie and Coke',
           category: 'category',
-          description: 'Indomie coated with two pieces of egg omelette and a coca-cola softdrink',
+          description:
+            'Indomie coated with two pieces of egg omelette and a coca-cola softdrink',
           price: 1200
         })
         .end((err, res) => {
@@ -43,7 +46,8 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
     });
 
     it('should return code 403 with error message when authorized user tries to create menu without token', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .send({
           foodName: 'food-name',
@@ -57,7 +61,8 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
     });
 
     it('should return code 400 with error message when user tries to create menu without price field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -73,7 +78,8 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
     });
 
     it('should return code 400 with error message when user tries to create menu without price field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -84,13 +90,16 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('Numbers and special characters not allowed as part of food name, only letters and spaces are allowed');
+          expect(res.body.error).to.eql(
+            'Numbers and special characters not allowed as part of food name, only letters and spaces are allowed'
+          );
           done();
         });
     });
 
     it('should return code 400 with error message when user tries to create menu without description field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -106,7 +115,8 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
     });
 
     it('should return code 400 with error message when user tries to create menu without category field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -116,13 +126,16 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('category field is required');
+          expect(res.body.error).to.eql(
+            'invalid type for category, must be a string'
+          );
           done();
         });
     });
 
     it('should return code 400 with error message when user tries to create menu with incorrect data type for description field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -133,13 +146,16 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('invalid type for description, must be a string');
+          expect(res.body.error).to.eql(
+            'invalid type for description, must be a string'
+          );
           done();
         });
     });
 
     it('should return code 400 with error message when user tries to create menu with incorrect data type for category field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
@@ -150,47 +166,58 @@ describe('Fast-Food-Fast backend tests with postgres database for menu model', (
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('invalid type for category, must be a string');
+          expect(res.body.error).to.eql(
+            'invalid type for category, must be a string'
+          );
           done();
         });
     });
 
     it('should return code 400 with error message when user tries to create menu with lengthy content in description field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
           foodName: 'foodName',
           price: 1200,
           category: 'category',
-          description: 'okay, do not try to comprehend wat I am typing because I just want the length of the field to be greater than the max-limit htsaytsytyt sytasyu astsa sausaf saujhdsd dsiydsg duyg idusdf dsuydsu dsuydsgudsgyds ihyg dsjgd sdutds dsyd dsuyug dsdgu dsydsuy dsygdsu dsfdsyt sdufdsu sayfsau sayfsau sufds udsgfu sdutfs asuyfas usafu sauys dsuds udsgu sdugsdu usasf sftdgydfesrfeygd ydygysautsa sautsyts usfududyud uysd sygds dsydsigds dsiygsd dsuydsuydiu kugu i eeueoeouiiuewe oeoer eooiod dodod  ddodh doio reoireoer reoeroereroreoi rroruirehreuiureiureh reor reoreuorhreiuruitr trouitruiorthiutr truiotruoitrh toitoitroitroithtro troitroitroitroitr oi'
+          description:
+            'okay, do not try to comprehend wat I am typing because I just want the length of the field to be greater than the max-limit htsaytsytyt sytasyu astsa sausaf saujhdsd dsiydsg duyg idusdf dsuydsu dsuydsgudsgyds ihyg dsjgd sdutds dsyd dsuyug dsdgu dsydsuy dsygdsu dsfdsyt sdufdsu sayfsau sayfsau sufds udsgfu sdutfs asuyfas usafu sauys dsuds udsgu sdugsdu usasf sftdgydfesrfeygd ydygysautsa sautsyts usfududyud uysd sygds dsydsigds dsiygsd dsuydsuydiu kugu i eeueoeouiiuewe oeoer eooiod dodod  ddodh doio reoireoer reoeroereroreoi rroruirehreuiureiureh reor reoreuorhreiuruitr trouitruiorthiutr truiotruoitrh toitoitroitroithtro troitroitroitroitr oi'
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('description too long, should not be more than 200 characters');
+          expect(res.body.error).to.eql(
+            'description too long, should not be more than 200 characters'
+          );
           done();
         });
     });
 
     it('should return code 400 with error message when user tries to create menu with lengthy content in description field', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
         .send({
           foodName: 'foodName',
           price: 1200,
           description: 'description',
-          category: 'okay, do not try to comprehend wat I am typing because I just want the length of the field to be greater than the max-limit htsaytsytytkmkla dij dojo d okw wk 0wk 0w'
+          category:
+            'okay, do not try to comprehend wat I am typing because I just want the length of the field to be greater than the max-limit htsaytsytytkmkla dij dojo d okw wk 0wk 0w'
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.error).to.eql('text for category too long, should not be more than 100 characters');
+          expect(res.body.error).to.eql(
+            'text for category too long, should not be more than 100 characters'
+          );
           done();
         });
     });
 
     it('should return code 403 with error message when authorized user tries to create menu without token', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .get('/api/v1/menu')
         .set('x-access-token', adminToken)
         .end((err, res) => {
