@@ -7,11 +7,10 @@ before_script:
   - npm install
   - npm i -D coveralls
 script:
-  - npm test
+  - npm run coverage
 after_script: 
   - npm run dropTable
 after_success:
-  - npm run coverage
   - npm run report-coverage
 env:
   - NODE_ENV = test

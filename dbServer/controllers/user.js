@@ -37,6 +37,7 @@ class UserController {
         const token = jwt.sign(
           {
             id: result.rows[0].userid,
+            username: result.rows[0].username,
             userType: result.rows[0].user_role
           },
           key,
@@ -99,6 +100,7 @@ class UserController {
         const token = jwt.sign(
           {
             id: result.rows[0].userid,
+            username: result.rows[0].username,
             userAdmin: result.rows[0].user_role
           },
           key,
