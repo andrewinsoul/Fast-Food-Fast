@@ -77,7 +77,7 @@ class UserController {
     const { email, password } = req.body;
     config
       .query(
-        'SELECT userid, email, password, user_role FROM users WHERE email=($1) LIMIT 1',
+        'SELECT userid, username, password, user_role FROM users WHERE email=($1) LIMIT 1',
         [email]
       )
       .then((result) => {
