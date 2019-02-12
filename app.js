@@ -12,9 +12,7 @@ import swaggerDocument from './swagger.json';
 
 const app = express();
 app.use(logger('dev'));
-app.use('/api/v1/api-docs',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument));
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'client')));
@@ -24,7 +22,10 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin,Content-Type,Accept,x-access-token,Cache-Control,Expires'
   );
-  res.header('Access-Control-Allow-Methods', '*');
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, PATCH, OPTIONS, POST, DELETE'
+  );
   next();
 });
 app.use('/api/v1/', userRouter);
