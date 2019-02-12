@@ -46,8 +46,17 @@ class UserController {
             expiresIn: 86400
           }
         );
+        const user = {
+          username: result.rows[0].username,
+          email: result.rows[0].email,
+          password: req.body.password,
+          address: result.rows[0].password,
+          userType: result.rows[0].user_role,
+          phone: result.rows[0].phone
+        };
         return res.status(201).send({
           status: 'success',
+          user,
           token,
           message: 'signup successful'
         });
@@ -78,7 +87,7 @@ class UserController {
     const { email, password } = req.body;
     config
       .query(
-        'SELECT userid, username, password, user_role FROM users WHERE email=($1) LIMIT 1',
+        'SELECT * FROM users WHERE email=($1) LIMIT 1',
         [email]
       )
       .then((result) => {
@@ -109,9 +118,18 @@ class UserController {
             expiresIn: 86400
           }
         );
+        const user = {
+          username: result.rows[0].username,
+          email: result.rows[0].email,
+          password: req.body.password,
+          address: result.rows[0].address,
+          userType: result.rows[0].user_role,
+          phone: result.rows[0].phone
+        };
         return res.status(200).send({
           status: 'success',
           token,
+          user,
           message
         });
       });
