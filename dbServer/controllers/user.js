@@ -50,7 +50,7 @@ class UserController {
           username: result.rows[0].username,
           email: result.rows[0].email,
           password: req.body.password,
-          address: result.rows[0].password,
+          address: result.rows[0].address,
           userType: result.rows[0].user_role,
           phone: result.rows[0].phone
         };
