@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import config from '../config/config';
+import getUser from '../middlewares/helperFunctions/getUser';
 import { re } from '../middlewares/validation';
 
 dotenv.load();
@@ -124,23 +125,13 @@ class UserController {
    */
   async updateUser(req, res) {
     try {
-      const foundUser = await config.query(
-        `
-      SELECT * FROM users WHERE userId = ($1) LIMIT 1
-    `,
-        [req.userId]
-      );
-      if (!foundUser.rows.length) {
-        return res
-          .status(404)
-          .send({ status: 'error', error: 'user not found' });
-      }
+      const foundUser = await getUser(req.userId);
       const payload = {
-        username: req.body.username || foundUser.rows[0].username,
-        email: req.body.email || foundUser.rows[0].email,
-        address: req.body.address || foundUser.rows[0].address,
-        password: req.body.password || foundUser.rows[0].password,
-        phone: req.body.phone || foundUser.rows[0].phone
+        username: req.body.username || foundUser.username,
+        email: req.body.email || foundUser.email,
+        address: req.body.address || foundUser.address,
+        password: req.body.password || foundUser.password,
+        phone: req.body.phone || foundUser.phone
       };
       if (!re.test(String(payload.email).toLowerCase())) {
         return res.status(400).send({
@@ -182,7 +173,7 @@ class UserController {
           error: 'space character is invalid for username field'
         });
       }
-      if (typeof (payload.address) !== 'string') {
+      if (typeof payload.address !== 'string') {
         return res.status(400).send({
           status: 'error',
           error: 'only strings are allowed for the address field'
