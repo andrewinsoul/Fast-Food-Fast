@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import config from '../config/config';
+import config from '../config';
+import { handleResponseError } from '../utils/errorHandler';
 
 /**
  * @description contains methods that manipulates data from order models
@@ -12,10 +13,31 @@ class Order {
    * @returns {object} - status code and server message
    */
   getAllOrders(req, res) {
-    return res.status(200).send({
-      status: 'success',
-      allOrders: req.orders
-    });
+    config.query(`
+      SELECT
+        C.orderId,
+        C.quantity,
+        C.status, 
+        C.createdAt, 
+        m.food,
+        (m.price*c.quantity) AS "TOTAL PRICE",
+        U.username, 
+        U.address, 
+        U.phone
+      FROM cart c
+      JOIN users u ON c.userId = u.userId
+      JOIN menu m ON c.menuid = m.foodid
+      ORDER BY c.createdat DESC
+     `).then((result) => {
+      if (result.rowCount === 0) {
+        const error = 'No order found';
+        return handleResponseError(res, error, 404);
+      }
+      return res.status(200).send({
+        status: 'success',
+        allOrders: result.rows
+      });
+    }).catch(error => handleResponseError(res, error, 500));
   }
 
   /**
@@ -31,17 +53,15 @@ class Order {
       UPDATE cart SET status = ($1) WHERE orderId = ($2) RETURNING *
     `, [status, orderId]).then((result) => {
       if (result.rowCount === 0) {
-        return res.status(404).send({
-          status: 'error',
-          error: 'order not found'
-        });
+        const error = 'order not found';
+        return handleResponseError(res, error, 404);
       }
       return res.status(200).send({
         status: 'success',
         message: 'updated successfully',
         data: result.rows[0]
       });
-    }).catch(error => res.status(500).send({ error }));
+    }).catch(error => handleResponseError(res, error, 500));
   }
 
   /**
@@ -56,10 +76,8 @@ class Order {
       SELECT * FROM cart WHERE orderId = ($1) LIMIT 1`,
     [orderId]).then((result) => {
       if (result.rowCount === 0) {
-        return res.status(404).send({
-          status: 'error',
-          error: 'order not found'
-        });
+        const error = 'order not found';
+        handleResponseError(res, error, 404);
       }
       return res.status(200).send({
         status: 'success',
@@ -75,22 +93,31 @@ class Order {
    * @returns {object} - status code and server message
    */
   getUserOrderHistory(req, res) {
-    const { userId } = req;
+    const { userId, userAdmin } = req;
     const userParamId = Number(req.params.userId);
-    if (userId !== userParamId) {
-      return res.status(401).send({
-        status: 'error',
-        error: 'unauthorized access, cannot view another user history order'
-      });
+
+    if (userId !== userParamId && !userAdmin) {
+      const error = 'unauthorized access, cannot view another user history order';
+      return handleResponseError(res, error, 401);
     }
     config.query(`
-      SELECT address, phone, email, orderId, orders, createdAt FROM users INNER JOIN cart ON (users.userid = ($1)) 
-    `, [userId]).then((result) => {
+    SELECT
+      address,
+      phone,
+      email,
+      orderId,
+      food,
+      quantity,
+      (quantity * price) AS "TOTAL PRICE",
+      status,
+      c.createdAt 
+    FROM cart c
+    JOIN users u ON u.userid = c.userid
+    JOIN menu m ON m.foodid = c.menuid
+    WHERE c.userId=($1)`, [userParamId]).then((result) => {
       if (result.rowCount === 0) {
-        return res.status(404).send({
-          status: 'error',
-          error: 'you have no order history'
-        });
+        const error = 'you have no order history';
+        return handleResponseError(res, error, 404);
       }
       return res.status(200).send({
         status: 'success',
@@ -106,27 +133,21 @@ class Order {
    * @returns {object} - status code and server message
    */
   placeOrder(req, res) {
-    const { orders } = req.body;
     config.query(
-      'INSERT INTO cart(orders, userid, createdAt) VALUES($1, $2, $3) RETURNING *', [
-        orders,
-        req.userId,
-        new Date(Date.now()),
-      ]
+      `INSERT INTO cart(menuId, quantity, userid) VALUES ${req.queryString} RETURNING *`
     ).then(
       (result) => {
         res.status(201).send({
           status: 'success',
           message: 'order placed successfully',
-          orders: result.rows[0].orders,
-          SUMTOTAL: res.SUMTOTAL
+          orders: result.rows
         });
       }
     ).catch((error) => {
-      res.status(500).send({
-        status: 'error',
-        error
-      });
+      if (Number(error.code) === 23503) {
+        return handleResponseError(res, error.detail, 404);
+      }
+      return handleResponseError(res, error, 500);
     });
   }
 }

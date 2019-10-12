@@ -1,4 +1,4 @@
-import config from '../../config/config';
+import config from '../../config';
 
 /**
   * @description - method that checks if a user is an admin

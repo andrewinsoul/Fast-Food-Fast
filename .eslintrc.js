@@ -10,6 +10,9 @@ module.exports = {
       },
       "rules": {
         "one-var": 0,
+        "quote-props": 0,
+        "no-plusplus": 0,
+        "quotes": 0,
         "linebreak-style": 0,
         "no-console": 0,
         "import/no-extraneous-dependencies": 0,

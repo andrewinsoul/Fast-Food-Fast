@@ -5,7 +5,9 @@ const menu = `
     category text,
     price integer,
     description varchar(450),
+    createdAt timestamp default NOW(),
     userId integer,
+    unique (food, category),
     foreign key(userId) references users(userId) 
     on delete cascade on update cascade
   )`;

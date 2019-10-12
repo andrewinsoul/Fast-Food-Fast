@@ -7,6 +7,7 @@ import userRouter from './dbServer/router/userRouter';
 import menuRouter from './dbServer/router/menuRouter';
 import orderRouter from './dbServer/router/orderRouter';
 import swaggerDocument from './swagger.json';
+import dbConfig from './dbServer/config';
 
 const app = express();
 app.use(logger('dev'));
@@ -42,5 +43,9 @@ app.all('*', (req, res) => {
 });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
-app.listen(port, () => console.log(`server live on port ${port}`));
+dbConfig.connect()
+  .then(() => {
+    app.listen(port, () => console.log(`server live on port ${port}`));
+  })
+  .catch(error => console.error({ error }));
 export default app;

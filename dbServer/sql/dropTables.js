@@ -1,20 +1,21 @@
-import config from '../config/config';
+import config from '../config';
+import { handleDBError } from '../utils/errorHandler';
 
-const user = 'drop table if exists users cascade';
-const menu = 'drop table if exists menu cascade';
-const cart = 'drop table if exists cart';
+const dropUserTable = 'drop table if exists users cascade';
+const dropMenuTable = 'drop table if exists menu cascade';
+const dropCartTable = 'drop table if exists cart';
 
-config.query(user)
+config.connect()
   .then(() => {
-    config.query(menu)
+    config.query(dropUserTable)
       .then(() => {
-        config.query(cart)
+        config.query(dropMenuTable)
           .then(() => {
-            console.log('tables successfully dropped');
-            process.exit(0);
-          });
-      });
-  }).catch((error) => {
-    console.log(error);
-    process.exit(1);
-  });
+            config.query(dropCartTable)
+              .then(() => {
+                console.log('tables successfully dropped');
+                process.exit(0);
+              }).catch(error => handleDBError(error));
+          }).catch(error => handleDBError(error));
+      }).catch(error => handleDBError(error));
+  }).catch((error => handleDBError(error)));

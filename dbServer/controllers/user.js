@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
-import config from '../config/config';
+import { comparePassword, encodePassword } from "../utils/passwordUtil";
+import config from '../config';
+import { handleResponseError } from '../utils/errorHandler';
 
 dotenv.load();
 const key = process.env.KEY;
@@ -12,13 +13,13 @@ const key = process.env.KEY;
  */
 class UserController {
   /**
-   * @description - method that signs up a user, the first user to sign up is added as admin whereas the rest are stored as mere users
+   * @description - method that signs up a user
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} - status code and server message
    */
   signupUser(req, res) {
-    const encodedPassword = bcrypt.hashSync(req.body.password, 8);
+    const encodedPassword = encodePassword(req.body.password);
     const {
       username,
       email,
@@ -31,7 +32,7 @@ class UserController {
         email,
         address,
         password,
-        phone) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [username, email, address, encodedPassword, phone]
+        phone) VALUES ($1, LOWER($2), $3, $4, $5) RETURNING *`, [username, email, address, encodedPassword, phone]
     ).then(
       (result) => {
         const token = jwt.sign(
@@ -58,10 +59,7 @@ class UserController {
       } else {
         error = 'user with username already exists';
       }
-      return res.status(409).send({
-        status: 'error',
-        error
-      });
+      return handleResponseError(res, error, 409);
     });
   }
 
@@ -82,17 +80,13 @@ class UserController {
       [email]
     ).then((result) => {
       if (result.rowCount === 0) {
-        return res.status(404).send({
-          status: 'error',
-          error: 'user with email not found'
-        });
+        const error = 'user with email not found';
+        return handleResponseError(res, error, 404);
       }
-      const isPasswordValid = bcrypt.compareSync(password, result.rows[0].password);
+      const isPasswordValid = comparePassword(result.rows[0].password, password);
       if (!isPasswordValid) {
-        return res.status(401).send({
-          status: 'error',
-          error: 'incorrect password'
-        });
+        const error = 'incorrect password';
+        return handleResponseError(res, error, 401);
       }
       const token = jwt.sign(
         {
@@ -110,6 +104,33 @@ class UserController {
         message
       });
     });
+  }
+
+  /**
+   * @description - method that updates a user
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} - status code and server message
+   */
+  updateUser(req, res) {
+    const messageSuccess = 'update successful';
+    config.query(
+      'UPDATE users SET email=($1), username=($2), password=($3), phone=($4), address=($5) WHERE userid=($6) RETURNING username, email, password, phone, address', [
+        req.newEmail,
+        req.newUsername,
+        req.newPassword,
+        req.newPhone,
+        req.newAddress,
+        req.userId,
+      ],
+    ).then(result => res.status(200).send(
+      {
+        status: 'success',
+        message: messageSuccess,
+        data: result.rows,
+      },
+    ))
+      .catch(error => handleResponseError(res, error, 500));
   }
 }
 export default new UserController();

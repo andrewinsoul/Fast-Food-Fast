@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import config from '../config/config';
+import config from '../config';
+import { encodePassword } from "../utils/passwordUtil";
 
 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // this regex was obtained from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 /**
@@ -222,18 +223,7 @@ class validation {
         error: 'invalid number type for price, must be integer'
       });
     }
-    config.query('SELECT * FROM menu WHERE food=($1) AND category=($2) AND price=($3) AND description=($4) LIMIT 1',
-      [foodName, category, price, description])
-      .then((result) => {
-        if (result.rowCount !== 0) {
-          return res.status(409).send({
-            status: 'error',
-            error: 'food already in database'
-          });
-        }
-        return next();
-      })
-      .catch(e => console.log(e));
+    return next();
   }
 
   /**
@@ -330,109 +320,138 @@ class validation {
         error: 'cart order empty, please fill'
       });
     }
-    const promiseArray = [];
-    const userOrders = [];
-    let Query;
-    for (let i = 0; i < orders.length; i += 1) {
-      if (orders[i].foodId === undefined) {
+    let placeOrderValueString = '';
+    for (let i = 0; i < orders.length; i++) {
+      const menuId = Number(orders[i].menuId);
+      const quantity = Number(orders[i].quantity);
+      if (orders[i].menuId === undefined) {
         return res.status(400).send({
           status: 'error',
-          error: 'object needs to have foodId property'
+          error: 'menuId is required'
         });
       }
       if (orders[i].quantity === undefined) {
         return res.status(400).send({
           status: 'error',
-          error: 'object needs to have quantity property'
+          error: 'quantity is required'
         });
       }
-      if (isNaN(orders[i].foodId) || typeof (orders[i].foodId) === 'string') {
+      if (isNaN(menuId) || menuId === 0 || parseInt(menuId, 10) !== menuId) {
         return res.status(400).send({
           status: 'error',
-          error: 'invalid type for foodId, type should be a number'
+          error: 'invalid type for menuId, it should be an integer'
         });
       }
-      if (isNaN(orders[i].quantity) || typeof (orders[i].quantity) === 'string') {
+      if (isNaN(quantity) || quantity === 0 || parseInt(quantity, 10) !== quantity) {
         return res.status(400).send({
           status: 'error',
-          error: 'invalid type for quantity, type should be a number'
+          error: 'invalid type for quantity, it should be an integer'
         });
       }
-      if (!(parseInt(orders[i].foodId, 10) === orders[i].foodId)) {
-        return res.status(400).send({
-          status: 'error',
-          error: 'invalid number type, foodId should be an integer'
-        });
+      if (i === orders.length - 1) {
+        placeOrderValueString += `(
+          ${orders[i].menuId},
+          ${orders[i].quantity},
+          ${req.userId}
+        )`;
+        break;
       }
-      if (!(parseInt(orders[i].quantity, 10) === orders[i].quantity)) {
-        return res.status(400).send({
-          status: 'error',
-          error: 'invalid number type, quantity should be an integer'
-        });
-      }
-      Query = config.query(`
-      SELECT food, price, category FROM menu WHERE foodId = ($1) LIMIT 1
-      `, [orders[i].foodId]);
-      promiseArray.push(Query);
-      userOrders.push(orders[i]);
+      placeOrderValueString += `(
+        ${orders[i].menuId},
+        ${orders[i].quantity},
+        ${req.userId}
+      ),`;
     }
-    const orderArray = [];
-    Promise.all(promiseArray).then((result) => {
-      for (let item = 0; item < result.length; item += 1) {
-        if (result[item].rowCount === 0) {
-          req.error = `foodId ${userOrders[item].foodId} not found`;
-          return;
-        }
-        result[item].rows[0].quantity = req.body.orders[item].quantity;
-        result[item].rows[0].total = req.body.orders[item].quantity * result[item].rows[0].price;
-        orderArray.push(result[item].rows[0]);
-      }
-      req.body.orders = orderArray;
-      let SUMTOTAL = 0;
-      for (let index = 0; index < orderArray.length; index += 1) {
-        SUMTOTAL += orderArray[index].total;
-      }
-      res.SUMTOTAL = SUMTOTAL;
-      return next();
-    }).then(() => {
-      if (req.error) {
-        return res.status(404).send({
-          status: 'error',
-          error: req.error
-        });
-      }
-    }).catch(error => res.status(500).send({ error }));
+    req.queryString = placeOrderValueString;
+    return next();
   }
 
   /**
-   * @description - method that validates input on place order route
+   * @description - method that validates user update payload
    * @param {object} req - the request object
    * @param {object} res - the response object
    * @param {function} next - the callback function
    * @returns {object} - status code and error
    */
-  getAllOrders(req, res, next) {
-    config.query(`
-      SELECT C.orders,
-      C.orderId,
-      C.status, 
-      C.createdAt, 
-      U.username, 
-      U.address, 
-      U.email,
-      U.phone
-      FROM cart c
-      JOIN users u ON c.userId = u.userId ORDER BY orderId DESC
-     `).then((result) => {
-      if (result.rowCount === 0) {
-        return res.status(404).send({
+  updateUser(req, res, next) {
+    let password;
+    let oldPassword;
+    if (req.body.password) password = encodePassword(req.body.password);
+    config.query(
+      'SELECT email, username, password, address, phone FROM users WHERE userid=($1) LIMIT 1', [req.userId],
+    ).then((result) => {
+      if (result.rowCount === 0) return res.status(404).send({ status: 'error', error: 'user not found' });
+      const {
+        phone,
+        address,
+        email,
+        username
+      } = result.rows[0];
+      const newEmail = req.body.email || email;
+      const newUsername = req.body.username || username;
+      const newPhone = req.body.phone || phone;
+      const newAddress = req.body.address || address;
+      const newPassword = password || oldPassword;
+      if (!re.test(String(newEmail).toLowerCase())) {
+        return res.status(400).send({
           status: 'error',
-          error: 'No order found'
+          error: 'invalid email'
         });
       }
-      req.orders = result.rows;
+      if (!newPhone.trim() || newPhone.includes(' ') || newPhone.includes('\n') || newPhone.includes('\t')) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'space character is not allowed in phone field'
+        });
+      }
+      if (isNaN(Number(newPhone))) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'Invalid phone number'
+        });
+      }
+      if (String(newPhone).length !== 11) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'phone must be 11 digits'
+        });
+      }
+      if (typeof (newUsername) !== 'string') {
+        return res.status(400).send({
+          status: 'error',
+          error: 'only strings are allowed for the username field'
+        });
+      }
+      if (!newUsername.trim() || newUsername.includes(' ') || newUsername.includes('\n') || newUsername.includes('\t')) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'space character is invalid for username field'
+        });
+      }
+      if (typeof (newAddress) !== 'string') {
+        return res.status(400).send({
+          status: 'error',
+          error: 'only strings are allowed for the address field'
+        });
+      }
+      if (!newAddress.trim()) {
+        return res.status(400).send({
+          status: 'error',
+          error: 'address field cannot be blank'
+        });
+      }
+      req.newEmail = newEmail;
+      req.newUsername = newUsername;
+      req.newPhone = newPhone;
+      req.newAddress = newAddress;
+      req.newPassword = newPassword;
       return next();
-    }).catch(e => console.error(e));
+    })
+      .catch(error => res.status(500).send({
+        status: 'error',
+        error,
+        message: 'update failed'
+      }));
   }
 }
 export default new validation();

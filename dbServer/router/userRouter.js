@@ -1,6 +1,7 @@
 import express from 'express';
 import user from '../controllers/user';
 import validation from '../middlewares/validation';
+import verifyToken from '../middlewares/helperFunctions/verifyToken';
 
 const userRouter = express.Router();
 
@@ -10,6 +11,10 @@ userRouter
     user.signupUser)
   .post('/auth/login',
     validation.loginMiddleware,
-    user.loginUser);
+    user.loginUser)
+  .put('/update',
+    verifyToken,
+    validation.updateUser,
+    user.updateUser);
 
 export default userRouter;

@@ -88,7 +88,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
 
     it('should return status code 200 when admin tries to update the status of an order with valid payload', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2')
+        .put('/api/v1/orders/1')
         .set('x-access-token', adminToken)
         .send({
           status: 'cancelled'
@@ -97,6 +97,21 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
           expect(res).to.have.status(200);
           expect(res.body.status).to.eql('success');
           expect(res.body.message).to.eql('updated successfully');
+          done();
+        });
+    });
+
+    it('should return status code 404 when admin tries to update the status of an order that does not exist with valid payload', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/666')
+        .set('x-access-token', adminToken)
+        .send({
+          status: 'cancelled'
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('order not found');
           done();
         });
     });
@@ -147,7 +162,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
 
     it('should return status code 404 when admin user tries to get an order not in the database', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/3')
+        .get('/api/v1/orders/300')
         .set('x-access-token', adminToken)
         .end((err, res) => {
           expect(res).to.have.status(404);
@@ -159,7 +174,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
 
     it('should return status code 200 when admin user tries to get an order in the database', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2')
+        .get('/api/v1/orders/1')
         .set('x-access-token', adminToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -183,7 +198,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
 
     it("should return status code 401 when a user tries to get another user's history of orders.", (done) => {
       chai.request(app)
-        .get('/api/v1/users/2/orders')
+        .get('/api/v1/users/3/orders')
         .set('x-access-token', userWithOrderToken)
         .end((err, res) => {
           expect(res).to.have.status(401);
@@ -193,9 +208,21 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         });
     });
 
+    it("should return status code 404 when a user tries to get his history of orders whereas he has none.", (done) => {
+      chai.request(app)
+        .get('/api/v1/users/3/orders')
+        .set('x-access-token', userWithNoOrderToken)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.eql('error');
+          expect(res.body.error).to.eql('you have no order history');
+          done();
+        });
+    });
+
     it('should return status code 400 when a user tries to get his history of orders with invalid params.', (done) => {
       chai.request(app)
-        .get('/api/v1/users/2asw/orders')
+        .get('/api/v1/users/invalidParam/orders')
         .set('x-access-token', userWithOrderToken)
         .end((err, res) => {
           expect(res).to.have.status(400);
@@ -207,7 +234,7 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
 
     it('should return status code 200 when a user tries to get his history of orders.', (done) => {
       chai.request(app)
-        .get('/api/v1/users/5/orders')
+        .get('/api/v1/users/2/orders')
         .set('x-access-token', userWithOrderToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -222,15 +249,17 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         .post('/api/v1/orders')
         .set('x-access-token', userWithNoOrderToken)
         .send({
-          orders: JSON.parse(`[
-            { "foodId": 1200, "quantity": 3 },
-            { "foodId": 5, "quantity": 1 }
-          ]`)
+          orders: [
+            { "menuId": 3000, "quantity": 5 },
+            { "menuId": 1, "quantity": 3 }
+          ]
         })
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.body.status).to.eql('error');
-          expect(res.body.error).to.eql('foodId 1200 not found');
+          expect(res.body.error).to.eql(
+            `Key (menuid)=(${3000}) is not present in table "menu".`
+          );
           done();
         });
     });
@@ -240,10 +269,10 @@ describe('Fast-Food-Fast backend tests  with postgres database for orders model'
         .post('/api/v1/orders')
         .set('x-access-token', userWithNoOrderToken)
         .send({
-          orders: JSON.parse(`[
-            { "foodId": 1, "quantity": 3 },
-            { "foodId": 2, "quantity": 1 }
-          ]`)
+          orders: [
+            { "menuId": 1, "quantity": 3 },
+            { "menuId": 2, "quantity": 1 }
+          ]
         })
         .end((err, res) => {
           expect(res).to.have.status(201);

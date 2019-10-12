@@ -6,6 +6,7 @@ const user = `
     address varchar(400), 
     Password varchar(340), 
     phone varchar(53), 
+    createdAt timestamp default NOW(),
     user_role boolean default false
   )`;
 export default user;

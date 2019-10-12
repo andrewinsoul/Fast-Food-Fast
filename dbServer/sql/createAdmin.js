@@ -1,19 +1,20 @@
 import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
-import config from '../config/config';
+import { encodePassword } from "../utils/passwordUtil";
+import config from '../config';
+import { handleDBError } from '../utils/errorHandler';
 
 dotenv.load();
 
-const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, 8);
+const password = encodePassword(process.env.ADMIN_PASSWORD);
 const insertAdmin = `
-  insert into users(
+  INSERT INTO users(
     username,
     email,
     address,
     password,
     phone,
     user_role
-  ) values(
+  ) VALUES(
     '${process.env.ADMIN_USERNAME}',
     '${process.env.ADMIN_EMAIL}',
     'Andela Office',
@@ -23,9 +24,11 @@ const insertAdmin = `
   )
 `;
 
-config.query(insertAdmin).then(() => {
-  process.exit(0);
-}).catch((error) => {
-  console.log(error);
-  process.exit(1);
-});
+config.connect()
+  .then(() => {
+    config.query(insertAdmin).then(() => {
+      console.log("Admin successfully created");
+      process.exit(0);
+    }).catch(error => handleDBError(error));
+  })
+  .catch(error => handleDBError(error));

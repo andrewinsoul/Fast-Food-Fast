@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run createTable",
-    "test:dev": "nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
-    "test": "npm run seed & nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
+    "test:dev": "npm run createTable & npm run createAdmin & npm run seed-test & nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit & npm run dropTable",
+    "test": "npm run seed-test & nyc mocha ./dbServer/test --compilers js:babel-core/register --timeout 18000 --exit",
     "start": "npm run createAdmin & babel-node ./app",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "createAdmin": "babel-node ./dbServer/sql/createAdmin.js",
     "dropTable": "babel-node ./dbServer/sql/dropTables.js",
     "createTable": "babel-node ./dbServer/sql/createTables.js",
     "seed": "babel-node ./dbServer/sql/seed.js",
+    "seed-test": "babel-node ./dbServer/sql/seed-test.js",
     "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
@@ -31,25 +32,26 @@
   },
   "homepage": "https://github.com/andrewinsoul/Fast-Food-App#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "cross-env": "^5.2.0",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
-    "morgan": "^1.9.1",
-    "pg": "^7.4.3",
-    "swagger-ui-express": "^4.0.1"
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "bcryptjs": "2.4.3",
+    "body-parser": "1.18.3",
+    "cross-env": "5.2.0",
+    "dotenv": "6.0.0",
+    "express": "4.16.3",
+    "jsonwebtoken": "8.3.0",
+    "morgan": "1.9.1",
+    "pg": "7.4.3",
+    "swagger-ui-express": "4.0.1"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^4.2.0",
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.0.1"
+    "chai": "4.1.2",
+    "chai-http": "4.2.0",
+    "eslint": "5.6.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "faker": "4.1.0",
+    "mocha": "5.2.0",
+    "nyc": "13.0.1"
   }
 }

@@ -1,4 +1,4 @@
-const hostURL = 'https://fast-food-andy.herokuapp.com/api/v1';
+const hostURL = 'http://localhost:8000/api/v1';
 const intercontinental = document.getElementById('intercontinental-div');
 const african = document.getElementById('african-div');
 const fries = document.getElementById('fries-div');

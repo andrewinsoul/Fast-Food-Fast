@@ -14,6 +14,11 @@ menuRouter
     menu.createMenu)
   .get('/menu',
     verifyToken,
-    menu.getAvailableMenu);
+    menu.getMenuByCategory,
+    menu.getAvailableMenu)
+  .get('/search',
+    verifyToken,
+    menu.searchMenuByName,
+    menu.searchMenuByCategory);
 
 export default menuRouter;

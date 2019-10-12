@@ -1,98 +1,95 @@
-/* eslint-disable max-len */
-import bcrypt from 'bcryptjs';
-import config from '../config/config';
+import faker from 'faker';
+import { encodePassword } from "../utils/passwordUtil";
+import config from '../config';
+import { handleDBError } from '../utils/errorHandler';
+
+let userString = '';
+for (let i = 0; i <= 30; i++) {
+  const password = faker.name.firstName();
+  const email = faker.internet.email();
+  userString += `(
+    '${faker.name.lastName() + i}',
+    '${email}',
+    '${faker.address.streetAddress()}',
+    '${encodePassword(password)}',
+    '${faker.phone.phoneNumberFormat()}'
+    ),`;
+  console.log(`Email ===> ${email}\n password ====> ${password}`);
+}
+
+userString = userString.slice(0, userString.length - 1);
 
 const BulkInsertUser = `
-  INSERT INTO users (
-    username,
-    email,
-    address,
-    password,
-    phone
-) VALUES
-  ( 'andypdyq',
-    'mymail@gmail.com',
-    'Andela Office',
-    '${bcrypt.hashSync('password')}',
-    '12345678654'),
-    ( 'andypin',
-    'mygmail@gmail.com',
-    'Andela Office',
-    '${bcrypt.hashSync('password')}',
-    '12345678654'),
-  ('slavaak',
-  'slavas@gmail.com',
-  'my school',
-  '${bcrypt.hashSync('password')}',
-  '12345678976'),
-  ('constancea',
-    'constance8721@gmail.com',
-    'address',
-    '${bcrypt.hashSync('password')}',
-    '12345678987')
+INSERT INTO users (
+  username,
+  email,
+  address,
+  password,
+  phone
+) VALUES ${userString}
 `;
-const BulkInsertMenu = `
-    INSERT INTO menu (
-      food,
-      category,
-      price,
-      description,
-      userId
-    ) VALUES
-      ( 'Indomie and Fried Plantain',
-        'Fast Food',
-        2000,
-        'A plate of this delicious meal cost 2000 with a bottle of chilled softdrink and six slices of fried plantain',
-        1),
-      ('Pepsi and Burger',
-        'Junks',
-        3000,
-        'Enjoy a special treat of delicious burger steak and a bottle of chilled Pepsi drink all for an awesome price of 3000',
-        1),
-      ('Akara and Pap',
-        'local',
-        1200,
-        'Enjoy properly fried akara balls and pap to complement it all at a whopping price of 1200',
-        1)
-`;
-let arrayOrders1 = `[
-  {"food": "Akara and Pap", "category":"local", "price":1200, "total":4800, "quantity":4},
-  {"food":"Pepsi and Burger","category":"Junks","price":3000,"total":3000,"quantity": 1}
-]`;
-let arrayOrders2 = `[
-  {"food": "Indomie and Fried Plantain", "category": "Fast Food", "price": 2000,"total": 8000,"quantity": 4},
-  {"food":"Pepsi and Burger","category":"Junks","price":3000,"total":3000,"quantity": 1}
 
-]`;
-arrayOrders1 = JSON.parse(arrayOrders1);
-arrayOrders2 = JSON.parse(arrayOrders2);
-const InsertOrder = `
-    INSERT INTO cart (
-      orders,
-      status,
-      userId,
-      createdAt
-    ) VALUES ($1, $2, $3, $4)`;
-config.query(BulkInsertUser).then(() => {
-  config.query(BulkInsertMenu).then(() => {
-    config.query(InsertOrder, [
-      arrayOrders1,
-      'new',
-      4,
-      new Date(Date.now())
-    ]).then(() => {
-      config.query(InsertOrder, [
-        arrayOrders2,
-        'cancelled',
-        4,
-        new Date(Date.now())
-      ]).then(() => {
-        console.log('tables successfully populated');
-        process.exit(0);
-      });
-    });
-  });
-}).catch((error) => {
-  console.log(error);
-  process.exit(1);
-});
+const categories = [
+  'Fries',
+  'Intercontinental',
+  'African',
+  'Chinese',
+  'Other',
+  'Italian'
+];
+const status = ['New', 'Cancelled', 'Processing', 'Complete'];
+
+let menuString = '';
+for (let i = 0; i <= 30; i++) {
+  menuString += `(
+    '${faker.lorem.word() + i}',
+    '${categories[faker.random.number({ min: 0, max: 5 })]}',
+    ${faker.random.number({ min: 3000, max: 80000, precision: 1000 })},
+    '${faker.lorem.sentences(7)}',
+    1
+  ),`;
+}
+
+menuString = menuString.slice(0, menuString.length - 1);
+const BulkInsertMenu = `
+  INSERT INTO menu (
+    food,
+    category,
+    price,
+    description,
+    userId
+  ) VALUES ${menuString}
+`;
+
+let orderString = '';
+for (let i = 0; i <= 30; i++) {
+  const menuId = faker.random.number({ min: 1, max: 30, precision: 1 });
+  const userId = faker.random.number({ min: 1, max: 30, precision: 1 });
+  const quantity = faker.random.number({ min: 1, max: 15, precision: 1 });
+  const index = faker.random.number({ min: 0, max: 3, precision: 1 });
+  orderString += `(
+    ${menuId}, ${userId}, ${quantity}, '${status[index]}'
+  ),`;
+}
+orderString = orderString.slice(0, orderString.length - 1);
+const bulkInsertOrder = `
+  INSERT INTO cart (
+    menuId,
+    userId,
+    quantity,
+    status
+  ) VALUES ${orderString}
+`;
+
+config.connect()
+  .then(() => {
+    config.query(BulkInsertUser).then(() => {
+      config.query(BulkInsertMenu).then(() => {
+        config.query(bulkInsertOrder).then(() => {
+          console.log('tables successfully populated');
+          process.exit(0);
+        }).catch(error => handleDBError(error));
+      }).catch(error => handleDBError(error));
+    }).catch(error => handleDBError(error));
+  })
+  .catch(error => handleDBError(error));

@@ -5,6 +5,7 @@ import app from '../../app';
 
 chai.use(chaiHttp);
 const { expect } = chai;
+let Token;
 
 describe('Fast-Food-Fast backend tests with postgres database for user model', () => {
   describe('tests controller that signs up a user', () => {
@@ -23,6 +24,7 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
           expect(res.body).to.have.property('status');
           expect(res.body.status).eql('success');
           expect(res.body.token).to.not.eql(null);
+          Token = res.body.token;
           done();
         });
     });
@@ -159,6 +161,22 @@ describe('Fast-Food-Fast backend tests with postgres database for user model', (
           expect(res).to.have.status(400);
           expect(res.body.status).to.eql('error');
           expect(res.body.error).to.eql('invalid email');
+          done();
+        });
+    });
+
+    it('should return code 200, when a valid user tries to update his profile', (done) => {
+      chai.request(app)
+        .put('/api/v1/update')
+        .set('x-access-token', Token)
+        .send({
+          email: 'newmail@hotmail.com',
+          password: 'NotIntelligentButCurious'
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.status).to.eql('success');
+          expect(res.body).to.haveOwnProperty('data');
           done();
         });
     });
